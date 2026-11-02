@@ -17,14 +17,14 @@ export const socialLinks: SocialLink[] = [
     platform: 'whatsapp',
     title: 'WhatsApp Direct',
     url: `https://wa.me/${siteConfig.whatsappNumber}?text=${defaultWhatsAppMessage}`,
-    displayHandle: '+91 89279 16525',
+    displayHandle: siteConfig.displayPhone,
     iconName: 'MessageSquare',
   },
   {
     platform: 'instagram',
     title: 'Instagram',
-    url: 'https://www.instagram.com/editorsouravroy/',
-    displayHandle: '@editorsouravroy',
+    url: 'https://www.instagram.com/sourav__one/',
+    displayHandle: '@sourav__one',
     iconName: 'Instagram',
   },
   {
@@ -37,8 +37,8 @@ export const socialLinks: SocialLink[] = [
   {
     platform: 'facebook',
     title: 'Facebook Page',
-    url: 'https://www.facebook.com/editorsouravroy/',
-    displayHandle: 'editorsouravroy',
+    url: 'https://www.facebook.com/ocofficialservice',
+    displayHandle: 'ocofficialservice',
     iconName: 'Facebook',
   },
   {

@@ -16,11 +16,11 @@ export const siteConfig: SiteConfig = {
   founderRole: 'Founder & Lead Video Editor',
   establishedYear: 2019,
   yearsOfExperience: '7+ Years',
-  location: 'West Bengal, India',
+  location: 'Ashoknagar, Building More, Ashoknagar Kalyangarh, West Bengal 743222, India',
 
   // Official contact details
   whatsappNumber: '918927916525',
-  displayPhone: '+91 89279 16525',
+  displayPhone: '+91 8927916525',
   contactEmail: 'ocofficialservice@gmail.com',
 
   // External Form Backend (Formspree or Web3Forms)
