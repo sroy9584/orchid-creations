@@ -13,21 +13,10 @@ interface StagedSlot {
 }
 
 export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos }) => {
-  // Filter top cinematic videos (weddings, pre-weddings, teasers, highlights)
+  // Curated Featured Projects pool (directly using the user's hand-picked featured collection)
   const pool = useMemo(() => {
     if (!videos || videos.length === 0) return [];
-    const prioritized = videos.filter((v) => {
-      const t = v.title.toLowerCase();
-      return (
-        t.includes('teaser') ||
-        t.includes('highlight') ||
-        t.includes('wedding') ||
-        t.includes('story') ||
-        t.includes('reel') ||
-        t.includes('film')
-      );
-    });
-    return prioritized.length >= 8 ? prioritized : videos;
+    return videos;
   }, [videos]);
 
   // Random starting point between 12s and 55s so every clip shows dynamic action
@@ -42,9 +31,9 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
 
   const [slotA, setSlotA] = useState<StagedSlot>(() => {
     const first = pool[0] || {
-      id: 'FargqR3UwXo',
-      title: 'Mukesh & Aditi Highlight Preview HD',
-      thumbnailUrl: 'https://i.ytimg.com/vi/FargqR3UwXo/maxresdefault.jpg',
+      id: 'ntDwGj0CZRE',
+      title: 'Fariha & Ibraheem Wedding Teaser',
+      thumbnailUrl: 'https://i.ytimg.com/vi/ntDwGj0CZRE/maxresdefault.jpg',
     };
     return {
       video: first as PortfolioVideo,
@@ -55,9 +44,9 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
 
   const [slotB, setSlotB] = useState<StagedSlot>(() => {
     const second = pool[1] || {
-      id: 'EsFPoMxjbDw',
-      title: 'Smarajit & Rituparna Wedding Teaser HD',
-      thumbnailUrl: 'https://i.ytimg.com/vi/EsFPoMxjbDw/maxresdefault.jpg',
+      id: 'LYZRr5Ex35Q',
+      title: 'Joydeep & Shweta Wedding Teaser',
+      thumbnailUrl: 'https://i.ytimg.com/vi/LYZRr5Ex35Q/maxresdefault.jpg',
     };
     return {
       video: second as PortfolioVideo,
@@ -65,6 +54,25 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
       key: 2,
     };
   });
+
+  const isInitialSyncDone = useRef<boolean>(false);
+
+  // Synchronize initial slots once the randomized pool is available
+  useEffect(() => {
+    if (!isInitialSyncDone.current && pool.length >= 2) {
+      isInitialSyncDone.current = true;
+      setSlotA({
+        video: pool[0],
+        startTime: getRandomStart(),
+        key: Date.now(),
+      });
+      setSlotB({
+        video: pool[1],
+        startTime: getRandomStart(),
+        key: Date.now() + 1,
+      });
+    }
+  }, [pool, getRandomStart]);
 
   const iframeARef = useRef<HTMLIFrameElement>(null);
   const iframeBRef = useRef<HTMLIFrameElement>(null);

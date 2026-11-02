@@ -33,9 +33,16 @@ export function usePortfolio(options: UsePortfolioOptions = {}) {
     );
   }, [selectedCategory, portfolioData.videos]);
 
-  // Featured videos for top highlight carousel / hero preview
+  // Curated Featured projects (explicit hand-picked IDs + 2 featured playlists), randomly shuffled
   const featuredVideos = useMemo(() => {
-    return portfolioData.videos.filter((video) => video.featured);
+    const list = portfolioData.videos.filter((video) => video.featured);
+    // Fisher-Yates shuffle algorithm for dynamic random order
+    const shuffled = [...list];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
   }, [portfolioData.videos]);
 
   // Paginated/Sliced slice for current display

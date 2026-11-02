@@ -16,8 +16,13 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
   onPlay,
   getCategoryTitle,
 }) => {
-  // Take up to 6 featured videos
-  const displayVideos = videos.slice(0, 6);
+  const [visibleCount, setVisibleCount] = React.useState<number>(9);
+  const displayVideos = videos.slice(0, visibleCount);
+  const hasMore = visibleCount < videos.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => Math.min(prev + 9, videos.length));
+  };
 
   return (
     <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 border-t border-white/5 overflow-hidden">
@@ -65,8 +70,19 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
           ))}
         </div>
 
-        {/* Bottom CTA to view all */}
-        <div className="mt-14 text-center">
+        {/* Action Buttons: Load More & Full Portfolio */}
+        <div className="mt-12 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
+          {hasMore && (
+            <button
+              type="button"
+              onClick={handleLoadMore}
+              className="glass-btn-secondary !px-7 !py-3.5 text-sm font-semibold tracking-wide group"
+            >
+              <span>SHOW MORE FEATURED PROJECTS ({videos.length - visibleCount} REMAINING)</span>
+              <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+            </button>
+          )}
+
           <Link
             to="/portfolio"
             className="glass-btn-primary !px-8 !py-3.5 text-sm font-semibold tracking-wide shadow-glow-accent group"
