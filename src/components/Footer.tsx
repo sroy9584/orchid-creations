@@ -35,10 +35,10 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative mt-24 border-t border-white/10 bg-[#08090D] overflow-hidden">
-      {/* Ambient background glows */}
-      <div className="ambient-glow bg-purple-600/15 w-96 h-96 -bottom-48 -left-24" />
-      <div className="ambient-glow bg-sky-500/10 w-96 h-96 -bottom-48 -right-24" />
+    <footer className="relative mt-24 border-t border-white/10 bg-[#0D1516] overflow-hidden">
+      {/* Ambient background glows (Orchid & Emerald) */}
+      <div className="ambient-glow bg-[#BF54A3]/15 w-96 h-96 -bottom-48 -left-24" />
+      <div className="ambient-glow bg-[#107361]/15 w-96 h-96 -bottom-48 -right-24" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
@@ -55,9 +55,9 @@ export const Footer: React.FC = () => {
               />
               <div className="flex flex-col">
                 <span className="text-xl font-extrabold tracking-wider text-white">
-                  ORCHID <span className="font-light text-purple-400">CREATIONS</span>
+                  ORCHID <span className="font-light text-[#BF54A3]">CREATIONS</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-widest text-neutral-400 font-mono">
+                <span className="text-[10px] uppercase tracking-widest text-[#107361] font-mono font-semibold">
                   POST-PRODUCTION STUDIO • EST. 2019
                 </span>
               </div>
@@ -68,7 +68,7 @@ export const Footer: React.FC = () => {
             </p>
 
             <div className="flex items-center gap-2 text-xs text-neutral-400">
-              <MapPin className="w-4 h-4 text-purple-400 shrink-0" />
+              <MapPin className="w-4 h-4 text-[#BF54A3] shrink-0" />
               <span>{siteConfig.location}</span>
             </div>
           </div>
@@ -83,7 +83,7 @@ export const Footer: React.FC = () => {
                 <li key={link.name}>
                   <Link
                     to={link.path}
-                    className="hover:text-purple-300 transition-colors inline-block"
+                    className="hover:text-[#BF54A3] transition-colors inline-block"
                   >
                     {link.name}
                   </Link>
@@ -99,27 +99,27 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2.5 text-sm text-neutral-400">
               <li>
-                <Link to="/portfolio" className="hover:text-purple-300 transition-colors">
+                <Link to="/portfolio" className="hover:text-[#BF54A3] transition-colors">
                   Bengali Wedding Films
                 </Link>
               </li>
               <li>
-                <Link to="/portfolio" className="hover:text-purple-300 transition-colors">
+                <Link to="/portfolio" className="hover:text-[#BF54A3] transition-colors">
                   Cinematic Teasers &amp; Highlights
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-purple-300 transition-colors">
+                <Link to="/services" className="hover:text-[#BF54A3] transition-colors">
                   DaVinci Color Grading
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-purple-300 transition-colors">
+                <Link to="/services" className="hover:text-[#BF54A3] transition-colors">
                   2D/3D Motion Graphics
                 </Link>
               </li>
               <li>
-                <Link to="/pricing" className="hover:text-purple-300 transition-colors">
+                <Link to="/pricing" className="hover:text-[#BF54A3] transition-colors">
                   Brand Reels &amp; Shorts
                 </Link>
               </li>
@@ -143,7 +143,7 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.title}
-                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-purple-600/30 border border-white/10 hover:border-purple-400/40 text-neutral-300 hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110"
+                  className="w-9 h-9 rounded-xl bg-white/5 hover:bg-[#BF54A3]/25 border border-white/10 hover:border-[#BF54A3]/40 text-neutral-300 hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110"
                 >
                   {getSocialIcon(social.platform)}
                 </a>
@@ -153,7 +153,7 @@ export const Footer: React.FC = () => {
             <div className="pt-2">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-purple-300 hover:text-purple-200"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-[#BF54A3] hover:text-[#BF54A3]/80"
               >
                 <span>Request Project Proposal</span>
                 <span>→</span>

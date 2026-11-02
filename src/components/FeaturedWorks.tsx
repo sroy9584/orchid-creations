@@ -21,21 +21,21 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
 
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden">
-      {/* Ambient background light */}
-      <div className="ambient-glow bg-purple-600/10 w-[550px] h-[550px] top-1/2 left-0 -translate-y-1/2" />
-      <div className="ambient-glow bg-sky-500/10 w-[450px] h-[450px] top-1/4 right-0" />
+      {/* Ambient background light (Orchid & Emerald) */}
+      <div className="ambient-glow bg-[#BF54A3]/15 w-[550px] h-[550px] top-1/2 left-0 -translate-y-1/2" />
+      <div className="ambient-glow bg-[#107361]/15 w-[450px] h-[450px] top-1/4 right-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold tracking-wider uppercase mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#BF54A3]/15 border border-[#BF54A3]/30 text-[#D977BF] text-xs font-semibold tracking-wider uppercase mb-3">
               <Sparkles className="w-3 h-3" />
               CURATED SHOWCASE
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
               FEATURED{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-sky-300">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BF54A3] via-[#D977BF] to-[#107361]">
                 PROJECTS
               </span>
             </h2>

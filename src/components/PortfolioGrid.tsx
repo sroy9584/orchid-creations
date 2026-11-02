@@ -24,7 +24,7 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({
   if (videos.length === 0) {
     return (
       <div className="py-20 text-center glass-card rounded-3xl p-8 max-w-xl mx-auto my-12">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-purple-400">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#BF54A3]">
           <Film className="w-8 h-8" />
         </div>
         <h3 className="text-xl font-semibold text-white">No Videos Found</h3>
@@ -63,7 +63,7 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({
             onClick={onLoadMore}
             className="glass-btn-secondary px-8 py-3.5 text-sm font-semibold tracking-wide"
           >
-            <ArrowDown className="w-4 h-4 text-purple-400" />
+            <ArrowDown className="w-4 h-4 text-[#BF54A3]" />
             <span>LOAD MORE PROJECTS</span>
             <span className="text-xs text-neutral-400">
               ({videos.length} of {allFilteredCount})

@@ -138,7 +138,7 @@ export const ContactForm: React.FC = () => {
           {/* Full Name */}
           <div>
             <label htmlFor="fullName" className="block text-xs font-semibold uppercase tracking-wider text-neutral-300 font-mono mb-2">
-              Full Name <span className="text-purple-400">*</span>
+              Full Name <span className="text-[#BF54A3]">*</span>
             </label>
             <input
               type="text"
@@ -155,7 +155,7 @@ export const ContactForm: React.FC = () => {
           {/* Email Address */}
           <div>
             <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-wider text-neutral-300 font-mono mb-2">
-              Email Address <span className="text-purple-400">*</span>
+              Email Address <span className="text-[#BF54A3]">*</span>
             </label>
             <input
               type="email"
@@ -197,14 +197,14 @@ export const ContactForm: React.FC = () => {
               name="service"
               value={formData.service}
               onChange={handleChange}
-              className="glass-input text-sm bg-[#101219] text-white"
+              className="glass-input text-sm bg-[#192526] text-[#F0F2F2]"
             >
               {servicesConfig.map((s) => (
-                <option key={s.id} value={s.title} className="bg-[#101219] text-white">
+                <option key={s.id} value={s.title} className="bg-[#192526] text-[#F0F2F2]">
                   {s.title}
                 </option>
               ))}
-              <option value="Custom Post-Production" className="bg-[#101219] text-white">
+              <option value="Custom Post-Production" className="bg-[#192526] text-[#F0F2F2]">
                 Other / Custom Post-Production
               </option>
             </select>
@@ -214,7 +214,7 @@ export const ContactForm: React.FC = () => {
         {/* Project Description */}
         <div>
           <label htmlFor="projectDescription" className="block text-xs font-semibold uppercase tracking-wider text-neutral-300 font-mono mb-2">
-            Project Description &amp; Requirements <span className="text-purple-400">*</span>
+            Project Description &amp; Requirements <span className="text-[#BF54A3]">*</span>
           </label>
           <textarea
             id="projectDescription"
@@ -250,7 +250,7 @@ export const ContactForm: React.FC = () => {
             onClick={handleWhatsAppSend}
             className="glass-btn-secondary w-full sm:w-auto text-sm font-semibold !py-3.5 !px-6 text-neutral-300 hover:text-white"
           >
-            <MessageSquare className="w-4 h-4 text-emerald-400" />
+            <MessageSquare className="w-4 h-4 text-[#107361]" />
             <span>Send via WhatsApp</span>
           </button>
         </div>

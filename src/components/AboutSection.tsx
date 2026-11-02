@@ -20,7 +20,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
           className="lg:col-span-5 relative"
         >
           {/* Ambient backlight */}
-          <div className="ambient-glow bg-purple-600/20 w-80 h-80 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <div className="ambient-glow bg-[#BF54A3]/20 w-80 h-80 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
           <div className="relative rounded-3xl overflow-hidden glass-card p-3 border border-white/15 shadow-2xl">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-[#161922]">
@@ -40,7 +40,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
               <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/10">
                 <div className="text-base font-bold text-white flex items-center justify-between">
                   <span>{siteConfig.founderName}</span>
-                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-400/30">
+                  <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-[#BF54A3]/20 text-[#BF54A3] border border-[#BF54A3]/30">
                     Lead Editor
                   </span>
                 </div>
@@ -57,10 +57,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="absolute -bottom-6 -right-4 sm:-right-6 p-4 rounded-2xl glass-card border-purple-400/30 shadow-glow-accent bg-[#101219]/90 backdrop-blur-xl"
+            className="absolute -bottom-6 -right-4 sm:-right-6 p-4 rounded-2xl glass-card border-[#BF54A3]/30 shadow-glow-accent bg-[#101219]/90 backdrop-blur-xl"
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-[#BF54A3]/20 text-[#BF54A3] flex items-center justify-center">
                 <Award className="w-5 h-5" />
               </div>
               <div>
@@ -82,14 +82,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
           className="lg:col-span-7 space-y-6"
         >
           {/* Eyebrow Label */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#BF54A3]/10 border border-[#BF54A3]/25 text-[#BF54A3] text-xs font-semibold tracking-wider uppercase">
             <Film className="w-3.5 h-3.5" />
             THE STUDIO BEHIND THE STORIES
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
             CRAFTING CINEMATIC STORIES WITH{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-sky-300">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BF54A3] to-[#107361]">
               PRECISION &amp; PASSION.
             </span>
           </h2>
@@ -109,7 +109,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
             <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
               <div className="flex items-center gap-1.5 text-neutral-400 text-xs mb-1">
-                <Calendar className="w-3.5 h-3.5 text-purple-400" />
+                <Calendar className="w-3.5 h-3.5 text-[#BF54A3]" />
                 <span>Established</span>
               </div>
               <div className="text-base font-bold text-white">{siteConfig.establishedYear}</div>
@@ -117,7 +117,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
 
             <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
               <div className="flex items-center gap-1.5 text-neutral-400 text-xs mb-1">
-                <User className="w-3.5 h-3.5 text-purple-400" />
+                <User className="w-3.5 h-3.5 text-[#BF54A3]" />
                 <span>Founder</span>
               </div>
               <div className="text-base font-bold text-white">{siteConfig.founderName}</div>
@@ -125,7 +125,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
 
             <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5 col-span-2 sm:col-span-1">
               <div className="flex items-center gap-1.5 text-neutral-400 text-xs mb-1">
-                <MapPin className="w-3.5 h-3.5 text-purple-400" />
+                <MapPin className="w-3.5 h-3.5 text-[#BF54A3]" />
                 <span>Base Location</span>
               </div>
               <div className="text-base font-bold text-white">{siteConfig.location}</div>
@@ -134,14 +134,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
 
           {/* Software & Skills Pills */}
           <div className="pt-4">
-            <div className="text-xs font-mono uppercase tracking-wider text-purple-300 font-semibold mb-3">
+            <div className="text-xs font-mono uppercase tracking-wider text-[#BF54A3] font-semibold mb-3">
               Industry Standard Software &amp; Suites:
             </div>
             <div className="flex flex-wrap gap-2">
               {siteConfig.skills.software.map((sw) => (
                 <span
                   key={sw}
-                  className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/[0.04] border border-white/10 text-neutral-300 hover:border-purple-400/40 hover:text-white transition-colors"
+                  className="px-3 py-1.5 rounded-full text-xs font-medium bg-white/[0.04] border border-white/10 text-neutral-300 hover:border-[#BF54A3]/40 hover:text-white transition-colors"
                 >
                   {sw}
                 </span>
@@ -175,7 +175,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
                 key={disc}
                 className="glass-card rounded-2xl p-5 border border-white/10 flex items-start gap-3"
               >
-                <div className="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-300 flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-8 h-8 rounded-lg bg-[#107361]/15 text-[#107361] flex items-center justify-center shrink-0 mt-0.5">
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
                 <div>

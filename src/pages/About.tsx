@@ -55,8 +55,8 @@ export const About: React.FC = () => {
   return (
     <div className="relative pt-32 pb-20 min-h-screen overflow-hidden">
       {/* Ambient background glows */}
-      <div className="ambient-glow bg-purple-600/15 w-[600px] h-[600px] top-24 left-1/4 -translate-x-1/2" />
-      <div className="ambient-glow bg-sky-500/10 w-[450px] h-[450px] top-1/2 -right-24" />
+      <div className="ambient-glow bg-[#BF54A3]/15 w-[600px] h-[600px] top-24 left-1/4 -translate-x-1/2" />
+      <div className="ambient-glow bg-[#107361]/15 w-[450px] h-[450px] top-1/2 -right-24" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
@@ -64,7 +64,7 @@ export const About: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold tracking-wider uppercase mb-4"
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#BF54A3]/10 border border-[#BF54A3]/25 text-[#BF54A3] text-xs font-semibold tracking-wider uppercase mb-4"
           >
             <Sparkles className="w-3.5 h-3.5" />
             THE STORY &amp; THE VISION
@@ -74,10 +74,10 @@ export const About: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#F0F2F2] tracking-tight"
           >
             ABOUT{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-sky-300">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361]">
               ORCHID CREATIONS
             </span>
           </motion.h1>
@@ -114,7 +114,7 @@ export const About: React.FC = () => {
                   key={i}
                   className="glass-card rounded-2xl p-6 border border-white/10 flex flex-col justify-between"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/20 flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#BF54A3]/10 text-[#BF54A3] border border-[#BF54A3]/25 flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
@@ -146,7 +146,7 @@ export const About: React.FC = () => {
                 key={m.year}
                 className="relative p-6 rounded-2xl glass-card border border-white/10 flex flex-col justify-between"
               >
-                <div className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-sky-300 font-mono mb-2">
+                <div className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#BF54A3] to-[#107361] font-mono mb-2">
                   {m.year}
                 </div>
                 <div>

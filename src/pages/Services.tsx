@@ -9,8 +9,8 @@ export const Services: React.FC = () => {
   return (
     <div className="relative pt-32 pb-20 min-h-screen overflow-hidden">
       {/* Ambient background glows */}
-      <div className="ambient-glow bg-purple-600/15 w-[550px] h-[550px] top-24 left-1/3 -translate-x-1/2" />
-      <div className="ambient-glow bg-sky-500/10 w-[450px] h-[450px] top-1/2 -right-24" />
+      <div className="ambient-glow bg-[#BF54A3]/15 w-[550px] h-[550px] top-24 left-1/3 -translate-x-1/2" />
+      <div className="ambient-glow bg-[#107361]/15 w-[450px] h-[450px] top-1/2 -right-24" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
@@ -18,7 +18,7 @@ export const Services: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold tracking-wider uppercase mb-4"
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#BF54A3]/10 border border-[#BF54A3]/25 text-[#BF54A3] text-xs font-semibold tracking-wider uppercase mb-4"
           >
             <Sparkles className="w-3.5 h-3.5" />
             END-TO-END POST-PRODUCTION
@@ -28,10 +28,10 @@ export const Services: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#F0F2F2] tracking-tight"
           >
             OUR{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-sky-300">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361]">
               SERVICES
             </span>
           </motion.h1>

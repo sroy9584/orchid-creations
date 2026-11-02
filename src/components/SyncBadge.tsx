@@ -49,7 +49,7 @@ export const SyncBadge: React.FC<SyncBadgeProps> = ({ metadata }) => {
       <span className="text-white/20">•</span>
 
       <span>
-        <span className="text-purple-300 font-medium">{metadata.videosSynchronized}</span> Videos
+        <span className="text-[#BF54A3] font-medium">{metadata.videosSynchronized}</span> Videos
       </span>
     </div>
   );

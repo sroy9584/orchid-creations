@@ -36,7 +36,7 @@ export const PortfolioFilters: React.FC<PortfolioFiltersProps> = ({
           {selectedCategory === 'all' && (
             <motion.div
               layoutId="activeFilterIndicator"
-              className="absolute inset-0 rounded-full border border-purple-400/50 pointer-events-none"
+              className="absolute inset-0 rounded-full border border-[#BF54A3]/60 pointer-events-none"
               transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
             />
           )}
@@ -57,13 +57,13 @@ export const PortfolioFilters: React.FC<PortfolioFiltersProps> = ({
               }`}
             >
               {cat.badge && (
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#BF54A3] animate-pulse" />
               )}
               <span>{cat.title}</span>
               {isSelected && (
                 <motion.div
                   layoutId="activeFilterIndicator"
-                  className="absolute inset-0 rounded-full border border-purple-400/50 pointer-events-none"
+                  className="absolute inset-0 rounded-full border border-[#BF54A3]/60 pointer-events-none"
                   transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
                 />
               )}

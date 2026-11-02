@@ -33,18 +33,18 @@ export const Home: React.FC = () => {
 
       {/* 3. Services Preview Section */}
       <section className="relative py-20 lg:py-28 border-t border-white/5 overflow-hidden">
-        <div className="ambient-glow bg-sky-500/10 w-[500px] h-[500px] top-1/3 -right-24" />
+        <div className="ambient-glow bg-[#107361]/15 w-[500px] h-[500px] top-1/3 -right-24" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold tracking-wider uppercase mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#BF54A3]/10 border border-[#BF54A3]/25 text-[#BF54A3] text-xs font-semibold tracking-wider uppercase mb-3">
                 <Sparkles className="w-3 h-3" />
                 POST-PRODUCTION SUITE
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F0F2F2] tracking-tight">
                 COMPREHENSIVE{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-sky-300">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BF54A3] to-[#107361]">
                   SERVICES
                 </span>
               </h2>
@@ -68,7 +68,7 @@ export const Home: React.FC = () => {
 
       {/* 4. About Studio & Founder Preview */}
       <section className="relative py-20 lg:py-28 border-t border-white/5 overflow-hidden">
-        <div className="ambient-glow bg-purple-600/15 w-[500px] h-[500px] top-1/2 left-0 -translate-y-1/2" />
+        <div className="ambient-glow bg-[#BF54A3]/15 w-[500px] h-[500px] top-1/2 left-0 -translate-y-1/2" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AboutSection isFullPage={false} />

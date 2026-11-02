@@ -7,23 +7,23 @@ export const CTASection: React.FC = () => {
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden">
       {/* Ambient background glows */}
-      <div className="ambient-glow bg-purple-600/25 w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+      <div className="ambient-glow bg-[#BF54A3]/20 w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="glass-card rounded-3xl p-8 sm:p-12 md:p-16 text-center border border-white/15 shadow-glow-accent relative overflow-hidden">
           {/* Subtle decorative ring */}
-          <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full border border-purple-500/20 pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full border border-sky-500/15 pointer-events-none" />
+          <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full border border-[#BF54A3]/20 pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full border border-[#107361]/20 pointer-events-none" />
 
           {/* Sparkle badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold tracking-wider uppercase mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#BF54A3]/10 border border-[#BF54A3]/25 text-[#BF54A3] text-xs font-semibold tracking-wider uppercase mb-5">
             <Sparkles className="w-3.5 h-3.5" />
             LET'S CREATE TOGETHER
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight max-w-2xl mx-auto leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#F0F2F2] tracking-tight max-w-2xl mx-auto leading-tight">
             HAVE A PROJECT{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-sky-300">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361]">
               IN MIND?
             </span>
           </h2>

@@ -14,8 +14,8 @@ export const Contact: React.FC = () => {
   return (
     <div className="relative pt-32 pb-24 min-h-screen overflow-hidden">
       {/* Ambient background glows */}
-      <div className="ambient-glow bg-purple-600/15 w-[600px] h-[600px] top-24 left-1/3 -translate-x-1/2" />
-      <div className="ambient-glow bg-sky-500/10 w-[450px] h-[450px] top-1/2 -right-24" />
+      <div className="ambient-glow bg-[#BF54A3]/15 w-[600px] h-[600px] top-24 left-1/3 -translate-x-1/2" />
+      <div className="ambient-glow bg-[#107361]/15 w-[450px] h-[450px] top-1/2 -right-24" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
@@ -23,7 +23,7 @@ export const Contact: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold tracking-wider uppercase mb-4"
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#BF54A3]/10 border border-[#BF54A3]/25 text-[#BF54A3] text-xs font-semibold tracking-wider uppercase mb-4"
           >
             <Sparkles className="w-3.5 h-3.5" />
             START A COLLABORATION
@@ -33,10 +33,10 @@ export const Contact: React.FC = () => {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#F0F2F2] tracking-tight"
           >
             GET IN{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-sky-300">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361]">
               TOUCH
             </span>
           </motion.h1>
@@ -62,7 +62,7 @@ export const Contact: React.FC = () => {
 
               <div className="space-y-4">
                 <div className="flex items-start gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#BF54A3]/10 border border-[#BF54A3]/25 text-[#BF54A3] flex items-center justify-center shrink-0">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
@@ -77,7 +77,7 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#107361]/10 border border-[#107361]/25 text-[#107361] flex items-center justify-center shrink-0">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
@@ -86,7 +86,7 @@ export const Contact: React.FC = () => {
                     </div>
                     <a
                       href={`mailto:${siteConfig.contactEmail}`}
-                      className="text-sm font-semibold text-white hover:text-purple-300 transition-colors mt-0.5 block"
+                      className="text-sm font-semibold text-white hover:text-[#BF54A3] transition-colors mt-0.5 block"
                     >
                       {siteConfig.contactEmail}
                     </a>
@@ -94,7 +94,7 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <div className="flex items-start gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#107361]/15 border border-[#107361]/30 text-[#107361] flex items-center justify-center shrink-0">
                     <MessageSquare className="w-5 h-5" />
                   </div>
                   <div>
@@ -105,7 +105,7 @@ export const Contact: React.FC = () => {
                       href={directWhatsApp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm font-semibold text-emerald-300 hover:text-emerald-200 transition-colors mt-0.5 block"
+                      className="text-sm font-semibold text-[#107361] hover:text-[#107361]/80 transition-colors mt-0.5 block"
                     >
                       Start Instant Chat on WhatsApp →
                     </a>

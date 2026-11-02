@@ -52,7 +52,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-5xl rounded-2xl bg-[#101219]/95 border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden z-10"
+            className="relative w-full max-w-5xl rounded-2xl bg-[#192526]/95 border border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden z-10"
             role="dialog"
             aria-modal="true"
             aria-labelledby="video-modal-title"
@@ -60,10 +60,10 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
             {/* Modal Header Bar */}
             <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-white/[0.03]">
               <div className="flex items-center gap-2.5 truncate mr-4">
-                <span className="p-1.5 rounded-lg bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                <span className="p-1.5 rounded-lg bg-[#BF54A3]/10 text-[#BF54A3] border border-[#BF54A3]/25">
                   <Film className="w-4 h-4" />
                 </span>
-                <span className="text-xs uppercase tracking-wider font-semibold px-2.5 py-0.5 rounded-full bg-white/5 text-purple-200 border border-white/10">
+                <span className="text-xs uppercase tracking-wider font-semibold px-2.5 py-0.5 rounded-full bg-white/5 text-[#BF54A3] border border-white/10">
                   {categoryTitle || video.categoryId}
                 </span>
                 <h3 id="video-modal-title" className="text-sm md:text-base font-semibold text-white/95 truncate">
@@ -76,7 +76,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
                 type="button"
                 onClick={onClose}
                 aria-label="Close video player"
-                className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
+                className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#BF54A3]"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -94,7 +94,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
             </div>
 
             {/* Modal Footer Description */}
-            <div className="p-5 bg-gradient-to-t from-[#08090D] to-[#101219] flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs md:text-sm text-neutral-300 border-t border-white/5">
+            <div className="p-5 bg-gradient-to-t from-[#0D1516] to-[#192526] flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs md:text-sm text-neutral-300 border-t border-white/5">
               <p className="line-clamp-2 text-neutral-400 max-w-3xl">
                 {video.description || 'Cinematic video post-production project by Orchid Creations.'}
               </p>

@@ -36,8 +36,8 @@ export const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'py-3 bg-[#08090D]/85 backdrop-blur-xl border-b border-white/10 shadow-lg'
-          : 'py-5 bg-[#08090D]/40 backdrop-blur-md border-b border-white/5'
+          ? 'py-3 bg-[#0D1516]/90 backdrop-blur-xl border-b border-white/10 shadow-lg'
+          : 'py-5 bg-[#0D1516]/45 backdrop-blur-md border-b border-white/5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,10 +59,10 @@ export const Navbar: React.FC = () => {
               />
               {/* Fallback stylized text if image missing */}
               <div className="flex flex-col">
-                <span className="text-lg font-extrabold tracking-wider text-white group-hover:text-purple-300 transition-colors">
-                  ORCHID <span className="font-light text-purple-400">CREATIONS</span>
+                <span className="text-lg font-extrabold tracking-wider text-white group-hover:text-[#BF54A3] transition-colors">
+                  ORCHID <span className="font-light text-[#BF54A3]">CREATIONS</span>
                 </span>
-                <span className="text-[9px] uppercase tracking-widest text-neutral-400 font-mono -mt-1">
+                <span className="text-[9px] uppercase tracking-widest text-[#107361] font-mono -mt-1 font-semibold">
                   POST-PRODUCTION STUDIO
                 </span>
               </div>
@@ -89,7 +89,7 @@ export const Navbar: React.FC = () => {
                     {isActive && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute inset-0 rounded-full bg-white/10 border border-white/15 shadow-sm"
+                        className="absolute inset-0 rounded-full bg-white/10 border border-[#BF54A3]/30 shadow-sm"
                         transition={{ type: 'spring', bounce: 0.25, duration: 0.5 }}
                       />
                     )}
@@ -114,14 +114,14 @@ export const Navbar: React.FC = () => {
           <div className="flex md:hidden items-center gap-2">
             <Link
               to="/contact"
-              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-purple-600/80 text-white border border-purple-400/30"
+              className="text-xs font-semibold px-3 py-1.5 rounded-full bg-[#BF54A3] text-white border border-[#BF54A3]/40"
             >
               Contact
             </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
+              className="p-2 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[#BF54A3]"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -139,7 +139,7 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden border-b border-white/10 bg-[#08090D]/95 backdrop-blur-2xl overflow-hidden px-4 pt-3 pb-6 shadow-2xl"
+            className="md:hidden border-b border-white/10 bg-[#0D1516]/95 backdrop-blur-2xl overflow-hidden px-4 pt-3 pb-6 shadow-2xl"
           >
             <div className="flex flex-col space-y-2">
               {navLinks.map((link) => (
@@ -149,7 +149,7 @@ export const Navbar: React.FC = () => {
                   className={({ isActive }) =>
                     `px-4 py-3 rounded-xl text-base font-medium flex items-center justify-between transition-colors ${
                       isActive
-                        ? 'bg-purple-600/20 text-white border border-purple-500/30 font-semibold'
+                        ? 'bg-[#BF54A3]/20 text-white border border-[#BF54A3]/40 font-semibold'
                         : 'text-neutral-300 hover:bg-white/5 hover:text-white'
                     }`
                   }

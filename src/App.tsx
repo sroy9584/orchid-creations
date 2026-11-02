@@ -29,7 +29,7 @@ export const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen bg-[#08090D] text-white selection:bg-purple-500/30 selection:text-purple-200">
+      <div className="flex flex-col min-h-screen bg-[#0D1516] text-[#F0F2F2] selection:bg-[#BF54A3]/30 selection:text-white">
         {/* Sticky Glass Navbar */}
         <Navbar />
 

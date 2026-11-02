@@ -25,9 +25,9 @@ export const Portfolio: React.FC = () => {
 
   return (
     <div className="relative pt-32 pb-24 min-h-screen overflow-hidden">
-      {/* Ambient background glows */}
-      <div className="ambient-glow bg-purple-600/15 w-[600px] h-[600px] top-24 left-1/2 -translate-x-1/2" />
-      <div className="ambient-glow bg-sky-500/10 w-[450px] h-[450px] top-1/3 -right-24" />
+      {/* Ambient background glows (Orchid & Teal) */}
+      <div className="ambient-glow bg-[#BF54A3]/20 w-[600px] h-[600px] top-24 left-1/2 -translate-x-1/2" />
+      <div className="ambient-glow bg-[#107361]/20 w-[450px] h-[450px] top-1/3 -right-24" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
@@ -35,10 +35,10 @@ export const Portfolio: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold tracking-wider uppercase mb-4"
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#BF54A3]/15 border border-[#BF54A3]/30 text-[#D977BF] text-xs font-semibold tracking-wider uppercase mb-4"
           >
-            <Film className="w-3.5 h-3.5" />
-            UNLISTED YOUTUBE PORTFOLIO VAULT
+            <Film className="w-3.5 h-3.5 text-[#107361]" />
+            570+ FILMS • YOUTUBE PORTFOLIO VAULT
           </motion.div>
 
           <motion.h1
@@ -48,7 +48,7 @@ export const Portfolio: React.FC = () => {
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight"
           >
             MY{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-sky-300">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361]">
               WORK
             </span>
           </motion.h1>
@@ -89,7 +89,7 @@ export const Portfolio: React.FC = () => {
             <span className="font-semibold text-white uppercase tracking-wider text-sm">
               {getCategoryTitle(selectedCategory)}
             </span>
-            <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-purple-300 font-mono">
+            <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-[#BF54A3] font-mono">
               {allFilteredCount} {allFilteredCount === 1 ? 'project' : 'projects'}
             </span>
           </div>
