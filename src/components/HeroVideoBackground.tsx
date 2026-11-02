@@ -139,6 +139,30 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
   // Touch and Mouse drag / swipe detection
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
 
+  // Active defense against native YouTube pause: auto-resume instantly if paused
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      try {
+        const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+        if (data && data.event === 'onStateChange' && data.info === 2) {
+          // If paused, force resume immediately
+          iframeARef.current?.contentWindow?.postMessage(
+            JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+            '*'
+          );
+          iframeBRef.current?.contentWindow?.postMessage(
+            JSON.stringify({ event: 'command', func: 'playVideo', args: [] }),
+            '*'
+          );
+        }
+      } catch {
+        // Safe ignore
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   const handlePointerDown = (e: React.PointerEvent) => {
     pointerStart.current = { x: e.clientX, y: e.clientY };
   };
@@ -241,7 +265,11 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
           TOUCH/MOUSE INTERACTION SHIELD
           Intercepts all user clicks and drags so native YouTube pause/controls are NEVER activated
           ========================================================= */}
-      <div className="absolute inset-0 z-10 pointer-events-auto cursor-grab active:cursor-grabbing touch-pan-y" />
+      <div
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        className="absolute inset-0 z-10 pointer-events-auto cursor-grab active:cursor-grabbing touch-pan-y"
+      />
 
       {/* =========================================================
           BALANCED CINEMATIC GLASS OVERLAY
