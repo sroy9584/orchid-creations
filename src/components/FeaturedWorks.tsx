@@ -20,33 +20,33 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
   const displayVideos = videos.slice(0, 6);
 
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden">
+    <section className="relative py-10 sm:py-14 overflow-hidden">
       {/* Ambient background light (Orchid & Emerald) */}
       <div className="ambient-glow bg-[#BF54A3]/15 w-[550px] h-[550px] top-1/2 left-0 -translate-y-1/2" />
       <div className="ambient-glow bg-[#107361]/15 w-[450px] h-[450px] top-1/4 right-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#BF54A3]/15 border border-[#BF54A3]/30 text-[#D977BF] text-xs font-semibold tracking-wider uppercase mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#BF54A3]/15 border border-[#BF54A3]/30 text-[#D977BF] text-xs font-semibold tracking-wider uppercase mb-2">
               <Sparkles className="w-3 h-3" />
               CURATED SHOWCASE
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
               FEATURED{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BF54A3] via-[#D977BF] to-[#107361]">
                 PROJECTS
               </span>
             </h2>
-            <p className="mt-3 text-neutral-400 max-w-xl text-sm sm:text-base">
+            <p className="mt-2 text-neutral-400 max-w-xl text-xs sm:text-sm">
               Hand-picked visual highlights featuring heartfelt wedding films, rhythmic music edits, and compelling brand storytelling.
             </p>
           </div>
 
           <Link
             to="/portfolio"
-            className="glass-btn-secondary self-start md:self-auto text-sm font-semibold tracking-wide group"
+            className="glass-btn-secondary self-start md:self-auto text-xs sm:text-sm font-semibold tracking-wide group"
           >
             <span>VIEW ALL PROJECTS</span>
             <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
@@ -54,7 +54,7 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
         </div>
 
         {/* Featured Video Cards Grid (3 columns on desktop) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {displayVideos.map((video) => (
             <VideoCard
               key={video.id}

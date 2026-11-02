@@ -95,7 +95,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ previewOnly = false 
       {/* Services Cards Grid */}
       <motion.div
         layout
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
       >
         <AnimatePresence mode="popLayout">
           {filteredServices.map((service, index) => {
@@ -109,13 +109,13 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ previewOnly = false 
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
-                className="glass-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between group hover:border-[#BF54A3]/30"
+                className="glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between group hover:border-[#BF54A3]/30"
               >
                 <div>
                   {/* Icon & Category Badge */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-[#BF54A3]/10 border border-[#BF54A3]/25 flex items-center justify-center text-[#BF54A3] group-hover:scale-110 group-hover:bg-[#BF54A3]/20 group-hover:text-[#F0F2F2] transition-all duration-300">
-                      <IconComponent className="w-6 h-6" />
+                  <div className="flex items-center justify-between mb-3.5">
+                    <div className="w-11 h-11 rounded-xl bg-[#BF54A3]/10 border border-[#BF54A3]/25 flex items-center justify-center text-[#BF54A3] group-hover:scale-110 group-hover:bg-[#BF54A3]/20 group-hover:text-[#F0F2F2] transition-all duration-300">
+                      <IconComponent className="w-5 h-5" />
                     </div>
                     <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-neutral-400 border border-white/10">
                       {service.category}
@@ -123,18 +123,18 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ previewOnly = false 
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-[#BF54A3] transition-colors">
+                  <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-[#BF54A3] transition-colors leading-snug">
                     {service.title}
                   </h3>
-                  <p className="mt-3 text-xs sm:text-sm text-neutral-400 leading-relaxed">
+                  <p className="mt-2 text-xs sm:text-sm text-neutral-400 leading-relaxed">
                     {service.shortDescription}
                   </p>
                 </div>
 
                 {/* Deliverables / Key Highlights */}
                 {service.deliverables && service.deliverables.length > 0 && (
-                  <div className="mt-6 pt-4 border-t border-white/10">
-                    <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 font-mono mb-2">
+                  <div className="mt-4 pt-3 border-t border-white/10">
+                    <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 font-mono mb-1.5">
                       Key Deliverables
                     </div>
                     <ul className="space-y-1.5">
