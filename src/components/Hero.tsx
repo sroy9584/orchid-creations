@@ -16,11 +16,6 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
       {/* Background Interactive Video Reel (Squarespace-style with random starting times & swipe gestures) */}
       <HeroVideoBackground videos={videos} />
 
-      {/* Ambient Liquid Glass Orbs (blended for soft color accent) */}
-      <div className="ambient-glow bg-[#BF54A3]/15 w-[500px] h-[500px] -top-24 left-1/2 -translate-x-1/2 pointer-events-none z-10" />
-      <div className="ambient-glow bg-[#107361]/15 w-[420px] h-[420px] top-1/3 -left-32 pointer-events-none z-10" />
-      <div className="ambient-glow bg-[#592D4D]/25 w-[380px] h-[380px] bottom-10 -right-20 pointer-events-none z-10" />
-
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center pointer-events-none">
         {/* Official Studio Emblem */}
         <motion.div
@@ -29,11 +24,10 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           transition={{ duration: 0.6 }}
           className="mb-3.5 relative pointer-events-auto"
         >
-          <div className="ambient-glow bg-[#BF54A3]/25 w-24 h-24 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
           <img
             src={siteConfig.logoPath}
             alt={`${siteConfig.brandName} Official Logo`}
-            className="w-14 h-14 sm:w-16 sm:h-16 object-contain mx-auto relative z-10 drop-shadow-[0_8px_20px_rgba(191,84,163,0.35)]"
+            className="w-14 h-14 sm:w-16 sm:h-16 object-contain mx-auto relative z-10 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]"
           />
         </motion.div>
 
@@ -42,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/40 border border-white/20 backdrop-blur-xl shadow-glass-sm mb-4 pointer-events-auto"
+          className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/60 border border-white/20 backdrop-blur-xl shadow-2xl mb-4 pointer-events-auto"
         >
           <Sparkles className="w-3.5 h-3.5 text-[#BF54A3]" />
           <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#F0F2F2]">
@@ -58,10 +52,10 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.12] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]"
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.12] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]"
         >
           GIVING WINGS TO YOUR{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361] drop-shadow-[0_0_35px_rgba(191,84,163,0.5)]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361] drop-shadow-[0_0_25px_rgba(191,84,163,0.6)]">
             STORIES.
           </span>
         </motion.h1>
@@ -71,7 +65,7 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-4 text-sm sm:text-base md:text-lg text-neutral-200 max-w-2xl leading-relaxed font-normal drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]"
+          className="mt-4 text-sm sm:text-base md:text-lg text-white/95 max-w-2xl leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
         >
           From cinematic wedding films to compelling brand visuals, we transform raw footage into meaningful stories through creative editing, stunning visuals, and immersive sound.
         </motion.p>

@@ -178,14 +178,14 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
           <img
             src={slotA.thumbnail}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover filter blur-[1px] opacity-40 scale-105"
+            className="absolute inset-0 w-full h-full object-cover opacity-90 scale-105"
           />
         )}
         <iframe
           key={`slotA-${slotA.renderKey}`}
           src={`https://www.youtube-nocookie.com/embed/${slotA.id}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1&start=${slotA.startTime}&iv_load_policy=3&disablekb=1&loop=1`}
           title={`Background Reel A - ${slotA.title}`}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none opacity-85 scale-105"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none opacity-100 scale-105"
           allow="autoplay; encrypted-media; picture-in-picture"
           tabIndex={-1}
         />
@@ -201,40 +201,40 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
           <img
             src={slotB.thumbnail}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover filter blur-[1px] opacity-40 scale-105"
+            className="absolute inset-0 w-full h-full object-cover opacity-90 scale-105"
           />
         )}
         <iframe
           key={`slotB-${slotB.renderKey}`}
           src={`https://www.youtube-nocookie.com/embed/${slotB.id}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1&start=${slotB.startTime}&iv_load_policy=3&disablekb=1&loop=1`}
           title={`Background Reel B - ${slotB.title}`}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none opacity-85 scale-105"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none opacity-100 scale-105"
           allow="autoplay; encrypted-media; picture-in-picture"
           tabIndex={-1}
         />
       </div>
 
       {/* =========================================================
-          DARK CINEMATIC GLASS OVERLAY
-          Ensures text is 100% readable and visitor is not distracted
+          BALANCED CINEMATIC GLASS OVERLAY
+          Bright & vivid video visibility + crystal-clear text readability
           ========================================================= */}
-      {/* 1. Base dark tint */}
-      <div className="absolute inset-0 bg-[#08090D]/75 backdrop-blur-[1.5px] z-10 pointer-events-none" />
+      {/* 1. Translucent dark tint (30% so footage details are bright & vibrant) */}
+      <div className="absolute inset-0 bg-[#08090D]/30 z-10 pointer-events-none" />
 
-      {/* 2. Radial vignette focus (brightest in center text, dark at boundaries) */}
+      {/* 2. Soft radial vignette (bright in center, gentle darkening toward outer edges) */}
       <div
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(8, 9, 13, 0.45) 0%, rgba(8, 9, 13, 0.75) 65%, rgba(8, 9, 13, 0.95) 100%)',
+            'radial-gradient(ellipse at center, rgba(8, 9, 13, 0.1) 0%, rgba(8, 9, 13, 0.35) 60%, rgba(8, 9, 13, 0.75) 100%)',
         }}
       />
 
-      {/* 3. Bottom seamless fade into next section */}
-      <div className="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-[#0D1516] via-[#0D1516]/80 to-transparent z-10 pointer-events-none" />
+      {/* 3. Bottom seamless blend into next section */}
+      <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#0D1516] via-[#0D1516]/60 to-transparent z-10 pointer-events-none" />
 
       {/* 4. Top subtle navbar protection gradient */}
-      <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-[#08090D]/80 to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-20 bg-gradient-to-b from-[#08090D]/50 to-transparent z-10 pointer-events-none" />
 
       {/* =========================================================
           INTERACTIVE CONTROLS & LIVE REEL STATUS PILL
