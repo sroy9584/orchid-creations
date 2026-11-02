@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight, Film, Award, Clock } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
 import { HeroVideoBackground } from './HeroVideoBackground';
+import { SeamlessVideoBanner } from './SeamlessVideoBanner';
 import { PortfolioVideo } from '../types/portfolio';
 
 interface HeroProps {
@@ -12,11 +13,11 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
   return (
-    <section className="relative flex flex-col justify-end items-center pt-24 pb-16 sm:pt-28 sm:pb-20 md:pb-20 min-h-[560px] sm:min-h-[640px] md:min-h-[680px] overflow-hidden">
+    <section className="relative flex flex-col justify-end items-center pt-20 sm:pt-24 pb-0 min-h-[540px] sm:min-h-[600px] md:min-h-[640px] overflow-hidden">
       {/* Background Interactive Video Reel (Curtain architecture with random start and dynamic cross-dissolve) */}
       <HeroVideoBackground videos={videos} />
 
-      <div className="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center pointer-events-none mb-1 sm:mb-2 w-full">
+      <div className="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center pointer-events-none mb-2 sm:mb-3 w-full">
         {/* Official Studio Wordmark Banner (Film Reel + Orchid Creation wordmark exclusively for Hero section) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -136,6 +137,11 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
             </div>
           </div>
         </motion.div>
+      </div>
+
+      {/* Seamless Infinite Video Banner Ribbon (Placed in the red-marked section) */}
+      <div className="relative z-30 w-full mt-1 sm:mt-2">
+        <SeamlessVideoBanner />
       </div>
     </section>
   );

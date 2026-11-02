@@ -25,7 +25,7 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
   };
 
   return (
-    <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 border-t border-white/5 overflow-hidden">
+    <section className="relative pt-8 sm:pt-12 pb-12 sm:pb-16 overflow-hidden">
       {/* Ambient background light (Orchid & Emerald) */}
       <div className="ambient-glow bg-[#BF54A3]/15 w-[550px] h-[550px] top-1/2 left-0 -translate-y-1/2" />
       <div className="ambient-glow bg-[#107361]/15 w-[450px] h-[450px] top-1/4 right-0" />
