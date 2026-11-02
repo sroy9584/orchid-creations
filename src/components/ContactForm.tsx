@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle, MessageSquare, Mail, Info } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, MessageSquare } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
 import { servicesConfig } from '../data/servicesConfig';
 import { getWhatsAppLink } from '../data/socialLinks';
@@ -25,10 +24,6 @@ export const ContactForm: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [feedbackMessage, setFeedbackMessage] = useState<string>('');
 
-  const isBackendConfigured = Boolean(
-    siteConfig.formspreeEndpoint && siteConfig.formspreeEndpoint.trim().length > 0
-  );
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -44,34 +39,43 @@ export const ContactForm: React.FC = () => {
     // Client-side validation
     if (!formData.fullName.trim() || !formData.email.trim() || !formData.projectDescription.trim()) {
       setStatus('error');
-      setFeedbackMessage('Please fill in your name, email, and project description.');
+      setFeedbackMessage('Please enter your Name, Email, and Project Description.');
       return;
     }
 
-    // Check if backend endpoint is configured
-    if (!isBackendConfigured) {
-      // Direct user cleanly to WhatsApp or Email
-      const generatedMessage = `Hello Sourav! My name is ${formData.fullName}.\n\nService: ${formData.service}\nEmail: ${formData.email}\nPhone: ${formData.whatsapp || 'N/A'}\n\nProject Details:\n${formData.projectDescription}`;
-      const fallbackUrl = getWhatsAppLink(generatedMessage);
-      window.open(fallbackUrl, '_blank');
-      return;
-    }
-
-    // Submit to configured backend (e.g. Formspree)
     setStatus('submitting');
+    setFeedbackMessage('');
+
+    // Use user-configured endpoint or zero-config FormSubmit direct to studio email
+    const endpoint =
+      siteConfig.formspreeEndpoint && siteConfig.formspreeEndpoint.trim().length > 0
+        ? siteConfig.formspreeEndpoint
+        : `https://formsubmit.co/ajax/${siteConfig.contactEmail}`;
+
     try {
-      const response = await fetch(siteConfig.formspreeEndpoint, {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.whatsapp || 'Not provided',
+          service: formData.service,
+          message: formData.projectDescription,
+          _subject: `New Project Enquiry: ${formData.service} (${formData.fullName})`,
+          _captcha: 'false',
+          _template: 'table',
+        }),
       });
 
       if (response.ok) {
         setStatus('success');
-        setFeedbackMessage('Thank you! Your project details have been successfully submitted. Sourav will reach out shortly.');
+        setFeedbackMessage(
+          `Thank you, ${formData.fullName}! Your enquiry has been sent directly to ${siteConfig.contactEmail}. Sourav will get in touch with you shortly.`
+        );
         setFormData({
           fullName: '',
           email: '',
@@ -80,52 +84,52 @@ export const ContactForm: React.FC = () => {
           projectDescription: '',
         });
       } else {
-        const errorData = await response.json();
-        throw new Error(errorData?.error || 'Submission failed.');
+        throw new Error('Server response was not ok');
       }
-    } catch (err: any) {
+    } catch {
+      // If network is restricted or user wants instant WhatsApp delivery, provide seamless fallback
       setStatus('error');
       setFeedbackMessage(
-        err.message || 'Unable to submit right now. Please reach out directly via WhatsApp or Email.'
+        'Unable to send email right now. You can click below to send this enquiry directly to Sourav via WhatsApp.'
       );
     }
   };
 
-  const handleWhatsAppDirect = () => {
+  const handleWhatsAppSend = () => {
     const text = formData.fullName
-      ? `Hello Sourav! My name is ${formData.fullName}.\n\nI am enquiring about ${formData.service}.\nEmail: ${formData.email || 'N/A'}\nWhatsApp: ${formData.whatsapp || 'N/A'}\n\nProject Overview:\n${formData.projectDescription || 'I would like to discuss video post-production.'}`
-      : 'Hello Orchid Creations! I would like to discuss video editing and post-production services.';
+      ? `Hello Sourav! My name is ${formData.fullName}.\n\nService: ${formData.service}\nEmail: ${formData.email || 'N/A'}\nWhatsApp/Phone: ${formData.whatsapp || 'N/A'}\n\nProject Overview:\n${formData.projectDescription || 'I would like to discuss video post-production.'}`
+      : 'Hello Orchid Creations! I am interested in your video editing services. I would like to discuss a project.';
     window.open(getWhatsAppLink(text), '_blank');
   };
 
   return (
     <div className="w-full glass-card rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl">
-      {/* Backend connection notice */}
-      {!isBackendConfigured && (
-        <div className="mb-8 p-4 rounded-2xl bg-purple-950/30 border border-purple-500/30 flex items-start gap-3 text-xs sm:text-sm text-purple-200">
-          <Info className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
-          <div className="space-y-1">
-            <p className="font-semibold text-white">Direct Connect Mode Active</p>
-            <p className="text-purple-300/90 leading-relaxed">
-              Static GitHub Pages does not run a server. Submitting this form will automatically prepare a structured enquiry message directly to Sourav via WhatsApp. (To enable direct email forms, set your Formspree endpoint in <code className="text-white bg-black/40 px-1 py-0.5 rounded font-mono text-[11px]">siteConfig.ts</code>).
-            </p>
+      {/* Success Alert */}
+      {status === 'success' && (
+        <div className="mb-6 p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 flex items-start gap-3 text-sm text-emerald-200">
+          <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+          <div>
+            <p className="font-semibold text-white">Message Sent Successfully</p>
+            <p className="text-emerald-300/90 text-xs mt-1 leading-relaxed">{feedbackMessage}</p>
           </div>
         </div>
       )}
 
-      {/* Success Alert */}
-      {status === 'success' && (
-        <div className="mb-6 p-4 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 flex items-center gap-3 text-sm text-emerald-200">
-          <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
-          <span>{feedbackMessage}</span>
-        </div>
-      )}
-
-      {/* Error Alert */}
+      {/* Error Alert with instant WhatsApp action */}
       {status === 'error' && (
-        <div className="mb-6 p-4 rounded-2xl bg-rose-950/40 border border-rose-500/40 flex items-center gap-3 text-sm text-rose-200">
-          <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
-          <span>{feedbackMessage}</span>
+        <div className="mb-6 p-4 rounded-2xl bg-rose-950/40 border border-rose-500/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-rose-200">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+            <span className="text-xs sm:text-sm">{feedbackMessage}</span>
+          </div>
+          <button
+            type="button"
+            onClick={handleWhatsAppSend}
+            className="px-4 py-2 rounded-xl bg-emerald-600/80 hover:bg-emerald-600 text-white font-semibold text-xs shrink-0 flex items-center gap-1.5 transition-colors"
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>Send via WhatsApp</span>
+          </button>
         </div>
       )}
 
@@ -178,7 +182,7 @@ export const ContactForm: React.FC = () => {
               name="whatsapp"
               value={formData.whatsapp}
               onChange={handleChange}
-              placeholder="+91 98765 43210"
+              placeholder="+91 89279 16525"
               className="glass-input text-sm"
             />
           </div>
@@ -233,30 +237,24 @@ export const ContactForm: React.FC = () => {
           >
             {status === 'submitting' ? (
               <span>SENDING ENQUIRY...</span>
-            ) : isBackendConfigured ? (
-              <>
-                <span>SEND MESSAGE</span>
-                <Send className="w-4 h-4 ml-1" />
-              </>
             ) : (
               <>
-                <span>CONTINUE VIA WHATSAPP</span>
-                <MessageSquare className="w-4 h-4 ml-1" />
+                <span>SEND MESSAGE (EMAIL)</span>
+                <Send className="w-4 h-4 ml-1" />
               </>
             )}
           </button>
 
           <button
             type="button"
-            onClick={handleWhatsAppDirect}
+            onClick={handleWhatsAppSend}
             className="glass-btn-secondary w-full sm:w-auto text-sm font-semibold !py-3.5 !px-6 text-neutral-300 hover:text-white"
           >
             <MessageSquare className="w-4 h-4 text-emerald-400" />
-            <span>Chat on WhatsApp Directly</span>
+            <span>Send via WhatsApp</span>
           </button>
         </div>
       </form>
     </div>
   );
 };
-
