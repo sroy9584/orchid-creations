@@ -303,26 +303,32 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
       />
 
       {/* =========================================================
-          BALANCED CINEMATIC GLASS OVERLAY
-          Bright & vivid video visibility + crystal-clear text readability
+          CINEMATIC BALANCED VIGNETTE & EDGE FADES
+          20-30% brightness reduction (70-80% visibility) + seamless edge merging
           ========================================================= */}
-      {/* 1. Translucent dark tint (30% so footage details are bright & vibrant) */}
-      <div className="absolute inset-0 bg-[#08090D]/30 z-15 pointer-events-none" />
+      {/* 1. Base dark tint for 25% brightness reduction (75% video visibility) */}
+      <div className="absolute inset-0 bg-[#0D1516]/25 z-15 pointer-events-none" />
 
-      {/* 2. Soft radial vignette (bright in center, gentle darkening toward outer edges) */}
+      {/* 2. Soft center-to-edge radial vignette */}
       <div
         className="absolute inset-0 z-15 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(8, 9, 13, 0.08) 0%, rgba(8, 9, 13, 0.32) 60%, rgba(8, 9, 13, 0.72) 100%)',
+            'radial-gradient(ellipse at center, rgba(13, 21, 22, 0.05) 0%, rgba(13, 21, 22, 0.35) 55%, rgba(13, 21, 22, 0.90) 100%)',
         }}
       />
 
-      {/* 3. Bottom seamless blend into next section */}
-      <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#0D1516] via-[#0D1516]/65 to-transparent z-15 pointer-events-none" />
+      {/* 3. LEFT EDGE VIGNETTE (Fades video edge seamlessly into page background) */}
+      <div className="absolute top-0 bottom-0 left-0 w-36 sm:w-64 md:w-80 bg-gradient-to-r from-[#0D1516] via-[#0D1516]/85 via-40% to-transparent z-15 pointer-events-none" />
 
-      {/* 4. Top subtle navbar protection gradient */}
-      <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#08090D]/50 to-transparent z-15 pointer-events-none" />
+      {/* 4. RIGHT EDGE VIGNETTE (Fades video edge seamlessly into page background) */}
+      <div className="absolute top-0 bottom-0 right-0 w-36 sm:w-64 md:w-80 bg-gradient-to-l from-[#0D1516] via-[#0D1516]/85 via-40% to-transparent z-15 pointer-events-none" />
+
+      {/* 5. DOWN (BOTTOM) EDGE VIGNETTE (Deep fade melting video into Featured section) */}
+      <div className="absolute bottom-0 inset-x-0 h-44 sm:h-64 bg-gradient-to-t from-[#0D1516] via-[#0D1516]/90 via-45% to-transparent z-15 pointer-events-none" />
+
+      {/* 6. TOP EDGE VIGNETTE (Subtle blend under navbar) */}
+      <div className="absolute top-0 inset-x-0 h-28 sm:h-36 bg-gradient-to-b from-[#0D1516] via-[#0D1516]/75 to-transparent z-15 pointer-events-none" />
 
       {/* =========================================================
           INTERACTIVE CONTROLS & LIVE REEL STATUS PILL
