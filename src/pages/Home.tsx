@@ -21,8 +21,8 @@ export const Home: React.FC = () => {
 
   return (
     <div className="relative overflow-hidden">
-      {/* 1. Hero Section */}
-      <Hero />
+      {/* 1. Hero Section with Interactive Video Background */}
+      <Hero videos={featuredVideos} />
 
       {/* 2. Featured Works Showcase */}
       <FeaturedWorks
