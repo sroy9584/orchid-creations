@@ -57,7 +57,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="absolute -bottom-6 -right-4 sm:-right-6 p-4 rounded-2xl glass-card border-[#BF54A3]/30 shadow-glow-accent bg-[#101219]/90 backdrop-blur-xl"
+            className="absolute -bottom-4 right-1 sm:-right-4 sm:-bottom-6 p-3 sm:p-4 rounded-2xl glass-card border-[#BF54A3]/30 shadow-glow-accent bg-[#101219]/90 backdrop-blur-xl"
           >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-[#BF54A3]/20 text-[#BF54A3] flex items-center justify-center">

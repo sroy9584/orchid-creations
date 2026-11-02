@@ -333,35 +333,35 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
       {/* =========================================================
           INTERACTIVE CONTROLS & LIVE REEL STATUS PILL
           ========================================================= */}
-      <div className="absolute bottom-4 sm:bottom-6 inset-x-0 z-20 flex items-center justify-between px-4 sm:px-8 max-w-7xl mx-auto pointer-events-none">
+      <div className="absolute bottom-2 sm:bottom-3.5 inset-x-0 z-20 flex items-center justify-between px-2 sm:px-6 max-w-7xl mx-auto pointer-events-none">
         {/* Left / Prev Arrow Button */}
         <button
           type="button"
           onClick={() => switchVideo('prev')}
           aria-label="Previous featured video clip"
-          className="pointer-events-auto p-2 sm:p-2.5 rounded-full bg-black/45 hover:bg-[#BF54A3]/30 border border-white/10 hover:border-[#BF54A3]/50 text-white/80 hover:text-white transition-all backdrop-blur-md hidden sm:flex items-center justify-center group shadow-lg"
+          className="pointer-events-auto p-1.5 sm:p-2.5 rounded-full bg-black/50 hover:bg-[#BF54A3]/30 border border-white/10 hover:border-[#BF54A3]/50 text-white/80 hover:text-white transition-all backdrop-blur-md flex items-center justify-center group shadow-lg"
         >
-          <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+          <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:-translate-x-0.5" />
         </button>
 
         {/* Center Live Reel Pill */}
-        <div className="pointer-events-auto mx-auto inline-flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full bg-black/60 border border-white/15 backdrop-blur-xl shadow-glass-sm text-[11px] sm:text-xs text-neutral-300">
+        <div className="pointer-events-auto mx-auto inline-flex items-center gap-1.5 sm:gap-2.5 px-2.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/70 border border-white/15 backdrop-blur-xl shadow-glass-sm text-[10px] sm:text-xs text-neutral-300">
           {/* Pulsing Live indicator */}
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#BF54A3] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#BF54A3]" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-[#BF54A3]" />
           </span>
 
-          <span className="font-mono text-[10px] uppercase text-[#D977BF] font-semibold tracking-wider flex items-center gap-1">
-            <Film className="w-3 h-3 text-[#BF54A3]" />
+          <span className="font-mono text-[9px] sm:text-[10px] uppercase text-[#D977BF] font-semibold tracking-wider flex items-center gap-1">
+            <Film className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#BF54A3]" />
             <span>REEL:</span>
           </span>
 
-          <span className="max-w-[150px] sm:max-w-[280px] truncate font-medium text-white/95">
+          <span className="max-w-[130px] sm:max-w-[260px] md:max-w-[340px] truncate font-medium text-white/95">
             {activeVideo?.title || 'Cinematic Film Highlight'}
           </span>
 
-          <span className="hidden md:inline text-neutral-400 font-mono text-[10px] pl-1.5 border-l border-white/15">
+          <span className="hidden sm:inline text-neutral-400 font-mono text-[9px] sm:text-[10px] pl-1.5 border-l border-white/15">
             Swipe ← → to switch
           </span>
         </div>
@@ -371,9 +371,9 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
           type="button"
           onClick={() => switchVideo('next')}
           aria-label="Next featured video clip"
-          className="pointer-events-auto p-2 sm:p-2.5 rounded-full bg-black/45 hover:bg-[#BF54A3]/30 border border-white/10 hover:border-[#BF54A3]/50 text-white/80 hover:text-white transition-all backdrop-blur-md hidden sm:flex items-center justify-center group shadow-lg"
+          className="pointer-events-auto p-1.5 sm:p-2.5 rounded-full bg-black/50 hover:bg-[#BF54A3]/30 border border-white/10 hover:border-[#BF54A3]/50 text-white/80 hover:text-white transition-all backdrop-blur-md flex items-center justify-center group shadow-lg"
         >
-          <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+          <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5" />
         </button>
       </div>
     </div>
