@@ -5,8 +5,7 @@ import { siteConfig } from './siteConfig';
  * =======================================================================
  * ORCHID CREATIONS — SOCIAL MEDIA LINKS
  * =======================================================================
- * Update your official social media URLs here.
- * These links are automatically reflected in the Header, Footer, and Contact page.
+ * Official studio channels for Sourav Roy / Orchid Creations.
  */
 
 export const defaultWhatsAppMessage = encodeURIComponent(
@@ -18,28 +17,28 @@ export const socialLinks: SocialLink[] = [
     platform: 'whatsapp',
     title: 'WhatsApp Direct',
     url: `https://wa.me/${siteConfig.whatsappNumber}?text=${defaultWhatsAppMessage}`,
-    displayHandle: '+91 (Direct Chat)',
+    displayHandle: '+91 89279 16525',
     iconName: 'MessageSquare',
   },
   {
     platform: 'instagram',
     title: 'Instagram',
-    url: 'https://instagram.com/orchidcreations_official', // REPLACE with your Instagram URL
-    displayHandle: '@orchidcreations_official',
+    url: 'https://www.instagram.com/editorsouravroy/',
+    displayHandle: '@editorsouravroy',
     iconName: 'Instagram',
   },
   {
     platform: 'youtube',
     title: 'YouTube Channel',
-    url: 'https://youtube.com/@orchidcreations', // REPLACE with your YouTube Channel URL
-    displayHandle: '@orchidcreations',
+    url: 'https://www.youtube.com/@orchidcreation',
+    displayHandle: '@orchidcreation',
     iconName: 'Youtube',
   },
   {
     platform: 'facebook',
     title: 'Facebook Page',
-    url: 'https://facebook.com/orchidcreations.official', // REPLACE with your Facebook Page URL
-    displayHandle: 'Orchid Creations Official',
+    url: 'https://www.facebook.com/editorsouravroy/',
+    displayHandle: 'editorsouravroy',
     iconName: 'Facebook',
   },
   {
@@ -51,11 +50,7 @@ export const socialLinks: SocialLink[] = [
   },
 ];
 
-/**
- * Helper to generate a pre-filled WhatsApp link with a custom message
- */
 export const getWhatsAppLink = (customMessage?: string): string => {
   const message = customMessage ? encodeURIComponent(customMessage) : defaultWhatsAppMessage;
   return `https://wa.me/${siteConfig.whatsappNumber}?text=${message}`;
 };
-

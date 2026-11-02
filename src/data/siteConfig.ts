@@ -4,9 +4,7 @@ import { SiteConfig } from '../types/config';
  * =======================================================================
  * ORCHID CREATIONS — SITE CONFIGURATION
  * =======================================================================
- * This file contains all primary company and founder details.
- * You can customize phone numbers, email, bio, logo path, and form settings
- * directly in this file without modifying the UI components.
+ * Contains official company and founder details for Sourav Roy.
  */
 
 export const siteConfig: SiteConfig = {
@@ -20,14 +18,12 @@ export const siteConfig: SiteConfig = {
   yearsOfExperience: '7+ Years',
   location: 'West Bengal, India',
 
-  // Contact details
-  // Note: Phone number should be international format without '+' or spaces (e.g., '919876543210')
-  whatsappNumber: '919000000000', // REPLACE with your actual WhatsApp phone number
-  displayPhone: '+91 (Contact via WhatsApp)',
-  contactEmail: 'contact.orchidcreations@gmail.com', // REPLACE with your official email
+  // Official contact details
+  whatsappNumber: '918927916525',
+  displayPhone: '+91 89279 16525',
+  contactEmail: 'ocofficialservice@gmail.com',
 
-  // External Form Backend (e.g. Formspree: 'https://formspree.io/f/your_form_id')
-  // Leave empty or set your endpoint to enable form submissions
+  // External Form Backend (Formspree or Web3Forms)
   formspreeEndpoint: '',
 
   // Official Asset Paths (located in public/ folder)
@@ -66,4 +62,3 @@ export const siteConfig: SiteConfig = {
     ],
   },
 };
-
