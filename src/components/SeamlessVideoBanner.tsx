@@ -125,17 +125,17 @@ export const SeamlessVideoBanner: React.FC = () => {
   return (
     <div
       className="relative w-full overflow-hidden bg-[#0D1516] border-y border-white/10 shadow-2xl select-none"
-      aria-label="Orchid Creation Video Banner Ribbon"
+      aria-label="Orchid Creation Video Editing Timeline Ribbon"
     >
-      <div className="relative w-full aspect-[1882/164] min-h-[44px] sm:min-h-[64px] md:min-h-[82px] lg:min-h-[105px]">
-        {/* Dual-Player Architecture for Zero-Lag, Zero-Stutter, Zero-Blink Infinite Loop */}
+      <div className="relative w-full aspect-[1794/128] min-h-[40px] sm:min-h-[58px] md:min-h-[72px] lg:min-h-[96px]">
+        {/* Dual-Player Architecture: Seamless cross-dissolve with matching brightness and contrast */}
         <video
           ref={videoRefA}
           src="./assets/video/banner-ribbon.mp4"
           muted
           playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          preload="metadata"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none brightness-[0.72] contrast-[1.03]"
           style={{ opacity: 1, willChange: 'opacity' }}
         />
 
@@ -144,16 +144,27 @@ export const SeamlessVideoBanner: React.FC = () => {
           src="./assets/video/banner-ribbon.mp4"
           muted
           playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          preload="metadata"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none brightness-[0.72] contrast-[1.03]"
           style={{ opacity: 0, willChange: 'opacity' }}
         />
 
-        {/* Soft Left & Right Vignette Blends so ribbon flows seamlessly with dark site edges */}
-        <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-20 bg-gradient-to-r from-[#0D1516] to-transparent pointer-events-none z-10" />
-        <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-20 bg-gradient-to-l from-[#0D1516] to-transparent pointer-events-none z-10" />
+        {/* Matching Dark Tint Overlay (Harmonized with hero video background) */}
+        <div className="absolute inset-0 bg-[#0D1516]/30 pointer-events-none z-10" />
+
+        {/* Soft Radial Vignette matching the upper background mood */}
+        <div
+          className="absolute inset-0 z-10 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse at center, rgba(13, 21, 22, 0.18) 0%, rgba(13, 21, 22, 0.50) 65%, rgba(13, 21, 22, 0.90) 100%)',
+          }}
+        />
+
+        {/* Soft Left & Right Vignette Blends so timeline edges dissolve into dark background */}
+        <div className="absolute top-0 bottom-0 left-0 w-10 sm:w-24 bg-gradient-to-r from-[#0D1516] via-[#0D1516]/85 to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 bottom-0 right-0 w-10 sm:w-24 bg-gradient-to-l from-[#0D1516] via-[#0D1516]/85 to-transparent pointer-events-none z-10" />
       </div>
     </div>
   );
 };
-

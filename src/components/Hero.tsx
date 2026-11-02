@@ -140,7 +140,7 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
       </div>
 
       {/* Seamless Infinite Video Banner Ribbon (Placed in the red-marked section) */}
-      <div className="relative z-30 w-full mt-1 sm:mt-2">
+      <div className="relative z-30 w-full mt-0.5 sm:mt-1">
         <SeamlessVideoBanner />
       </div>
     </section>
