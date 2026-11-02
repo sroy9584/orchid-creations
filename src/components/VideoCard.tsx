@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Sparkles } from 'lucide-react';
 import { PortfolioVideo } from '../types/portfolio';
@@ -11,16 +11,137 @@ interface VideoCardProps {
 }
 
 export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPlay }) => {
-  // Graceful fallback from maxresdefault to hqdefault if 404
+  // Graceful fallback from maxresdefault to hqdefault
   const [thumbSrc, setThumbSrc] = useState<string>(
-    video.thumbnailUrl || `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`
+    video.thumbnailUrl || `https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`
   );
 
-  const handleImageError = () => {
-    // Fallback to high-quality thumbnail if maxres is unavailable on YouTube
-    if (!thumbSrc.includes('hqdefault')) {
-      setThumbSrc(`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`);
+  // 6 Motion Preview Frame URLs across different timestamps of the video
+  const frameUrls = useMemo(
+    () => [
+      thumbSrc,                                     // Frame 0: Primary Cover
+      `https://i.ytimg.com/vi/${video.id}/sd1.jpg`, // Frame 1: ~25% timestamp (Opening story)
+      `https://i.ytimg.com/vi/${video.id}/sd2.jpg`, // Frame 2: ~50% timestamp (Climax/Rituals)
+      `https://i.ytimg.com/vi/${video.id}/sd3.jpg`, // Frame 3: ~75% timestamp (Celebration/Ending)
+      `https://i.ytimg.com/vi/${video.id}/hq1.jpg`, // Frame 4: Motion Moment 1
+      `https://i.ytimg.com/vi/${video.id}/hq2.jpg`, // Frame 5: Motion Moment 2
+    ],
+    [video.id, thumbSrc]
+  );
+
+  const [isPreviewing, setIsPreviewing] = useState<boolean>(false);
+  const [currentFrameIndex, setCurrentFrameIndex] = useState<number>(0);
+  const frameTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const preloadedRef = useRef<boolean>(false);
+
+  // Touch long-press handling
+  const touchStartPos = useRef<{ x: number; y: number } | null>(null);
+  const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isLongPressActive = useRef<boolean>(false);
+
+  // Preload preview frames on first interaction
+  const preloadFrames = useCallback(() => {
+    if (preloadedRef.current) return;
+    preloadedRef.current = true;
+    frameUrls.slice(1).forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  }, [frameUrls]);
+
+  // Frame cycling loop: 6 motion frames looping continuously during hover/press
+  useEffect(() => {
+    if (isPreviewing) {
+      preloadFrames();
+      frameTimerRef.current = setInterval(() => {
+        setCurrentFrameIndex((prev) => (prev + 1) % frameUrls.length);
+      }, 390);
+    } else {
+      if (frameTimerRef.current) {
+        clearInterval(frameTimerRef.current);
+        frameTimerRef.current = null;
+      }
+      setCurrentFrameIndex(0);
     }
+
+    return () => {
+      if (frameTimerRef.current) clearInterval(frameTimerRef.current);
+    };
+  }, [isPreviewing, preloadFrames, frameUrls.length]);
+
+  // Mouse Hover handlers (Desktop)
+  const handleMouseEnter = () => {
+    setIsPreviewing(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsPreviewing(false);
+  };
+
+  // Touch handlers (Mobile & Tablet Press-and-Hold Preview)
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartPos.current = { x: touch.clientX, y: touch.clientY };
+    isLongPressActive.current = false;
+
+    // Start long-press detection (held for >220ms triggers preview)
+    longPressTimerRef.current = setTimeout(() => {
+      isLongPressActive.current = true;
+      setIsPreviewing(true);
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try {
+          navigator.vibrate(20);
+        } catch (_) {}
+      }
+    }, 220);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!touchStartPos.current) return;
+    const touch = e.touches[0];
+    const dx = Math.abs(touch.clientX - touchStartPos.current.x);
+    const dy = Math.abs(touch.clientY - touchStartPos.current.y);
+
+    // If user scrolls page (>10px), cancel long press and preview immediately
+    if (dx > 10 || dy > 10) {
+      if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
+      if (isLongPressActive.current) {
+        setIsPreviewing(false);
+        isLongPressActive.current = false;
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
+
+    if (isLongPressActive.current) {
+      // User released after long-press preview
+      setIsPreviewing(false);
+      isLongPressActive.current = false;
+    } else {
+      // Normal quick tap -> open full video modal
+      onPlay(video);
+    }
+    touchStartPos.current = null;
+  };
+
+  const handleTouchCancel = () => {
+    if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
+    setIsPreviewing(false);
+    isLongPressActive.current = false;
+    touchStartPos.current = null;
+  };
+
+  const handleImageError = () => {
+    if (!thumbSrc.includes('hqdefault')) {
+      setThumbSrc(`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`);
+    }
+  };
+
+  const handleClick = () => {
+    // Desktop click directly opens full video modal
+    onPlay(video);
   };
 
   return (
@@ -30,43 +151,81 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
-      className="group relative rounded-2xl overflow-hidden glass-card flex flex-col cursor-pointer focus-within:ring-2 focus-within:ring-[#BF54A3]"
-      onClick={() => onPlay(video)}
+      className="group relative rounded-2xl overflow-hidden glass-card flex flex-col cursor-pointer focus-within:ring-2 focus-within:ring-[#BF54A3] select-none"
+      onClick={handleClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchCancel}
     >
-      {/* Thumbnail Aspect Ratio 16:9 Frame */}
+      {/* Thumbnail Aspect Ratio 16:9 Frame with Motion Preview */}
       <div className="relative w-full aspect-video overflow-hidden bg-neutral-900/80">
-        <img
-          src={thumbSrc}
+        {/* Animated Motion Frame: Cycles through 5-6 timestamps on hover/touch-hold */}
+        <motion.img
+          key={isPreviewing ? currentFrameIndex : 'cover'}
+          src={isPreviewing ? frameUrls[currentFrameIndex] : thumbSrc}
           alt={video.title}
           onError={handleImageError}
           loading="lazy"
+          initial={isPreviewing ? { opacity: 0.9, scale: 1.03 } : false}
+          animate={{ opacity: 1, scale: isPreviewing ? 1.07 : 1 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
 
         {/* Ambient Overlay Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1516] via-black/25 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1516] via-black/25 to-transparent opacity-80 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none" />
 
         {/* Top Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-          <span className="text-[11px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-white/90 border border-white/10 shadow-sm">
+        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-20">
+          <span className="text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/65 backdrop-blur-md text-white/90 border border-white/10 shadow-sm">
             {categoryTitle || video.categoryId}
           </span>
-          {video.featured && (
-            <span className="flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#BF54A3] backdrop-blur-md text-white border border-[#D977BF]/40 shadow-glow-accent">
+          {isPreviewing ? (
+            <span className="flex items-center gap-1 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-[#BF54A3] backdrop-blur-md text-white border border-[#D977BF]/40 shadow-glow-accent animate-pulse">
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
+              PREVIEW
+            </span>
+          ) : video.featured ? (
+            <span className="flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-[#BF54A3] backdrop-blur-md text-white border border-[#D977BF]/40 shadow-glow-accent">
               <Sparkles className="w-3 h-3" />
               Featured
             </span>
-          )}
+          ) : null}
         </div>
 
+        {/* Motion Scrubber Indicator Bars (Active on Hover or Touch-Hold) */}
+        {isPreviewing && (
+          <div className="absolute bottom-2.5 inset-x-3 z-20 flex items-center gap-1 pointer-events-none">
+            {frameUrls.map((_, idx) => (
+              <div
+                key={idx}
+                className={`h-1 flex-1 rounded-full transition-all duration-300 ${
+                  idx === currentFrameIndex
+                    ? 'bg-[#BF54A3] shadow-[0_0_8px_rgba(191,84,163,0.9)]'
+                    : idx < currentFrameIndex
+                    ? 'bg-white/70'
+                    : 'bg-white/20'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
         {/* Play Icon Trigger Button */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
           <motion.div
             whileHover={{ scale: 1.12 }}
             whileTap={{ scale: 0.95 }}
-            className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center text-white shadow-[0_8px_25px_rgba(0,0,0,0.5)] group-hover:bg-[#BF54A3] group-hover:border-[#D977BF] group-hover:shadow-[0_0_25px_rgba(191,84,163,0.65)] transition-all duration-300"
+            className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-white shadow-[0_8px_25px_rgba(0,0,0,0.5)] transition-all duration-300 ${
+              isPreviewing
+                ? 'bg-[#BF54A3] border border-[#D977BF] shadow-[0_0_25px_rgba(191,84,163,0.7)] scale-105'
+                : 'bg-white/15 backdrop-blur-md border border-white/30 group-hover:bg-[#BF54A3] group-hover:border-[#D977BF]'
+            }`}
           >
-            <Play className="w-6 h-6 fill-current ml-0.5 text-white" />
+            <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current ml-0.5 text-white" />
           </motion.div>
         </div>
       </div>
@@ -93,4 +252,3 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
     </motion.div>
   );
 };
-

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Film } from 'lucide-react';
+import { X, Film } from 'lucide-react';
 import { PortfolioVideo } from '../types/portfolio';
 
 interface VideoModalProps {
@@ -21,7 +21,6 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    // Lock scroll
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
@@ -71,12 +70,12 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
                 </h3>
               </div>
 
-              {/* Close Button with generous touch target */}
+              {/* Close Button */}
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close video player"
-                className="flex items-center justify-center w-8 h-8 sm:w-8 sm:h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#BF54A3] shrink-0"
+                className="flex items-center justify-center w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#BF54A3] shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -108,4 +107,3 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
     </AnimatePresence>
   );
 };
-
