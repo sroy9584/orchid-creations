@@ -20,7 +20,7 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
   const displayVideos = videos.slice(0, 6);
 
   return (
-    <section className="relative py-10 sm:py-14 overflow-hidden">
+    <section className="relative pt-16 sm:pt-24 pb-12 sm:pb-16 border-t border-white/5 overflow-hidden">
       {/* Ambient background light (Orchid & Emerald) */}
       <div className="ambient-glow bg-[#BF54A3]/15 w-[550px] h-[550px] top-1/2 left-0 -translate-y-1/2" />
       <div className="ambient-glow bg-[#107361]/15 w-[450px] h-[450px] top-1/4 right-0" />

@@ -12,7 +12,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
   return (
-    <section className="relative flex items-center justify-center pt-24 pb-12 sm:pt-28 sm:pb-16 overflow-hidden min-h-[580px] sm:min-h-[640px]">
+    <section className="relative flex items-center justify-center pt-24 pb-20 sm:pt-28 sm:pb-28 overflow-hidden min-h-[660px] sm:min-h-[720px] lg:min-h-[760px]">
       {/* Background Interactive Video Reel (Squarespace-style with random starting times & swipe gestures) */}
       <HeroVideoBackground videos={videos} />
 
@@ -99,7 +99,7 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-8 sm:mt-10 w-full max-w-4xl p-3.5 sm:p-4 rounded-2xl glass-card flex flex-wrap items-center justify-around gap-3 sm:gap-6 text-left border border-white/15 bg-black/50 backdrop-blur-xl pointer-events-auto shadow-2xl"
+          className="mt-7 sm:mt-9 mb-6 sm:mb-10 w-full max-w-4xl p-3.5 sm:p-4 rounded-2xl glass-card flex flex-wrap items-center justify-around gap-3 sm:gap-6 text-left border border-white/15 bg-black/50 backdrop-blur-xl pointer-events-auto shadow-2xl"
         >
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-[#BF54A3]/20 border border-[#BF54A3]/30 flex items-center justify-center text-[#BF54A3]">
