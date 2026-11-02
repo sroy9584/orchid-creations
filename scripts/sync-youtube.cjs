@@ -17,6 +17,20 @@ const https = require('https');
 const CONFIG_PATH = path.join(__dirname, '../src/data/portfolioConfig.ts');
 const VIDEOS_JSON_PATH = path.join(__dirname, '../src/data/portfolioVideos.json');
 
+// Explicit list of video IDs to exclude from FEATURED PROJECTS per client instruction
+const EXCLUDED_FEATURED_IDS = new Set([
+  'yBqwuBTR2-I',
+  'bpZPh11wnGs',
+  '6CtcZup1i1s',
+  'pIwmjxltbhE',
+  'y9vab4ontEE',
+  '7O8NfT_f8dc',
+  'd6wVSUNNtj8',
+  'sEytK0aEL00',
+  'xWQepGBNruE',
+  'c2BMlv2QsaI',
+]);
+
 // Fetch helper using Node.js native https
 function httpsGet(url) {
   return new Promise((resolve, reject) => {
@@ -179,6 +193,7 @@ async function main() {
   console.log(`Checking ${validCategories.length} active playlists on YouTube...`);
 
   const fetchedVideos = [];
+  const seenVideoIds = new Set();
   let playlistsChecked = 0;
   let newlyDetectedCount = 0;
   const errors = [];
@@ -191,17 +206,30 @@ async function main() {
       console.log(`  -> Retrieved ${items.length} videos`);
 
       for (const item of items) {
-        // If already exists, preserve manual flags like 'featured'
+        // Prevent duplicate video records if uploaded/added across multiple playlists
+        if (seenVideoIds.has(item.id)) {
+          continue;
+        }
+        seenVideoIds.add(item.id);
+
         const existing = existingVideoMap.get(item.id);
-        if (existing) {
-          item.featured = existing.featured || cat.featured || false;
-          if (existing.manualOverride) {
-            item.manualOverride = true;
-          }
-        } else {
+        if (EXCLUDED_FEATURED_IDS.has(item.id)) {
+          item.featured = false;
+        } else if (existing && typeof existing.featured === 'boolean') {
+          // Strictly preserve existing curated featured decision
+          item.featured = existing.featured;
+        } else if (!existing) {
+          // Newly uploaded video to YouTube playlist: automatically added & featured
           newlyDetectedCount++;
+          item.featured = true;
+        } else {
           item.featured = cat.featured || false;
         }
+
+        if (existing && existing.manualOverride) {
+          item.manualOverride = true;
+        }
+
         fetchedVideos.push(item);
       }
     } catch (err) {

@@ -16,15 +16,23 @@ export function usePortfolio(options: UsePortfolioOptions = {}) {
   const [visibleCount, setVisibleCount] = useState<number>(itemsPerPage);
   const [selectedVideo, setSelectedVideo] = useState<PortfolioVideo | null>(null);
 
-  // Cast JSON data into typed structure safely
+  // Cast JSON data into typed structure safely and ensure base date-descending sort (newest first)
   const portfolioData = useMemo(() => {
+    const rawVideos = (portfolioDataJson.videos || []) as PortfolioVideo[];
+    const sortedVideos = [...rawVideos].sort((a, b) => {
+      const timeA = new Date(a.publishedAt || 0).getTime();
+      const timeB = new Date(b.publishedAt || 0).getTime();
+      return timeB - timeA;
+    });
+
     return {
       metadata: portfolioDataJson.metadata as SyncMetadata,
-      videos: portfolioDataJson.videos as PortfolioVideo[],
+      videos: sortedVideos,
     };
   }, []);
 
   // Filtered videos based on selectedCategory AND searchQuery (title or Video ID)
+  // Strictly sorted date-wise: newest uploaded first -> oldest last
   const filteredVideos = useMemo(() => {
     let result = portfolioData.videos;
 
@@ -45,19 +53,22 @@ export function usePortfolio(options: UsePortfolioOptions = {}) {
       });
     }
 
-    return result;
+    // Enforce date-wise sorting: newest first, oldest last
+    return [...result].sort((a, b) => {
+      const timeA = new Date(a.publishedAt || 0).getTime();
+      const timeB = new Date(b.publishedAt || 0).getTime();
+      return timeB - timeA;
+    });
   }, [selectedCategory, searchQuery, portfolioData.videos]);
 
-  // Curated Featured projects (explicit hand-picked IDs + 2 featured playlists), randomly shuffled
+  // Curated Featured projects (strictly sorted by upload date: newest first -> oldest last)
   const featuredVideos = useMemo(() => {
     const list = portfolioData.videos.filter((video) => video.featured);
-    // Fisher-Yates shuffle algorithm for dynamic random order
-    const shuffled = [...list];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
+    return [...list].sort((a, b) => {
+      const timeA = new Date(a.publishedAt || 0).getTime();
+      const timeB = new Date(b.publishedAt || 0).getTime();
+      return timeB - timeA;
+    });
   }, [portfolioData.videos]);
 
   // Paginated/Sliced slice for current display

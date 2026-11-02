@@ -2,8 +2,8 @@ name: Sync YouTube Playlists to Portfolio
 
 on:
   schedule:
-    # Run every 30 minutes automatically
-    - cron: '*/30 * * * *'
+    # Run automatically every 15 minutes to check for newly uploaded videos
+    - cron: '*/15 * * * *'
   # Allow manual trigger anytime from GitHub Actions tab
   workflow_dispatch:
 
@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      changes_detected: ${{ steps.git_status.outputs.changes_detected }}
 
     steps:
       - name: Checkout Repository
@@ -52,6 +54,14 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "Orchid Creations Bot"
           git add src/data/portfolioVideos.json
-          git commit -m "Automated sync: updated YouTube playlist portfolio [skip ci]"
+          git commit -m "Automated sync: updated YouTube playlist portfolio"
           git push origin main
 
+  deploy-site:
+    needs: sync-playlists
+    if: needs.sync-playlists.outputs.changes_detected == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
