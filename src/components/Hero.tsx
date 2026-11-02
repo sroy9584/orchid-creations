@@ -22,11 +22,26 @@ export const Hero: React.FC = () => {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+        {/* Official Studio Emblem */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="mb-5 relative"
+        >
+          <div className="ambient-glow bg-[#BF54A3]/25 w-28 h-28 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <img
+            src={siteConfig.logoPath}
+            alt={`${siteConfig.brandName} Official Logo`}
+            className="w-16 h-16 sm:w-20 sm:h-20 object-contain mx-auto relative z-10 drop-shadow-[0_8px_20px_rgba(191,84,163,0.35)]"
+          />
+        </motion.div>
+
         {/* Small Top Studio Badge */}
         <motion.div
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/15 backdrop-blur-xl shadow-glass-sm mb-6"
         >
           <Sparkles className="w-3.5 h-3.5 text-[#BF54A3]" />
@@ -42,12 +57,12 @@ export const Hero: React.FC = () => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+          transition={{ duration: 0.7, delay: 0.15 }}
           className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl leading-[1.12]"
         >
-          WE TURN YOUR MOMENTS INTO{' '}
+          GIVING WINGS TO YOUR{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361] drop-shadow-[0_0_35px_rgba(191,84,163,0.45)]">
-            CINEMATIC STORIES.
+            STORIES.
           </span>
         </motion.h1>
 

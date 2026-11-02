@@ -31,17 +31,17 @@ export const About: React.FC = () => {
 
   const milestones = [
     {
-      year: '2019',
-      title: 'Inception of Orchid Creations',
-      desc: 'Founded by Sourav Roy in West Bengal, India, focusing on boutique wedding highlights and independent music visuals.',
-    },
-    {
       year: '2021',
-      title: 'Expanded Post-Production Pipeline',
-      desc: 'Adopted dedicated DaVinci Resolve color suites and professional sound mixing tools for broadcast deliverables.',
+      title: 'Inception of Orchid Creations',
+      desc: 'Founded by Sourav Roy in West Bengal, India, dedicated to giving wings to visual stories through boutique wedding highlights and cinematic post-production.',
     },
     {
       year: '2023',
+      title: 'Expanded Post-Production Pipeline',
+      desc: 'Adopted dedicated DaVinci Resolve color suites and professional acoustic mixing tools for broadcast-quality deliverables.',
+    },
+    {
+      year: '2024',
       title: 'Commercial & Multi-Day Weddings',
       desc: 'Partnered with regional cinematographers across India to edit extensive multi-camera traditional ceremonies and brand reels.',
     },
@@ -136,7 +136,7 @@ export const About: React.FC = () => {
               STUDIO EVOLUTION
             </h3>
             <p className="mt-2 text-sm text-neutral-400">
-              The continuous pursuit of cinematic refinement since 2019.
+              The continuous pursuit of cinematic refinement since 2021.
             </p>
           </div>
 

@@ -9,13 +9,13 @@ import { SiteConfig } from '../types/config';
 
 export const siteConfig: SiteConfig = {
   brandName: 'ORCHID CREATIONS',
-  tagline: 'WE TURN YOUR MOMENTS INTO CINEMATIC STORIES.',
+  tagline: 'GIVING WINGS TO YOUR STORIES',
   subTagline:
-    'From cinematic wedding films to compelling brand visuals, we transform raw footage into meaningful stories through creative editing, stunning visuals, and immersive sound.',
+    'We turn your moments into cinematic visual experiences. From cinematic wedding films to compelling brand visuals, we transform raw footage into meaningful stories through creative editing, stunning visuals, and immersive sound.',
   founderName: 'Sourav Roy',
   founderRole: 'Founder & Lead Video Editor',
-  establishedYear: 2019,
-  yearsOfExperience: '7+ Years',
+  establishedYear: 2021,
+  yearsOfExperience: '5+ Years',
   location: 'Ashoknagar, Building More, Ashoknagar Kalyangarh, West Bengal 743222, India',
 
   // Official contact details
@@ -27,11 +27,11 @@ export const siteConfig: SiteConfig = {
   formspreeEndpoint: '',
 
   // Official Asset Paths (located in public/ folder)
-  logoPath: './assets/logo/orchid-logo.svg',
+  logoPath: './assets/logo/orchid-logo.png',
   founderPhotoPath: './assets/images/founder-placeholder.svg',
 
   aboutText: {
-    hero: 'Orchid Creations is a creative video post-production studio established in 2019. Founded by Sourav Roy, the studio focuses on transforming raw footage into cinematic visual experiences.',
+    hero: 'Orchid Creations is a creative video post-production studio established in 2021. Founded by Sourav Roy, the studio focuses on giving wings to your stories by transforming raw footage into cinematic visual experiences.',
     story: [
       'With deep expertise in video editing, color correction, visual effects, motion graphics, and sound design, Orchid Creations helps clients turn their special moments and creative ideas into memorable stories.',
       'From grand multi-day Bengali and traditional Indian weddings to contemporary pre-wedding narratives, music videos, and commercial brand reels, our craft balances cinematic grandeur with heartfelt emotion.',

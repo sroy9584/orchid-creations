@@ -44,21 +44,18 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
           {/* Brand Info (2 cols) */}
           <div className="lg:col-span-2 space-y-5">
-            <Link to="/" className="inline-block focus:outline-none">
+            <Link to="/" className="inline-flex items-center gap-3 focus:outline-none group">
               <img
                 src={siteConfig.logoPath}
                 alt={siteConfig.brandName}
-                className="h-10 w-auto object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                }}
+                className="h-12 w-12 object-contain transition-transform duration-300 group-hover:scale-105"
               />
               <div className="flex flex-col">
-                <span className="text-xl font-extrabold tracking-wider text-white">
+                <span className="text-xl font-extrabold tracking-wider text-white group-hover:text-[#BF54A3] transition-colors leading-tight">
                   ORCHID <span className="font-light text-[#BF54A3]">CREATIONS</span>
                 </span>
-                <span className="text-[10px] uppercase tracking-widest text-[#107361] font-mono font-semibold">
-                  POST-PRODUCTION STUDIO • EST. 2019
+                <span className="text-[10px] uppercase tracking-wider text-[#107361] font-mono font-semibold">
+                  GIVING WINGS TO YOUR STORIES • EST. {siteConfig.establishedYear}
                 </span>
               </div>
             </Link>
@@ -175,7 +172,7 @@ export const Footer: React.FC = () => {
             <button
               type="button"
               onClick={scrollToTop}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white border border-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400"
+              className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white border border-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[#BF54A3]"
               aria-label="Back to top"
             >
               <span>TOP</span>

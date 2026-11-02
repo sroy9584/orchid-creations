@@ -45,25 +45,20 @@ export const Navbar: React.FC = () => {
           {/* Brand Logo */}
           <Link
             to="/"
-            className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-purple-400 rounded-lg p-1"
+            className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-[#BF54A3] rounded-lg p-1"
           >
-            <div className="relative h-10 w-auto flex items-center">
+            <div className="flex items-center gap-3">
               <img
                 src={siteConfig.logoPath}
                 alt={`${siteConfig.brandName} Official Logo`}
-                className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                onError={(e) => {
-                  // Fallback if SVG fails to load
-                  e.currentTarget.style.display = 'none';
-                }}
+                className="h-10 w-10 object-contain transition-transform duration-300 group-hover:scale-105"
               />
-              {/* Fallback stylized text if image missing */}
               <div className="flex flex-col">
-                <span className="text-lg font-extrabold tracking-wider text-white group-hover:text-[#BF54A3] transition-colors">
+                <span className="text-base sm:text-lg font-extrabold tracking-wider text-white group-hover:text-[#BF54A3] transition-colors leading-tight">
                   ORCHID <span className="font-light text-[#BF54A3]">CREATIONS</span>
                 </span>
-                <span className="text-[9px] uppercase tracking-widest text-[#107361] font-mono -mt-1 font-semibold">
-                  POST-PRODUCTION STUDIO
+                <span className="text-[9px] uppercase tracking-wider text-[#107361] font-mono font-semibold">
+                  GIVING WINGS TO YOUR STORIES
                 </span>
               </div>
             </div>
