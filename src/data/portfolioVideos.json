@@ -885,7 +885,7 @@
       "playlistId": "PLVBKm1M4_08Qg4RNPatMBEjv4Q4twG1rm",
       "categoryId": "pre-wedding-ring",
       "publishedAt": "2026-08-20T07:33:37Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "h0ymJMWofHY",
@@ -2665,7 +2665,7 @@
       "playlistId": "PLVBKm1M4_08Qg4RNPatMBEjv4Q4twG1rm",
       "categoryId": "pre-wedding-ring",
       "publishedAt": "2023-12-30T08:06:51Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "oZGALDWtg3c",
@@ -3215,7 +3215,7 @@
       "playlistId": "PLVBKm1M4_08Qg4RNPatMBEjv4Q4twG1rm",
       "categoryId": "pre-wedding-ring",
       "publishedAt": "2023-12-30T06:42:58Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "gkIoUOmVQCg",
@@ -3395,7 +3395,7 @@
       "playlistId": "PLVBKm1M4_08Qg4RNPatMBEjv4Q4twG1rm",
       "categoryId": "pre-wedding-ring",
       "publishedAt": "2023-03-18T07:28:07Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "rm9DLC6B_iM",
@@ -3435,7 +3435,7 @@
       "playlistId": "PLVBKm1M4_08Qg4RNPatMBEjv4Q4twG1rm",
       "categoryId": "pre-wedding-ring",
       "publishedAt": "2023-03-18T07:24:04Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "wLLlqxynsFE",
@@ -3985,7 +3985,7 @@
       "playlistId": "PLVBKm1M4_08QlbXp3ZxKH3A12Sqetcd66",
       "categoryId": "wedding-teaser",
       "publishedAt": "2023-03-18T06:19:30Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "1eHm6wLf_Mc",
@@ -4735,7 +4735,7 @@
       "playlistId": "PLVBKm1M4_08Qg4RNPatMBEjv4Q4twG1rm",
       "categoryId": "pre-wedding-ring",
       "publishedAt": "2022-11-09T13:46:29Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "FqET3xAA_Xg",
@@ -5125,7 +5125,7 @@
       "playlistId": "PLVBKm1M4_08SOa75z6k0G20tAfpAL5PTt",
       "categoryId": "promotional-commercial",
       "publishedAt": "2022-02-11T10:05:26Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "6CtcZup1i1s",
@@ -5135,7 +5135,7 @@
       "playlistId": "PLVBKm1M4_08SOa75z6k0G20tAfpAL5PTt",
       "categoryId": "promotional-commercial",
       "publishedAt": "2022-02-11T10:05:26Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "MMl86JRXogI",
@@ -5155,7 +5155,7 @@
       "playlistId": "PLVBKm1M4_08SOa75z6k0G20tAfpAL5PTt",
       "categoryId": "promotional-commercial",
       "publishedAt": "2022-02-11T10:05:26Z",
-      "featured": true
+      "featured": false
     },
     {
       "id": "wJXEPSAaSmA",
