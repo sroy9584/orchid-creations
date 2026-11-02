@@ -156,3 +156,4 @@ export const SeamlessVideoBanner: React.FC = () => {
     </div>
   );
 };
+

@@ -12,6 +12,7 @@ export function usePortfolio(options: UsePortfolioOptions = {}) {
   const { initialCategory = 'all', itemsPerPage = 9 } = options;
 
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [visibleCount, setVisibleCount] = useState<number>(itemsPerPage);
   const [selectedVideo, setSelectedVideo] = useState<PortfolioVideo | null>(null);
 
@@ -23,15 +24,29 @@ export function usePortfolio(options: UsePortfolioOptions = {}) {
     };
   }, []);
 
-  // Filtered videos based on selectedCategory
+  // Filtered videos based on selectedCategory AND searchQuery (title or Video ID)
   const filteredVideos = useMemo(() => {
-    if (selectedCategory === 'all') {
-      return portfolioData.videos;
+    let result = portfolioData.videos;
+
+    // Filter by category if not 'all'
+    if (selectedCategory !== 'all') {
+      result = result.filter(
+        (video) => video.categoryId.toLowerCase() === selectedCategory.toLowerCase()
+      );
     }
-    return portfolioData.videos.filter(
-      (video) => video.categoryId.toLowerCase() === selectedCategory.toLowerCase()
-    );
-  }, [selectedCategory, portfolioData.videos]);
+
+    // Filter by search query (checks video title and video ID)
+    const q = searchQuery.trim().toLowerCase();
+    if (q) {
+      result = result.filter((video) => {
+        const titleMatch = video.title.toLowerCase().includes(q);
+        const idMatch = video.id.toLowerCase().includes(q);
+        return titleMatch || idMatch;
+      });
+    }
+
+    return result;
+  }, [selectedCategory, searchQuery, portfolioData.videos]);
 
   // Curated Featured projects (explicit hand-picked IDs + 2 featured playlists), randomly shuffled
   const featuredVideos = useMemo(() => {
@@ -61,6 +76,16 @@ export function usePortfolio(options: UsePortfolioOptions = {}) {
     setVisibleCount(itemsPerPage); // Reset pagination on category change
   };
 
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setVisibleCount(itemsPerPage); // Reset pagination on search change
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setVisibleCount(itemsPerPage);
+  };
+
   // Helper to get category title from category id
   const getCategoryTitle = (catId: string) => {
     if (catId === 'all') return 'All Projects';
@@ -72,8 +97,12 @@ export function usePortfolio(options: UsePortfolioOptions = {}) {
     categories: playlistCategories,
     selectedCategory,
     setSelectedCategory: handleCategorySelect,
+    searchQuery,
+    setSearchQuery: handleSearchChange,
+    clearSearch: handleClearSearch,
     videos: paginatedVideos,
     allFilteredCount: filteredVideos.length,
+    totalVaultCount: portfolioData.videos.length,
     featuredVideos,
     hasMore,
     loadMore,

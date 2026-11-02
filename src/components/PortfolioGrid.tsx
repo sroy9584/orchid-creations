@@ -11,6 +11,8 @@ interface PortfolioGridProps {
   hasMore?: boolean;
   onLoadMore?: () => void;
   allFilteredCount?: number;
+  searchQuery?: string;
+  onClearSearch?: () => void;
 }
 
 export const PortfolioGrid: React.FC<PortfolioGridProps> = ({
@@ -20,17 +22,36 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({
   hasMore = false,
   onLoadMore,
   allFilteredCount = 0,
+  searchQuery = '',
+  onClearSearch,
 }) => {
   if (videos.length === 0) {
     return (
-      <div className="py-20 text-center glass-card rounded-3xl p-8 max-w-xl mx-auto my-12">
+      <div className="py-16 text-center glass-card rounded-3xl p-8 max-w-xl mx-auto my-12 border border-white/10">
         <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#BF54A3]">
           <Film className="w-8 h-8" />
         </div>
         <h3 className="text-xl font-semibold text-white">No Videos Found</h3>
-        <p className="mt-2 text-sm text-neutral-400">
-          There are currently no videos in this category. They will appear here once synchronized with your YouTube playlist.
-        </p>
+        {searchQuery ? (
+          <div className="mt-2">
+            <p className="text-sm text-neutral-400">
+              No videos found matching &ldquo;<span className="text-white font-medium">{searchQuery}</span>&rdquo;. Try searching by another title or YouTube video ID.
+            </p>
+            {onClearSearch && (
+              <button
+                type="button"
+                onClick={onClearSearch}
+                className="mt-4 px-5 py-2 rounded-full glass-btn-primary text-xs font-semibold"
+              >
+                Clear Search & Show All
+              </button>
+            )}
+          </div>
+        ) : (
+          <p className="mt-2 text-sm text-neutral-400">
+            There are currently no videos in this category.
+          </p>
+        )}
       </div>
     );
   }
