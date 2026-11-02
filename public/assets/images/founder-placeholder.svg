@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161922" />
+      <stop offset="100%" stop-color="#0B0D12" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(167, 139, 250, 0.2)" />
+      <stop offset="100%" stop-color="rgba(56, 189, 248, 0.05)" />
+    </linearGradient>
+    <linearGradient id="contour" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.2" />
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="750" rx="24" fill="url(#bgGrad)" />
+  <rect width="600" height="750" rx="24" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+  
+  <!-- Ambient backdrop circle -->
+  <circle cx="300" cy="300" r="180" fill="url(#glow)" filter="blur(40px)" />
+  
+  <!-- Minimalist Portrait Silhouette -->
+  <g transform="translate(150, 160)" stroke="url(#contour)" stroke-width="2.5" fill="none">
+    <!-- Head -->
+    <path d="M150 110 C190 110 205 70 205 20 C205 -30 190 -70 150 -70 C110 -70 95 -30 95 20 C95 70 110 110 150 110 Z" />
+    <!-- Shoulders -->
+    <path d="M50 280 C60 210 90 160 120 145 C130 140 140 138 150 138 C160 138 170 140 180 145 C210 160 240 210 250 280" />
+    <!-- Glasses / Artistic feature -->
+    <circle cx="132" cy="18" r="16" />
+    <circle cx="168" cy="18" r="16" />
+    <line x1="148" y1="18" x2="152" y2="18" />
+  </g>
+
+  <!-- Prompt Overlay Card -->
+  <g transform="translate(75, 540)">
+    <rect width="450" height="130" rx="16" fill="rgba(8, 9, 13, 0.75)" stroke="rgba(255, 255, 255, 0.12)" />
+    <text x="225" y="45" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+      SOURAV ROY
+    </text>
+    <text x="225" y="72" font-family="'Inter', sans-serif" font-size="13" font-weight="500" fill="#A78BFA" text-anchor="middle">
+      Founder &amp; Lead Video Editor
+    </text>
+    <text x="225" y="100" font-family="'Inter', sans-serif" font-size="11" font-weight="400" fill="#A5A7B0" text-anchor="middle">
+      Upload official photo to: /public/assets/images/sourav-roy.jpg
+    </text>
+  </g>
+</svg>
+

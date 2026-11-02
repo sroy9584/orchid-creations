@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sroy9584.github.io/orchid-creations/sitemap.xml
+

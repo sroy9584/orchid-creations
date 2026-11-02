@@ -1,0 +1,100 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { ArrowRight, Sparkles, Film, Heart } from 'lucide-react';
+import { Hero } from '../components/Hero';
+import { FeaturedWorks } from '../components/FeaturedWorks';
+import { ServicesGrid } from '../components/ServicesGrid';
+import { AboutSection } from '../components/AboutSection';
+import { CTASection } from '../components/CTASection';
+import { VideoModal } from '../components/VideoModal';
+import { usePortfolio } from '../hooks/usePortfolio';
+
+export const Home: React.FC = () => {
+  const {
+    featuredVideos,
+    selectedVideo,
+    openVideoModal,
+    closeVideoModal,
+    getCategoryTitle,
+  } = usePortfolio();
+
+  return (
+    <div className="relative overflow-hidden">
+      {/* 1. Hero Section */}
+      <Hero />
+
+      {/* 2. Featured Works Showcase */}
+      <FeaturedWorks
+        videos={featuredVideos}
+        onPlay={openVideoModal}
+        getCategoryTitle={getCategoryTitle}
+      />
+
+      {/* 3. Services Preview Section */}
+      <section className="relative py-20 lg:py-28 border-t border-white/5 overflow-hidden">
+        <div className="ambient-glow bg-sky-500/10 w-[500px] h-[500px] top-1/3 -right-24" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold tracking-wider uppercase mb-3">
+                <Sparkles className="w-3 h-3" />
+                POST-PRODUCTION SUITE
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+                COMPREHENSIVE{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-sky-300">
+                  SERVICES
+                </span>
+              </h2>
+              <p className="mt-3 text-neutral-400 max-w-xl text-sm sm:text-base">
+                Specialized post-production capabilities tailored for wedding cinematographers, independent filmmakers, and digital brands.
+              </p>
+            </div>
+
+            <Link
+              to="/services"
+              className="glass-btn-secondary self-start md:self-auto text-sm font-semibold tracking-wide group"
+            >
+              <span>VIEW ALL 18 SERVICES</span>
+              <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+
+          <ServicesGrid previewOnly={true} />
+        </div>
+      </section>
+
+      {/* 4. About Studio & Founder Preview */}
+      <section className="relative py-20 lg:py-28 border-t border-white/5 overflow-hidden">
+        <div className="ambient-glow bg-purple-600/15 w-[500px] h-[500px] top-1/2 left-0 -translate-y-1/2" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AboutSection isFullPage={false} />
+
+          <div className="mt-12 text-center">
+            <Link
+              to="/about"
+              className="glass-btn-secondary !px-8 !py-3.5 text-sm font-semibold tracking-wide group"
+            >
+              <span>LEARN MORE ABOUT SOURAV &amp; STUDIO</span>
+              <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. CTA Section */}
+      <CTASection />
+
+      {/* Video Playback Modal */}
+      <VideoModal
+        video={selectedVideo}
+        onClose={closeVideoModal}
+        categoryTitle={selectedVideo ? getCategoryTitle(selectedVideo.categoryId) : undefined}
+      />
+    </div>
+  );
+};
+

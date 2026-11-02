@@ -1,0 +1,57 @@
+name: Sync YouTube Playlists to Portfolio
+
+on:
+  schedule:
+    # Run every 30 minutes automatically
+    - cron: '*/30 * * * *'
+  # Allow manual trigger anytime from GitHub Actions tab
+  workflow_dispatch:
+
+concurrency:
+  group: youtube-sync
+  cancel-in-progress: true
+
+jobs:
+  sync-playlists:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run YouTube Playlists Synchronizer
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: node scripts/sync-youtube.cjs
+
+      - name: Check For Portfolio Data Changes
+        id: git_status
+        run: |
+          if [ -n "$(git status --porcelain src/data/portfolioVideos.json)" ]; then
+            echo "changes_detected=true" >> $GITHUB_OUTPUT
+            echo "Portfolio data updated with newly synchronized playlist videos."
+          else
+            echo "changes_detected=false" >> $GITHUB_OUTPUT
+            echo "No new playlist changes detected. Portfolio is up to date."
+          fi
+
+      - name: Commit and Push Updated Portfolio Data
+        if: steps.git_status.outputs.changes_detected == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Orchid Creations Bot"
+          git add src/data/portfolioVideos.json
+          git commit -m "Automated sync: updated YouTube playlist portfolio [skip ci]"
+          git push origin main
+

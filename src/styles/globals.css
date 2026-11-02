@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-primary: #08090D;
+    --color-bg-secondary: #101219;
+    --color-accent-violet: #A78BFA;
+    --color-accent-blue: #38BDF8;
+  }
+
+  body {
+    background-color: #08090D;
+    color: #FFFFFF;
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom Glass Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #08090D;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+    border: 2px solid #08090D;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(167, 139, 250, 0.4);
+  }
+}
+
+@layer components {
+  /* Apple-inspired Liquid Glass Card */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.065);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45), 0 0 20px 0 rgba(167, 139, 250, 0.15);
+    transform: translateY(-3px);
+  }
+
+  /* Navigation Glass */
+  .glass-nav {
+    background: rgba(8, 9, 13, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Glass Button Styles */
+  .glass-btn-primary {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.9) 0%, rgba(124, 58, 237, 0.95) 100%);
+    color: #FFFFFF;
+    font-weight: 600;
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .glass-btn-primary:hover {
+    box-shadow: 0 6px 28px rgba(167, 139, 250, 0.5);
+    transform: translateY(-2px);
+  }
+
+  .glass-btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #FFFFFF;
+    font-weight: 600;
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .glass-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.28);
+    transform: translateY(-2px);
+  }
+
+  /* Glass Pill Filter */
+  .glass-pill {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #A5A7B0;
+    transition: all 0.25s ease;
+  }
+
+  .glass-pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-pill.active {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.25) 0%, rgba(56, 189, 248, 0.15) 100%);
+    border-color: rgba(167, 139, 250, 0.5);
+    color: #FFFFFF;
+    box-shadow: 0 0 15px rgba(167, 139, 250, 0.25);
+  }
+
+  /* Glass Input Form Controls */
+  .glass-input {
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.75rem;
+    padding: 0.85rem 1.15rem;
+    color: #FFFFFF;
+    transition: all 0.25s ease;
+    width: 100%;
+  }
+
+  .glass-input:focus {
+    outline: none;
+    border-color: rgba(167, 139, 250, 0.6);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+  }
+
+  .glass-input::placeholder {
+    color: #6F727D;
+  }
+}
+
+/* Ambient Background Light Gradient */
+.ambient-glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.28;
+  z-index: 0;
+}
+

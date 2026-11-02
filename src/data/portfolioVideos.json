@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "lastSyncTime": "2026-11-02T18:00:00.000Z",
+    "playlistsChecked": 14,
+    "videosSynchronized": 8,
+    "newlyDetected": 0,
+    "status": "manual",
+    "note": "Initial starter portfolio cache. Automatic YouTube synchronization updates this file via GitHub Actions."
+  },
+  "videos": [
+    {
+      "id": "M7lc1UVf-VE",
+      "title": "A Royal Kolkata Wedding — Cinematic Highlight Film",
+      "description": "A cinematic celebration of love, rituals, and emotional familial moments captured and edited with rich color grading and evocative music.",
+      "thumbnailUrl": "https://img.youtube.com/vi/M7lc1UVf-VE/maxresdefault.jpg",
+      "playlistId": "PL_BENGALI_WEDDINGS_REPLACE_ID",
+      "categoryId": "bengali-weddings",
+      "publishedAt": "2026-09-15T12:00:00Z",
+      "featured": true
+    },
+    {
+      "id": "aqz-KE-bpKQ",
+      "title": "Sunsets & Vows — Modern Pre-Wedding Narrative",
+      "description": "Story-driven romantic visuals featuring warm sunset lighting, slow-motion framing, and delicate soundscapes.",
+      "thumbnailUrl": "https://img.youtube.com/vi/aqz-KE-bpKQ/maxresdefault.jpg",
+      "playlistId": "PL_PRE_WEDDING_REPLACE_ID",
+      "categoryId": "pre-wedding-films",
+      "publishedAt": "2026-08-20T14:30:00Z",
+      "featured": true
+    },
+    {
+      "id": "ScMzIvxBSi4",
+      "title": "Grand Palace Celebration — Non-Bengali Wedding Film",
+      "description": "High-octane Baraat sequences, traditional rituals, and vibrant festivities cut to rhythmic Indian acoustic percussion.",
+      "thumbnailUrl": "https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg",
+      "playlistId": "PL_NON_BENGALI_WEDDINGS_REPLACE_ID",
+      "categoryId": "non-bengali-weddings",
+      "publishedAt": "2026-07-10T10:15:00Z",
+      "featured": true
+    },
+    {
+      "id": "e-ORhEE9VVg",
+      "title": "Eternal Moments — Cinematic 4K Wedding Teaser",
+      "description": "A 90-second breathless teaser summarizing 3 days of joyous celebrations with speed ramps and sound design.",
+      "thumbnailUrl": "https://img.youtube.com/vi/e-ORhEE9VVg/maxresdefault.jpg",
+      "playlistId": "PL_WEDDING_HIGHLIGHTS_REPLACE_ID",
+      "categoryId": "wedding-highlights",
+      "publishedAt": "2026-06-05T09:00:00Z",
+      "featured": true
+    },
+    {
+      "id": "jNQXAC9IVRw",
+      "title": "First Sacred Grains — Joyful Rice Ceremony",
+      "description": "Heartwarming Annaprashan film preserving the baby's first tastes of food, sacred elders' blessings, and playful family moments.",
+      "thumbnailUrl": "https://img.youtube.com/vi/jNQXAC9IVRw/maxresdefault.jpg",
+      "playlistId": "PL_RICE_CEREMONY_REPLACE_ID",
+      "categoryId": "rice-ceremony",
+      "publishedAt": "2026-05-18T16:00:00Z",
+      "featured": true
+    },
+    {
+      "id": "9bZkp7q19f0",
+      "title": "Urban Beats — High-Tempo Music Video Edit",
+      "description": "Multi-angle performance cuts, stylized lens flare overlays, and custom glitch transitions tailored to the audio beat.",
+      "thumbnailUrl": "https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg",
+      "playlistId": "PL_MUSIC_VIDEOS_REPLACE_ID",
+      "categoryId": "music-videos",
+      "publishedAt": "2026-04-12T18:00:00Z",
+      "featured": true
+    },
+    {
+      "id": "kJQP7kiw5Fk",
+      "title": "Velvet Elegance — Luxury Fashion Brand Reel",
+      "description": "Snappy, engaging 9:16 vertical reel optimized for Instagram and YouTube Shorts with typography kinetic motion.",
+      "thumbnailUrl": "https://img.youtube.com/vi/kJQP7kiw5Fk/maxresdefault.jpg",
+      "playlistId": "PL_BRAND_REELS_REPLACE_ID",
+      "categoryId": "brand-reels",
+      "publishedAt": "2026-03-25T11:00:00Z",
+      "featured": false
+    },
+    {
+      "id": "L_LUpnjgPso",
+      "title": "Promise of Forever — Engagement Highlights",
+      "description": "Intimate ring exchange ceremony, heartfelt speeches, and cinematic portraits edited with soft pastel tones.",
+      "thumbnailUrl": "https://img.youtube.com/vi/L_LUpnjgPso/maxresdefault.jpg",
+      "playlistId": "PL_ENGAGEMENT_REPLACE_ID",
+      "categoryId": "engagement-films",
+      "publishedAt": "2026-02-14T15:00:00Z",
+      "featured": false
+    }
+  ]
+}
+
