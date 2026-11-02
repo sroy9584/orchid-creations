@@ -76,11 +76,11 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-3 sm:mt-3.5 flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-full sm:w-auto pointer-events-auto"
+          className="mt-3 sm:mt-3.5 flex flex-row items-center justify-center gap-2 sm:gap-4 w-full sm:w-auto pointer-events-auto px-1 sm:px-0"
         >
           <Link
             to="/portfolio"
-            className="glass-btn-primary text-xs sm:text-sm font-semibold !py-2.5 !px-4 sm:!py-3 sm:!px-7 shadow-glow-accent group shrink-0"
+            className="glass-btn-primary text-xs sm:text-sm font-semibold !py-2.5 !px-3.5 sm:!py-3 sm:!px-7 shadow-glow-accent group shrink-0"
           >
             <span>EXPLORE WORK</span>
             <Film className="w-3.5 h-3.5 ml-1 transition-transform group-hover:scale-110" />
@@ -88,7 +88,7 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
 
           <Link
             to="/contact"
-            className="glass-btn-secondary text-xs sm:text-sm font-semibold !py-2.5 !px-4 sm:!py-3 sm:!px-7 group bg-black/40 backdrop-blur-md border border-white/20 shrink-0"
+            className="glass-btn-secondary text-xs sm:text-sm font-semibold !py-2.5 !px-3.5 sm:!py-3 sm:!px-7 group bg-black/40 backdrop-blur-md border border-white/20 shrink-0"
           >
             <span>LET'S WORK TOGETHER</span>
             <ArrowRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-1" />
@@ -100,40 +100,50 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.24 }}
-          className="mt-3 sm:mt-3.5 mb-1.5 sm:mb-2 w-full max-w-3xl p-2 sm:p-3 rounded-xl sm:rounded-2xl glass-card grid grid-cols-3 divide-x divide-white/10 text-center border border-white/15 bg-black/55 backdrop-blur-xl pointer-events-auto shadow-2xl"
+          className="mt-2.5 sm:mt-3.5 mb-1 sm:mb-2 w-full max-w-3xl p-1.5 sm:p-3 rounded-xl sm:rounded-2xl glass-card grid grid-cols-3 divide-x divide-white/10 text-center border border-white/15 bg-black/55 backdrop-blur-xl pointer-events-auto shadow-2xl"
         >
           {/* Stat 1: 5+ Years */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 px-1 sm:px-3">
-            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#BF54A3]/20 border border-[#BF54A3]/30 flex items-center justify-center text-[#BF54A3] shrink-0">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 px-1 sm:px-3 py-0.5 sm:py-0">
+            <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-lg bg-[#BF54A3]/20 border border-[#BF54A3]/30 flex items-center justify-center text-[#BF54A3] shrink-0">
               <Award className="w-3 h-3 sm:w-4 sm:h-4" />
             </div>
-            <div className="text-center sm:text-left">
-              <div className="text-xs sm:text-sm md:text-base font-bold text-white leading-tight">
+            <div className="text-center sm:text-left min-w-0">
+              <div className="text-[11px] sm:text-sm md:text-base font-bold text-white leading-tight">
                 {siteConfig.yearsOfExperience}
               </div>
-              <div className="text-[9px] sm:text-[11px] text-neutral-400 truncate">Post-Production Craft</div>
+              <div className="text-[8px] sm:text-[11px] text-neutral-400 leading-tight truncate sm:overflow-visible">
+                Post-Production Craft
+              </div>
             </div>
           </div>
 
           {/* Stat 2: 570+ Films */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 px-1 sm:px-3">
-            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#107361]/20 border border-[#107361]/30 flex items-center justify-center text-[#107361] shrink-0">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 px-1 sm:px-3 py-0.5 sm:py-0">
+            <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-lg bg-[#107361]/20 border border-[#107361]/30 flex items-center justify-center text-[#107361] shrink-0">
               <Film className="w-3 h-3 sm:w-4 sm:h-4" />
             </div>
-            <div className="text-center sm:text-left">
-              <div className="text-xs sm:text-sm md:text-base font-bold text-white leading-tight">570+ Films</div>
-              <div className="text-[9px] sm:text-[11px] text-neutral-400 truncate">YouTube Official Vault</div>
+            <div className="text-center sm:text-left min-w-0">
+              <div className="text-[11px] sm:text-sm md:text-base font-bold text-white leading-tight">
+                570+ Films
+              </div>
+              <div className="text-[8px] sm:text-[11px] text-neutral-400 leading-tight truncate sm:overflow-visible">
+                YouTube Official Vault
+              </div>
             </div>
           </div>
 
           {/* Stat 3: Turnkey Suite */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 px-1 sm:px-3">
-            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-[#592D4D]/30 border border-[#592D4D]/40 flex items-center justify-center text-[#D977BF] shrink-0">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 px-1 sm:px-3 py-0.5 sm:py-0">
+            <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-lg bg-[#592D4D]/30 border border-[#592D4D]/40 flex items-center justify-center text-[#D977BF] shrink-0">
               <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
             </div>
-            <div className="text-center sm:text-left">
-              <div className="text-xs sm:text-sm md:text-base font-bold text-white leading-tight">Turnkey Suite</div>
-              <div className="text-[9px] sm:text-[11px] text-neutral-400 truncate">Pacing • Color • Sound</div>
+            <div className="text-center sm:text-left min-w-0">
+              <div className="text-[11px] sm:text-sm md:text-base font-bold text-white leading-tight">
+                Turnkey Suite
+              </div>
+              <div className="text-[8px] sm:text-[11px] text-neutral-400 leading-tight truncate sm:overflow-visible">
+                Pacing • Color • Sound
+              </div>
             </div>
           </div>
         </motion.div>

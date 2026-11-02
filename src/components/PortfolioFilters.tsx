@@ -18,7 +18,10 @@ export const PortfolioFilters: React.FC<PortfolioFiltersProps> = ({
 }) => {
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 overflow-x-auto pb-4 pt-1 no-scrollbar sm:flex-wrap sm:justify-center">
+      <div
+        className="flex items-center gap-2 overflow-x-auto pb-4 pt-1 no-scrollbar sm:flex-wrap sm:justify-center px-4 sm:px-0 touch-pan-x"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
         {/* 'All Projects' Pill */}
         <button
           type="button"

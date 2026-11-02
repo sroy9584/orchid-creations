@@ -132,9 +132,9 @@ export const Portfolio: React.FC = () => {
         </div>
 
         {/* Active Category Header */}
-        <div className="flex items-center justify-between pb-6 mb-6 border-b border-white/10 text-xs text-neutral-400">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-6 mb-6 border-b border-white/10 text-xs text-neutral-400 gap-1.5 sm:gap-2">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-white uppercase tracking-wider text-sm">
+            <span className="font-semibold text-white uppercase tracking-wider text-xs sm:text-sm">
               {getCategoryTitle(selectedCategory)}
             </span>
             <span className="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-[#BF54A3] font-mono">
@@ -142,8 +142,8 @@ export const Portfolio: React.FC = () => {
             </span>
           </div>
 
-          <span className="hidden sm:inline font-mono text-[11px] text-neutral-500">
-            Click any thumbnail for embedded playback
+          <span className="font-mono text-[10px] sm:text-[11px] text-neutral-500">
+            Tap thumbnail to play
           </span>
         </div>
 

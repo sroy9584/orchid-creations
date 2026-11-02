@@ -71,12 +71,12 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
         </div>
 
         {/* Action Buttons: Load More & Full Portfolio */}
-        <div className="mt-12 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-10 sm:mt-14 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-lg sm:max-w-none mx-auto">
           {hasMore && (
             <button
               type="button"
               onClick={handleLoadMore}
-              className="glass-btn-secondary !px-7 !py-3.5 text-sm font-semibold tracking-wide group"
+              className="glass-btn-secondary w-full sm:w-auto text-center justify-center !px-5 sm:!px-7 !py-3 sm:!py-3.5 text-xs sm:text-sm font-semibold tracking-wide group"
             >
               <span>SHOW MORE FEATURED PROJECTS ({videos.length - visibleCount} REMAINING)</span>
               <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
@@ -85,7 +85,7 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
 
           <Link
             to="/portfolio"
-            className="glass-btn-primary !px-8 !py-3.5 text-sm font-semibold tracking-wide shadow-glow-accent group"
+            className="glass-btn-primary w-full sm:w-auto text-center justify-center !px-5 sm:!px-8 !py-3 sm:!py-3.5 text-xs sm:text-sm font-semibold tracking-wide shadow-glow-accent group"
           >
             <span>DISCOVER FULL PORTFOLIO ARCHIVE</span>
             <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
