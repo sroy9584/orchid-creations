@@ -97,7 +97,11 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
               <p className="line-clamp-2 text-neutral-400 max-w-3xl text-[11px] sm:text-xs md:text-sm">
                 {video.description || 'Cinematic video post-production project by Orchid Creations.'}
               </p>
-              <div className="flex items-center gap-2 self-end shrink-0 text-neutral-500 font-mono text-[10px] sm:text-[11px]">
+              <div className="flex items-center gap-2 self-end shrink-0 text-neutral-400 font-mono text-[10px] sm:text-[11px]">
+                {video.duration && (
+                  <span className="text-[#107361] font-semibold">{video.duration}</span>
+                )}
+                {video.duration && <span className="text-white/20">•</span>}
                 <span>ID: {video.id}</span>
               </div>
             </div>

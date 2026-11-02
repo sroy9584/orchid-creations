@@ -91,6 +91,48 @@ function parsePortfolioConfig(filePath) {
   return categories;
 }
 
+// Format YouTube ISO 8601 duration string (e.g. PT3M25S, PT1H2M10S, PT45S) into MM:SS or H:MM:SS
+function formatDuration(isoDuration) {
+  if (!isoDuration) return '';
+  const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+  if (!match) return '';
+  const hours = parseInt(match[1] || 0, 10);
+  const minutes = parseInt(match[2] || 0, 10);
+  const seconds = parseInt(match[3] || 0, 10);
+
+  if (hours > 0) {
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// Fetch video durations in batches of up to 50 video IDs
+async function fetchVideoDurations(videoIds, apiKey) {
+  const durationMap = new Map();
+  const chunkSize = 50;
+  for (let i = 0; i < videoIds.length; i += chunkSize) {
+    const chunk = videoIds.slice(i, i + chunkSize);
+    const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${encodeURIComponent(
+      chunk.join(',')
+    )}&key=${encodeURIComponent(apiKey)}`;
+
+    try {
+      const response = await httpsGet(url);
+      if (response.items && Array.isArray(response.items)) {
+        for (const item of response.items) {
+          const rawDuration = item.contentDetails?.duration;
+          if (rawDuration) {
+            durationMap.set(item.id, formatDuration(rawDuration));
+          }
+        }
+      }
+    } catch (err) {
+      console.warn(`[WARN] Could not fetch durations for batch (${i}..${i + chunk.length}): ${err.message}`);
+    }
+  }
+  return durationMap;
+}
+
 // Retrieve all videos from a single playlist with pagination
 async function fetchPlaylistVideos(playlistId, categoryId, apiKey) {
   const videos = [];
@@ -251,6 +293,23 @@ async function main() {
       fetchedVideos.push(v);
     }
   });
+
+  // Retrieve exact video durations from YouTube Data API in batches of 50
+  console.log(`Fetching video durations for ${fetchedVideos.length} videos...`);
+  const allIds = fetchedVideos.map((v) => v.id);
+  const durationMap = await fetchVideoDurations(allIds, apiKey);
+  console.log(`  -> Retrieved durations for ${durationMap.size} videos`);
+
+  for (const video of fetchedVideos) {
+    if (durationMap.has(video.id)) {
+      video.duration = durationMap.get(video.id);
+    } else {
+      const existing = existingVideoMap.get(video.id);
+      if (existing?.duration) {
+        video.duration = existing.duration;
+      }
+    }
+  }
 
   // Sort newest first
   fetchedVideos.sort((a, b) => {

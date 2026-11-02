@@ -6,6 +6,7 @@ export interface PortfolioVideo {
   playlistId: string;
   categoryId: string;
   publishedAt?: string;
+  duration?: string;
   featured?: boolean;
   manualOverride?: boolean; // Set true if manually added and not managed by YouTube sync
 }

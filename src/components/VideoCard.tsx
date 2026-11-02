@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Sparkles } from 'lucide-react';
+import { Play, Sparkles, Clock } from 'lucide-react';
 import { PortfolioVideo } from '../types/portfolio';
 
 interface VideoCardProps {
@@ -34,10 +34,12 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
   const frameTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const preloadedRef = useRef<boolean>(false);
 
-  // Touch long-press handling
+  // Touch and scroll discrimination handling
   const touchStartPos = useRef<{ x: number; y: number } | null>(null);
-  const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isScrollingRef = useRef<boolean>(false);
   const isLongPressActive = useRef<boolean>(false);
+  const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastTouchTimeRef = useRef<number>(0);
 
   // Preload preview frames on first interaction
   const preloadFrames = useCallback(() => {
@@ -78,20 +80,23 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
     setIsPreviewing(false);
   };
 
-  // Touch handlers (Mobile & Tablet Press-and-Hold Preview)
+  // Touch handlers: Clean scroll detection preventing unintended modal opens
   const handleTouchStart = (e: React.TouchEvent) => {
     const touch = e.touches[0];
     touchStartPos.current = { x: touch.clientX, y: touch.clientY };
+    isScrollingRef.current = false;
     isLongPressActive.current = false;
 
-    // Start long-press detection (held for >220ms triggers preview)
+    // Start long-press preview detection (held for >220ms without scroll movement)
     longPressTimerRef.current = setTimeout(() => {
-      isLongPressActive.current = true;
-      setIsPreviewing(true);
-      if (typeof navigator !== 'undefined' && navigator.vibrate) {
-        try {
-          navigator.vibrate(20);
-        } catch (_) {}
+      if (!isScrollingRef.current) {
+        isLongPressActive.current = true;
+        setIsPreviewing(true);
+        if (typeof navigator !== 'undefined' && navigator.vibrate) {
+          try {
+            navigator.vibrate(20);
+          } catch (_) {}
+        }
       }
     }, 220);
   };
@@ -102,8 +107,9 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
     const dx = Math.abs(touch.clientX - touchStartPos.current.x);
     const dy = Math.abs(touch.clientY - touchStartPos.current.y);
 
-    // If user scrolls page (>10px), cancel long press and preview immediately
-    if (dx > 10 || dy > 10) {
+    // If movement exceeds 8px in any direction, user is SCROLLING the page!
+    if (dx > 8 || dy > 8) {
+      isScrollingRef.current = true;
       if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
       if (isLongPressActive.current) {
         setIsPreviewing(false);
@@ -114,22 +120,27 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
 
   const handleTouchEnd = () => {
     if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
+    lastTouchTimeRef.current = Date.now();
 
     if (isLongPressActive.current) {
-      // User released after long-press preview
+      // User held finger for motion preview and just lifted: stop preview, do NOT open modal
       setIsPreviewing(false);
       isLongPressActive.current = false;
-    } else {
-      // Normal quick tap -> open full video modal
+    } else if (!isScrollingRef.current && touchStartPos.current) {
+      // Intentional, stationary tap (not a scroll movement): open full video modal
       onPlay(video);
     }
+    // If isScrollingRef.current === true, do absolutely nothing (user was scrolling)
+
     touchStartPos.current = null;
+    isScrollingRef.current = false;
   };
 
   const handleTouchCancel = () => {
     if (longPressTimerRef.current) clearTimeout(longPressTimerRef.current);
     setIsPreviewing(false);
     isLongPressActive.current = false;
+    isScrollingRef.current = false;
     touchStartPos.current = null;
   };
 
@@ -140,7 +151,11 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
   };
 
   const handleClick = () => {
-    // Desktop click directly opens full video modal
+    // Suppress synthetic click fired by mobile browser after touch scrolling/tapping
+    if (Date.now() - lastTouchTimeRef.current < 600) {
+      return;
+    }
+    // Desktop mouse click: open full video modal
     onPlay(video);
   };
 
@@ -196,6 +211,16 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
           ) : null}
         </div>
 
+        {/* Duration Pill on Thumbnail Corner */}
+        {video.duration && !isPreviewing && (
+          <div className="absolute bottom-2.5 right-2.5 z-20 pointer-events-none">
+            <span className="flex items-center gap-1 text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-black/80 backdrop-blur-md text-white/95 border border-white/10 shadow-sm">
+              <Clock className="w-2.5 h-2.5 text-[#107361]" />
+              <span>{video.duration}</span>
+            </span>
+          </div>
+        )}
+
         {/* Motion Scrubber Indicator Bars (Active on Hover or Touch-Hold) */}
         {isPreviewing && (
           <div className="absolute bottom-2.5 inset-x-3 z-20 flex items-center gap-1 pointer-events-none">
@@ -241,12 +266,16 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
           </p>
         </div>
 
+        {/* Card Footer: Watch Film action and Video Duration Badge replacing old '4K Portfolio' */}
         <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400">
           <span className="flex items-center gap-1.5 text-[#BF54A3] group-hover:text-[#D977BF] font-medium">
             Watch Film
             <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
           </span>
-          <span className="text-[11px] font-mono text-[#107361] font-semibold">4K Portfolio</span>
+          <span className="text-[11px] font-mono text-[#107361] font-semibold flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#107361]/10 border border-[#107361]/25">
+            <Clock className="w-3 h-3 text-[#107361]" />
+            <span>{video.duration || '4K Film'}</span>
+          </span>
         </div>
       </div>
     </motion.div>
