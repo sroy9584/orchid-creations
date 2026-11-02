@@ -249,7 +249,7 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
         <img
           src={slotA.video?.thumbnailUrl || `https://i.ytimg.com/vi/${slotA.video?.id}/maxresdefault.jpg`}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover scale-105 opacity-90"
+          className="absolute inset-0 w-full h-full object-cover scale-105 opacity-90 brightness-[0.55] contrast-[1.05]"
           onError={(e) => {
             (e.target as HTMLImageElement).src = `https://i.ytimg.com/vi/${slotA.video?.id}/hqdefault.jpg`;
           }}
@@ -260,7 +260,7 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
           key={`slotA-${slotA.key}`}
           src={`https://www.youtube-nocookie.com/embed/${slotA.video?.id}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1&start=${slotA.startTime}&iv_load_policy=3&disablekb=1&fs=0`}
           title={`Cinematic Reel A - ${slotA.video?.title}`}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none scale-105"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none scale-105 brightness-[0.55] contrast-[1.05]"
           allow="autoplay; encrypted-media; picture-in-picture"
           tabIndex={-1}
         />
@@ -275,7 +275,7 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
         <img
           src={slotB.video?.thumbnailUrl || `https://i.ytimg.com/vi/${slotB.video?.id}/maxresdefault.jpg`}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover scale-105 opacity-90"
+          className="absolute inset-0 w-full h-full object-cover scale-105 opacity-90 brightness-[0.55] contrast-[1.05]"
           onError={(e) => {
             (e.target as HTMLImageElement).src = `https://i.ytimg.com/vi/${slotB.video?.id}/hqdefault.jpg`;
           }}
@@ -286,7 +286,7 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
           key={`slotB-${slotB.key}`}
           src={`https://www.youtube-nocookie.com/embed/${slotB.video?.id}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1&start=${slotB.startTime}&iv_load_policy=3&disablekb=1&fs=0`}
           title={`Cinematic Reel B - ${slotB.video?.title}`}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none scale-105"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none scale-105 brightness-[0.55] contrast-[1.05]"
           allow="autoplay; encrypted-media; picture-in-picture"
           tabIndex={-1}
         />
@@ -304,31 +304,31 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
 
       {/* =========================================================
           CINEMATIC BALANCED VIGNETTE & EDGE FADES
-          20-30% brightness reduction (70-80% visibility) + seamless edge merging
+          Darkened background for crystal-clear foreground text legibility
           ========================================================= */}
-      {/* 1. Base dark tint for 25% brightness reduction (75% video visibility) */}
-      <div className="absolute inset-0 bg-[#0D1516]/25 z-15 pointer-events-none" />
+      {/* 1. Base dark tint overlay */}
+      <div className="absolute inset-0 bg-[#0D1516]/45 z-[15] pointer-events-none" />
 
       {/* 2. Soft center-to-edge radial vignette */}
       <div
-        className="absolute inset-0 z-15 pointer-events-none"
+        className="absolute inset-0 z-[15] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(13, 21, 22, 0.05) 0%, rgba(13, 21, 22, 0.35) 55%, rgba(13, 21, 22, 0.90) 100%)',
+            'radial-gradient(ellipse at center, rgba(13, 21, 22, 0.35) 0%, rgba(13, 21, 22, 0.65) 55%, rgba(13, 21, 22, 0.95) 100%)',
         }}
       />
 
       {/* 3. LEFT EDGE VIGNETTE (Fades video edge seamlessly into page background) */}
-      <div className="absolute top-0 bottom-0 left-0 w-36 sm:w-64 md:w-80 bg-gradient-to-r from-[#0D1516] via-[#0D1516]/85 via-40% to-transparent z-15 pointer-events-none" />
+      <div className="absolute top-0 bottom-0 left-0 w-36 sm:w-64 md:w-80 bg-gradient-to-r from-[#0D1516] via-[#0D1516]/90 via-40% to-transparent z-[15] pointer-events-none" />
 
       {/* 4. RIGHT EDGE VIGNETTE (Fades video edge seamlessly into page background) */}
-      <div className="absolute top-0 bottom-0 right-0 w-36 sm:w-64 md:w-80 bg-gradient-to-l from-[#0D1516] via-[#0D1516]/85 via-40% to-transparent z-15 pointer-events-none" />
+      <div className="absolute top-0 bottom-0 right-0 w-36 sm:w-64 md:w-80 bg-gradient-to-l from-[#0D1516] via-[#0D1516]/90 via-40% to-transparent z-[15] pointer-events-none" />
 
       {/* 5. DOWN (BOTTOM) EDGE VIGNETTE (Deep fade melting video into Featured section) */}
-      <div className="absolute bottom-0 inset-x-0 h-44 sm:h-64 bg-gradient-to-t from-[#0D1516] via-[#0D1516]/90 via-45% to-transparent z-15 pointer-events-none" />
+      <div className="absolute bottom-0 inset-x-0 h-44 sm:h-64 bg-gradient-to-t from-[#0D1516] via-[#0D1516]/95 via-45% to-transparent z-[15] pointer-events-none" />
 
       {/* 6. TOP EDGE VIGNETTE (Subtle blend under navbar) */}
-      <div className="absolute top-0 inset-x-0 h-28 sm:h-36 bg-gradient-to-b from-[#0D1516] via-[#0D1516]/75 to-transparent z-15 pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-28 sm:h-36 bg-gradient-to-b from-[#0D1516] via-[#0D1516]/80 to-transparent z-[15] pointer-events-none" />
 
       {/* =========================================================
           INTERACTIVE CONTROLS & LIVE REEL STATUS PILL
