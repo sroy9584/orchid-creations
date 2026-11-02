@@ -13,7 +13,7 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
   return (
     <section className="relative flex items-center justify-center pt-32 pb-24 sm:pt-36 sm:pb-28 md:pt-40 md:pb-32 overflow-hidden min-h-[720px] sm:min-h-[780px] lg:min-h-[820px]">
-      {/* Background Interactive Video Reel (Squarespace-style with random starting times & swipe gestures) */}
+      {/* Background Interactive Video Reel (Curtain architecture with random start and dynamic cross-dissolve) */}
       <HeroVideoBackground videos={videos} />
 
       <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center pointer-events-none">

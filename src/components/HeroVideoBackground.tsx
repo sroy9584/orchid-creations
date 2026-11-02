@@ -25,9 +25,11 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
   // Track the index of the currently active video in the pool
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  // Dual-slot state: Slot A and Slot B
-  // ONE slot is visible at opacity-100; the OTHER pre-buffers in the background at opacity-0
+  // Dual-slot Curtain Architecture:
+  // - activeSlot: 'A' | 'B' (which slot is on top at z-index: 2)
+  // - fadingSlot: 'A' | 'B' | null (which front slot is currently dissolving 1 -> 0 to reveal the back slot)
   const [activeSlot, setActiveSlot] = useState<'A' | 'B'>('A');
+  const [fadingSlot, setFadingSlot] = useState<'A' | 'B' | null>(null);
 
   const [slotA, setSlotA] = useState<StagedSlot>(() => {
     const first = pool[0] || {
@@ -77,11 +79,11 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
   const iframeARef = useRef<HTMLIFrameElement>(null);
   const iframeBRef = useRef<HTMLIFrameElement>(null);
 
-  // References to keep track of timers and prevent duplicate triggers
   const cycleTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isTransitioningRef = useRef<boolean>(false);
 
-  // Switch to next or previous video with seamless cross-dissolve
+  // Seamless curtain cross-dissolve:
+  // The front slot dissolves to opacity 0, smoothly revealing the back slot which is ALREADY playing!
   const switchVideo = useCallback(
     (direction: 'next' | 'prev' = 'next') => {
       if (pool.length < 2 || isTransitioningRef.current) return;
@@ -95,57 +97,60 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
       const upcomingAfterNext = (nextIndex + 1) % pool.length;
 
       if (activeSlot === 'A') {
-        // Slot B was ALREADY preloaded and running in background at opacity-0!
-        // Immediately fade B in and fade A out:
-        setActiveSlot('B');
-        setCurrentIndex(nextIndex);
+        // Slot A is in front (z-2). Slot B has ALREADY been running in background (z-1, opacity-100)!
+        // Fade Slot A from 1 -> 0 to reveal Slot B:
+        setFadingSlot('A');
 
-        // After the 1.4s crossfade finishes and Slot A is 100% hidden,
-        // pre-load the subsequent video into Slot A so it is ready for the next transition!
         setTimeout(() => {
+          // Swap roles: Slot B is now the front slot (z-2), Slot A becomes back slot (z-1)
+          setActiveSlot('B');
+          setFadingSlot(null);
+          setCurrentIndex(nextIndex);
+
+          // Mount the subsequent video into Slot A behind Slot B:
           setSlotA({
             video: pool[upcomingAfterNext],
             startTime: getRandomStart(),
             key: Date.now(),
           });
           isTransitioningRef.current = false;
-        }, 1500);
+        }, 1250);
       } else {
-        // Slot A was ALREADY preloaded and running in background at opacity-0!
-        // Immediately fade A in and fade B out:
-        setActiveSlot('A');
-        setCurrentIndex(nextIndex);
+        // Slot B is in front (z-2). Slot A has ALREADY been running in background (z-1, opacity-100)!
+        // Fade Slot B from 1 -> 0 to reveal Slot A:
+        setFadingSlot('B');
 
-        // After the 1.4s crossfade finishes and Slot B is 100% hidden,
-        // pre-load the subsequent video into Slot B so it is ready for the next transition!
         setTimeout(() => {
+          // Swap roles: Slot A is now the front slot (z-2), Slot B becomes back slot (z-1)
+          setActiveSlot('A');
+          setFadingSlot(null);
+          setCurrentIndex(nextIndex);
+
+          // Mount the subsequent video into Slot B behind Slot A:
           setSlotB({
             video: pool[upcomingAfterNext],
             startTime: getRandomStart(),
             key: Date.now(),
           });
           isTransitioningRef.current = false;
-        }, 1500);
+        }, 1250);
       }
     },
     [pool, currentIndex, activeSlot, getRandomStart]
   );
 
-  // Auto-advance video every 5 seconds
+  // Auto-advance video every 4.8 seconds
   useEffect(() => {
     if (pool.length < 2) return;
 
     cycleTimerRef.current = setInterval(() => {
       switchVideo('next');
-    }, 5000);
+    }, 4800);
 
     return () => {
       if (cycleTimerRef.current) clearInterval(cycleTimerRef.current);
     };
   }, [switchVideo, pool.length]);
-
-  // Touch and Mouse drag / swipe detection
-  const pointerStart = useRef<{ x: number; y: number } | null>(null);
 
   // Active defense against native YouTube pause: auto-resume instantly if paused
   useEffect(() => {
@@ -171,6 +176,9 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
     return () => window.removeEventListener('message', handleMessage);
   }, []);
 
+  // Touch and Mouse drag / swipe detection
+  const pointerStart = useRef<{ x: number; y: number } | null>(null);
+
   const handlePointerDown = (e: React.PointerEvent) => {
     pointerStart.current = { x: e.clientX, y: e.clientY };
   };
@@ -195,12 +203,33 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
       if (cycleTimerRef.current) clearInterval(cycleTimerRef.current);
       cycleTimerRef.current = setInterval(() => {
         switchVideo('next');
-      }, 5000);
+      }, 4800);
     }
   };
 
   // Active video title for the bottom pill
-  const activeVideo = activeSlot === 'A' ? slotA.video : slotB.video;
+  const activeVideo =
+    fadingSlot === 'A'
+      ? slotB.video
+      : fadingSlot === 'B'
+      ? slotA.video
+      : activeSlot === 'A'
+      ? slotA.video
+      : slotB.video;
+
+  // Determine Layering for Slot A
+  const slotAIsFront = activeSlot === 'A';
+  const slotAIsFading = fadingSlot === 'A';
+  const slotAClass = slotAIsFront
+    ? `z-[2] ${slotAIsFading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-[1200ms] ease-in-out`
+    : 'z-[1] opacity-100';
+
+  // Determine Layering for Slot B
+  const slotBIsFront = activeSlot === 'B';
+  const slotBIsFading = fadingSlot === 'B';
+  const slotBClass = slotBIsFront
+    ? `z-[2] ${slotBIsFading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-[1200ms] ease-in-out`
+    : 'z-[1] opacity-100';
 
   return (
     <div
@@ -211,14 +240,12 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
     >
       {/* =========================================================
           SLOT A VIDEO LAYER
-          Visible when activeSlot === 'A', smoothly preloading when 'B'
+          Both slots stay at opacity-100 in the DOM stack so the browser NEVER throttles or suspends playback.
+          The front slot simply fades to 0 to seamlessly reveal the already-playing back slot.
           ========================================================= */}
       <div
-        className={`absolute inset-0 w-full h-full transition-opacity duration-[1400ms] ease-in-out pointer-events-none ${
-          activeSlot === 'A' ? 'opacity-100 z-10' : 'opacity-0 z-0'
-        }`}
+        className={`absolute inset-0 w-full h-full pointer-events-none ${slotAClass}`}
       >
-        {/* High-res backdrop photo prevents any blank flash during initial connection */}
         <img
           src={slotA.video?.thumbnailUrl || `https://i.ytimg.com/vi/${slotA.video?.id}/maxresdefault.jpg`}
           alt=""
@@ -231,7 +258,7 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
         <iframe
           ref={iframeARef}
           key={`slotA-${slotA.key}`}
-          src={`https://www.youtube-nocookie.com/embed/${slotA.video?.id}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1&start=${slotA.startTime}&iv_load_policy=3&disablekb=1&loop=1&playlist=${slotA.video?.id}`}
+          src={`https://www.youtube-nocookie.com/embed/${slotA.video?.id}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1&start=${slotA.startTime}&iv_load_policy=3&disablekb=1&fs=0`}
           title={`Cinematic Reel A - ${slotA.video?.title}`}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none scale-105"
           allow="autoplay; encrypted-media; picture-in-picture"
@@ -241,14 +268,10 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
 
       {/* =========================================================
           SLOT B VIDEO LAYER
-          Visible when activeSlot === 'B', smoothly preloading when 'A'
           ========================================================= */}
       <div
-        className={`absolute inset-0 w-full h-full transition-opacity duration-[1400ms] ease-in-out pointer-events-none ${
-          activeSlot === 'B' ? 'opacity-100 z-10' : 'opacity-0 z-0'
-        }`}
+        className={`absolute inset-0 w-full h-full pointer-events-none ${slotBClass}`}
       >
-        {/* High-res backdrop photo prevents any blank flash during initial connection */}
         <img
           src={slotB.video?.thumbnailUrl || `https://i.ytimg.com/vi/${slotB.video?.id}/maxresdefault.jpg`}
           alt=""
@@ -261,7 +284,7 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
         <iframe
           ref={iframeBRef}
           key={`slotB-${slotB.key}`}
-          src={`https://www.youtube-nocookie.com/embed/${slotB.video?.id}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1&start=${slotB.startTime}&iv_load_policy=3&disablekb=1&loop=1&playlist=${slotB.video?.id}`}
+          src={`https://www.youtube-nocookie.com/embed/${slotB.video?.id}?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&playsinline=1&modestbranding=1&enablejsapi=1&start=${slotB.startTime}&iv_load_policy=3&disablekb=1&fs=0`}
           title={`Cinematic Reel B - ${slotB.video?.title}`}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115vw] h-[65vw] min-w-[180vh] min-h-[100%] pointer-events-none scale-105"
           allow="autoplay; encrypted-media; picture-in-picture"
@@ -271,7 +294,7 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
 
       {/* =========================================================
           TOUCH/MOUSE INTERACTION SHIELD
-          Intercepts all user clicks and drags so native YouTube pause/controls are NEVER activated
+          Intercepts all user clicks and drags so native YouTube controls are NEVER activated
           ========================================================= */}
       <div
         onPointerDown={handlePointerDown}
@@ -284,11 +307,11 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
           Bright & vivid video visibility + crystal-clear text readability
           ========================================================= */}
       {/* 1. Translucent dark tint (30% so footage details are bright & vibrant) */}
-      <div className="absolute inset-0 bg-[#08090D]/30 z-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-[#08090D]/30 z-15 pointer-events-none" />
 
       {/* 2. Soft radial vignette (bright in center, gentle darkening toward outer edges) */}
       <div
-        className="absolute inset-0 z-10 pointer-events-none"
+        className="absolute inset-0 z-15 pointer-events-none"
         style={{
           background:
             'radial-gradient(ellipse at center, rgba(8, 9, 13, 0.08) 0%, rgba(8, 9, 13, 0.32) 60%, rgba(8, 9, 13, 0.72) 100%)',
@@ -296,10 +319,10 @@ export const HeroVideoBackground: React.FC<HeroVideoBackgroundProps> = ({ videos
       />
 
       {/* 3. Bottom seamless blend into next section */}
-      <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#0D1516] via-[#0D1516]/65 to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 inset-x-0 h-28 bg-gradient-to-t from-[#0D1516] via-[#0D1516]/65 to-transparent z-15 pointer-events-none" />
 
       {/* 4. Top subtle navbar protection gradient */}
-      <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#08090D]/50 to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#08090D]/50 to-transparent z-15 pointer-events-none" />
 
       {/* =========================================================
           INTERACTIVE CONTROLS & LIVE REEL STATUS PILL
