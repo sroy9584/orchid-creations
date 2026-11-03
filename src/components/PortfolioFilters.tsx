@@ -59,9 +59,6 @@ export const PortfolioFilters: React.FC<PortfolioFiltersProps> = ({
                   : 'glass-pill text-neutral-400 hover:text-white'
               }`}
             >
-              {cat.badge && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#BF54A3] animate-pulse" />
-              )}
               <span>{cat.title}</span>
               {isSelected && (
                 <motion.div
