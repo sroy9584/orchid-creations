@@ -32,7 +32,7 @@ export const About: React.FC = () => {
   const milestones = [
     {
       year: '2021',
-      title: 'Inception of Orchid Creations',
+      title: 'Inception of Orchid Creation',
       desc: 'Founded by Sourav Roy in West Bengal, India, dedicated to giving wings to visual stories through boutique wedding highlights and cinematic post-production.',
     },
     {
@@ -78,7 +78,7 @@ export const About: React.FC = () => {
           >
             ABOUT{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361]">
-              ORCHID CREATIONS
+              ORCHID CREATION
             </span>
           </motion.h1>
 

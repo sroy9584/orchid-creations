@@ -2,9 +2,9 @@ import { ServiceItem } from '../types/services';
 
 /**
  * =======================================================================
- * ORCHID CREATIONS — SERVICES CONFIGURATION
+ * ORCHID CREATION — SERVICES CONFIGURATION
  * =======================================================================
- * Customize all services offered by Orchid Creations.
+ * Customize all services offered by Orchid Creation.
  * You can add, edit, or reorder services without editing page code.
  */
 

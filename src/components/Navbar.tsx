@@ -55,7 +55,7 @@ export const Navbar: React.FC = () => {
               />
               <div className="flex flex-col">
                 <span className="text-base sm:text-lg font-extrabold tracking-wider text-white group-hover:text-[#BF54A3] transition-colors leading-tight">
-                  ORCHID <span className="font-light text-[#BF54A3]">CREATIONS</span>
+                  ORCHID <span className="font-light text-[#BF54A3]">CREATION</span>
                 </span>
                 <span className="text-[9px] uppercase tracking-wider text-[#107361] font-mono font-semibold">
                   GIVING WINGS TO YOUR STORIES

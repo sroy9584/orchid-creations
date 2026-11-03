@@ -1,4 +1,4 @@
-name: Deploy Orchid Creations to GitHub Pages
+name: Deploy Orchid Creation to GitHub Pages
 
 on:
   push:

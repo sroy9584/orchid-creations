@@ -98,7 +98,7 @@ export const ContactForm: React.FC = () => {
   const handleWhatsAppSend = () => {
     const text = formData.fullName
       ? `Hello Sourav! My name is ${formData.fullName}.\n\nService: ${formData.service}\nEmail: ${formData.email || 'N/A'}\nWhatsApp/Phone: ${formData.whatsapp || 'N/A'}\n\nProject Overview:\n${formData.projectDescription || 'I would like to discuss video post-production.'}`
-      : 'Hello Orchid Creations! I am interested in your video editing services. I would like to discuss a project.';
+      : 'Hello Orchid Creation! I am interested in your video editing services. I would like to discuss a project.';
     window.open(getWhatsAppLink(text), '_blank');
   };
 

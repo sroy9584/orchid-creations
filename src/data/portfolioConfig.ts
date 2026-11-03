@@ -2,7 +2,7 @@ import { PlaylistCategory } from '../types/portfolio';
 
 /**
  * =======================================================================
- * ORCHID CREATIONS — OFFICIAL YOUTUBE PLAYLIST CONFIGURATION
+ * ORCHID CREATION — OFFICIAL YOUTUBE PLAYLIST CONFIGURATION
  * =======================================================================
  * Configured with official unlisted YouTube playlists from @orchidcreation.
  * Synced automatically every 30 minutes via GitHub Actions.

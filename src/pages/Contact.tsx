@@ -8,7 +8,7 @@ import { getWhatsAppLink } from '../data/socialLinks';
 
 export const Contact: React.FC = () => {
   const directWhatsApp = getWhatsAppLink(
-    'Hello Orchid Creations! I am interested in your video editing services. I would like to discuss a project.'
+    'Hello Orchid Creation! I am interested in your video editing services. I would like to discuss a project.'
   );
 
   return (

@@ -1,4 +1,4 @@
-# Official Orchid Creations Logo Location
+# Official Orchid Creation Logo Location
 
 Upload your official logo files here:
 

@@ -2,7 +2,7 @@ import { PricingPackage, PricingTerms } from '../types/pricing';
 
 /**
  * =======================================================================
- * ORCHID CREATIONS — PRICING CONFIGURATION
+ * ORCHID CREATION — PRICING CONFIGURATION
  * =======================================================================
  * Easily update prices, package names, deliverables, and WhatsApp enquiry
  * messages in this file.
@@ -41,7 +41,7 @@ export const pricingPackages: PricingPackage[] = [
       'Delivery via Google Drive / high-speed cloud link',
     ],
     whatsappMessage:
-      'Hello Sourav! I am interested in the "Bengali Wedding — Both Sides" package (₹4,500) for Orchid Creations. I would like to discuss my project details.',
+      'Hello Sourav! I am interested in the "Bengali Wedding — Both Sides" package (₹4,500) for Orchid Creation. I would like to discuss my project details.',
   },
   {
     id: 'non-bengali-wedding-both-sides',
@@ -66,7 +66,7 @@ export const pricingPackages: PricingPackage[] = [
       'Up to 3 revision rounds included',
     ],
     whatsappMessage:
-      'Hello Sourav! I am interested in the "Non-Bengali Wedding — Both Sides" package (₹7,500) for Orchid Creations. I would like to discuss my footage and timeline.',
+      'Hello Sourav! I am interested in the "Non-Bengali Wedding — Both Sides" package (₹7,500) for Orchid Creation. I would like to discuss my footage and timeline.',
   },
   {
     id: 'pre-post-wedding-story',
@@ -89,7 +89,7 @@ export const pricingPackages: PricingPackage[] = [
       'Quick turnaround available on request',
     ],
     whatsappMessage:
-      'Hello Sourav! I would like to enquire about the "Pre-Wedding / Post-Wedding" editing package (₹1,500–₹2,000) for Orchid Creations.',
+      'Hello Sourav! I would like to enquire about the "Pre-Wedding / Post-Wedding" editing package (₹1,500–₹2,000) for Orchid Creation.',
   },
   {
     id: 'engagement-films',
@@ -113,7 +113,7 @@ export const pricingPackages: PricingPackage[] = [
       'Quick delivery within 5–7 days',
     ],
     whatsappMessage:
-      'Hello Sourav! I am enquiring about the "Engagement Ceremony" editing package (₹2,500) with Orchid Creations.',
+      'Hello Sourav! I am enquiring about the "Engagement Ceremony" editing package (₹2,500) with Orchid Creation.',
   },
   {
     id: 'rice-ceremony-birthday',
@@ -137,7 +137,7 @@ export const pricingPackages: PricingPackage[] = [
       '1 revision round included',
     ],
     whatsappMessage:
-      'Hello Sourav! I want to discuss editing for a "Rice Ceremony / Birthday" project (₹2,000) with Orchid Creations.',
+      'Hello Sourav! I want to discuss editing for a "Rice Ceremony / Birthday" project (₹2,000) with Orchid Creation.',
   },
   {
     id: 'brand-reels-vertical',
@@ -160,7 +160,7 @@ export const pricingPackages: PricingPackage[] = [
       '24–48 hour rapid delivery available',
     ],
     whatsappMessage:
-      'Hello Sourav! I am interested in "Brand Reels & Short-Form Video Editing" (₹800–₹1,000) for my brand/channel with Orchid Creations.',
+      'Hello Sourav! I am interested in "Brand Reels & Short-Form Video Editing" (₹800–₹1,000) for my brand/channel with Orchid Creation.',
   },
 ];
 

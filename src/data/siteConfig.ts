@@ -2,13 +2,13 @@ import { SiteConfig } from '../types/config';
 
 /**
  * =======================================================================
- * ORCHID CREATIONS — SITE CONFIGURATION
+ * ORCHID CREATION — SITE CONFIGURATION
  * =======================================================================
  * Contains official company and founder details for Sourav Roy.
  */
 
 export const siteConfig: SiteConfig = {
-  brandName: 'ORCHID CREATIONS',
+  brandName: 'ORCHID CREATION',
   tagline: 'GIVING WINGS TO YOUR STORIES',
   subTagline:
     'We turn your moments into cinematic visual experiences. From cinematic wedding films to compelling brand visuals, we transform raw footage into meaningful stories through creative editing, stunning visuals, and immersive sound.',
@@ -31,9 +31,9 @@ export const siteConfig: SiteConfig = {
   founderPhotoPath: './assets/images/founder-placeholder.svg',
 
   aboutText: {
-    hero: 'Orchid Creations is a creative video post-production studio established in 2021. Founded by Sourav Roy, the studio focuses on giving wings to your stories by transforming raw footage into cinematic visual experiences.',
+    hero: 'Orchid Creation is a creative video post-production studio established in 2021. Founded by Sourav Roy, the studio focuses on giving wings to your stories by transforming raw footage into cinematic visual experiences.',
     story: [
-      'With deep expertise in video editing, color correction, visual effects, motion graphics, and sound design, Orchid Creations helps clients turn their special moments and creative ideas into memorable stories.',
+      'With deep expertise in video editing, color correction, visual effects, motion graphics, and sound design, Orchid Creation helps clients turn their special moments and creative ideas into memorable stories.',
       'From grand multi-day Bengali and traditional Indian weddings to contemporary pre-wedding narratives, music videos, and commercial brand reels, our craft balances cinematic grandeur with heartfelt emotion.',
       'Our philosophy is anchored in meticulous detail: tailored pacing, harmonic color science, spatial sound mastering, and an uncompromising dedication to visual rhythm.',
     ],

@@ -95,7 +95,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
             {/* Modal Footer Description */}
             <div className="p-3.5 sm:p-5 bg-gradient-to-t from-[#0D1516] to-[#192526] flex flex-col md:flex-row md:items-center justify-between gap-2.5 sm:gap-3 text-xs md:text-sm text-neutral-300 border-t border-white/5">
               <p className="line-clamp-2 text-neutral-400 max-w-3xl text-[11px] sm:text-xs md:text-sm">
-                {video.description || 'Cinematic video post-production project by Orchid Creations.'}
+                {video.description || 'Cinematic video post-production project by Orchid Creation.'}
               </p>
               <div className="flex items-center gap-2 self-end shrink-0 text-neutral-400 font-mono text-[10px] sm:text-[11px]">
                 {video.duration && (

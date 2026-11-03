@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
               />
               <div className="flex flex-col">
                 <span className="text-xl font-extrabold tracking-wider text-white group-hover:text-[#BF54A3] transition-colors leading-tight">
-                  ORCHID <span className="font-light text-[#BF54A3]">CREATIONS</span>
+                  ORCHID <span className="font-light text-[#BF54A3]">CREATION</span>
                 </span>
                 <span className="text-[10px] uppercase tracking-wider text-[#107361] font-mono font-semibold">
                   GIVING WINGS TO YOUR STORIES • EST. {siteConfig.establishedYear}
@@ -161,7 +161,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
-          <p>© 2026 Orchid Creations. All Rights Reserved. Crafted for Sourav Roy.</p>
+          <p>© 2026 Orchid Creation. All Rights Reserved. Crafted for Sourav Roy.</p>
 
           <div className="flex items-center gap-6">
             <span className="font-mono text-[11px] text-neutral-400">

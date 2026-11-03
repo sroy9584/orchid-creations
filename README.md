@@ -1,4 +1,4 @@
-# ORCHID CREATIONS — OFFICIAL STUDIO WEBSITE
+# ORCHID CREATION — OFFICIAL STUDIO WEBSITE
 
 > **Premium Dark Liquid Glass Multi-Page Video Post-Production Portfolio**  
 > Founded by **Sourav Roy** • Established 2019 • West Bengal, India  
@@ -8,7 +8,7 @@
 
 ## 🌟 Overview & Architecture
 
-**Orchid Creations** is a modern, high-performance, multi-page web platform designed for video post-production studios. Built with Apple-inspired **Dark Liquid Glass aesthetics**, frosted glass navigation, smooth spring motion, and automated cloud synchronization for unlisted YouTube portfolio playlists.
+**Orchid Creation** is a modern, high-performance, multi-page web platform designed for video post-production studios. Built with Apple-inspired **Dark Liquid Glass aesthetics**, frosted glass navigation, smooth spring motion, and automated cloud synchronization for unlisted YouTube portfolio playlists.
 
 ### Key Features
 - **Multi-Page Experience**: Dedicated pages for **Home**, **Portfolio**, **Services**, **Pricing**, **About**, and **Contact**.
@@ -106,7 +106,7 @@ e:/Orchid Creation/
 
 ## 📖 HOW TO UPDATE YOUR WEBSITE
 
-You can manage almost every aspect of Orchid Creations simply by updating files in the `src/data/` folder and `public/assets/` directory.
+You can manage almost every aspect of Orchid Creation simply by updating files in the `src/data/` folder and `public/assets/` directory.
 
 ---
 
@@ -237,7 +237,7 @@ npm run preview
 1. Commit and push all files to your GitHub repository:
    ```bash
    git add .
-   git commit -m "feat: complete Orchid Creations premium portfolio website"
+   git commit -m "feat: complete Orchid Creation premium portfolio website"
    git push origin main
    ```
 2. In your GitHub repository:
@@ -256,5 +256,5 @@ npm run preview
 
 ---
 
-© 2026 **ORCHID CREATIONS**. Crafted with cinematic precision for **Sourav Roy**.
+© 2026 **ORCHID CREATION**. Crafted with cinematic precision for **Sourav Roy**.
 

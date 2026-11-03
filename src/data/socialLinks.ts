@@ -3,13 +3,13 @@ import { siteConfig } from './siteConfig';
 
 /**
  * =======================================================================
- * ORCHID CREATIONS — SOCIAL MEDIA LINKS
+ * ORCHID CREATION — SOCIAL MEDIA LINKS
  * =======================================================================
- * Official studio channels for Sourav Roy / Orchid Creations.
+ * Official studio channels for Sourav Roy / Orchid Creation.
  */
 
 export const defaultWhatsAppMessage = encodeURIComponent(
-  'Hello Orchid Creations! I am interested in your video editing services. I would like to discuss a project.'
+  'Hello Orchid Creation! I am interested in your video editing services. I would like to discuss a project.'
 );
 
 export const socialLinks: SocialLink[] = [
@@ -44,7 +44,7 @@ export const socialLinks: SocialLink[] = [
   {
     platform: 'email',
     title: 'Official Email',
-    url: `mailto:${siteConfig.contactEmail}?subject=Video%20Editing%20Enquiry%20-%20Orchid%20Creations`,
+    url: `mailto:${siteConfig.contactEmail}?subject=Video%20Editing%20Enquiry%20-%20Orchid%20Creation`,
     displayHandle: siteConfig.contactEmail,
     iconName: 'Mail',
   },

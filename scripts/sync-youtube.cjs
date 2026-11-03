@@ -1,6 +1,6 @@
 /**
  * =======================================================================
- * ORCHID CREATIONS — AUTOMATIC YOUTUBE PLAYLIST SYNCHRONIZER
+ * ORCHID CREATION — AUTOMATIC YOUTUBE PLAYLIST SYNCHRONIZER
  * =======================================================================
  * This script connects to the YouTube Data API v3, queries all configured
  * playlists (including unlisted videos), paginates through all items,
@@ -220,7 +220,7 @@ async function fetchPlaylistVideos(playlistId, categoryId, apiKey) {
 
 async function main() {
   console.log('----------------------------------------------------');
-  console.log('ORCHID CREATIONS — AUTOMATIC PLAYLIST SYNCHRONIZER');
+  console.log('ORCHID CREATION — AUTOMATIC PLAYLIST SYNCHRONIZER');
   console.log('----------------------------------------------------');
 
   const apiKey = process.env.YOUTUBE_API_KEY;

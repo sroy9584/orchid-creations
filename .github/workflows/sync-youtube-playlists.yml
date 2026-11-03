@@ -52,7 +52,7 @@ jobs:
         if: steps.git_status.outputs.changes_detected == 'true'
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "Orchid Creations Bot"
+          git config --local user.name "Orchid Creation Bot"
           git add src/data/portfolioVideos.json
           git commit -m "Automated sync: updated YouTube playlist portfolio"
           git push origin main
