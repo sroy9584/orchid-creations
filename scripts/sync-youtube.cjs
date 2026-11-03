@@ -19,6 +19,7 @@ const VIDEOS_JSON_PATH = path.join(__dirname, '../src/data/portfolioVideos.json'
 
 // Explicit list of video IDs to exclude from FEATURED PROJECTS per client instruction
 const EXCLUDED_FEATURED_IDS = new Set([
+  // Batch 1 exclusions
   'yBqwuBTR2-I',
   'bpZPh11wnGs',
   '6CtcZup1i1s',
@@ -29,6 +30,40 @@ const EXCLUDED_FEATURED_IDS = new Set([
   'sEytK0aEL00',
   'xWQepGBNruE',
   'c2BMlv2QsaI',
+
+  // Batch 2 exclusions
+  'Vp2GcSwhjSY',
+  'xMOwBt9Yw9k',
+  'VpCAJLm6Uxg',
+  'u8MMS0uQUnE',
+  'GQ8ZDAdwGus',
+  'Uf8K7RcFABQ',
+  'dPTQR0M4qvg',
+  'fiz0GYBmyqY',
+  'bXgx8lm4hDY',
+  'XgbIOvzyEK8',
+  '6BcCIp3ZiZ4',
+  'LjgnIPAQTpI',
+  'XF3-9O2wjds',
+  'UgJ94PnK-dY',
+  'W6DSH5aOo1I',
+  'UnazyEv0UcA',
+  'k4X2kIKT8Uc',
+  'OtuI--zOR7c',
+  'gEbiOiDDFh8',
+  'SAzTHO19lb0',
+  'p_dyZeGwbJY',
+  'rm9DLC6B_iM',
+  'qkROgxVF7Vg',
+  'tCgHsCH8m24',
+  'AvnQiXWJTXU',
+  'ehaSqV9cIco',
+  'GHIdp5YCovY',
+  'HRT9i_g2Wk4',
+  '7LZqbNh2D9A',
+  'QpQc9GlvV0w',
+  'Kw5qyWc6zyE',
+  'of0L5UWAljI',
 ]);
 
 // Fetch helper using Node.js native https
