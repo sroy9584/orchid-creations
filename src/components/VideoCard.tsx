@@ -206,7 +206,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
           ) : video.featured ? (
             <span className="flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-[#BF54A3] backdrop-blur-md text-white border border-[#D977BF]/40 shadow-glow-accent">
               <Sparkles className="w-3 h-3" />
-              Featured
+              Best Project
             </span>
           ) : null}
         </div>

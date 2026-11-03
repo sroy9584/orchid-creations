@@ -39,7 +39,7 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
               CURATED SHOWCASE
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
-              FEATURED{' '}
+              OUR BEST{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BF54A3] via-[#D977BF] to-[#107361]">
                 PROJECTS
               </span>
@@ -78,7 +78,7 @@ export const FeaturedWorks: React.FC<FeaturedWorksProps> = ({
               onClick={handleLoadMore}
               className="glass-btn-secondary w-full sm:w-auto text-center justify-center !px-5 sm:!px-7 !py-3 sm:!py-3.5 text-xs sm:text-sm font-semibold tracking-wide group"
             >
-              <span>SHOW MORE FEATURED PROJECTS ({videos.length - visibleCount} REMAINING)</span>
+              <span>SHOW MORE BEST PROJECTS ({videos.length - visibleCount} REMAINING)</span>
               <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
             </button>
           )}
