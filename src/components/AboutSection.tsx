@@ -45,7 +45,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
                   </span>
                 </div>
                 <div className="text-xs text-neutral-400 mt-1">
-                  Founder &amp; Creative Post-Production Director
+                  Founder &amp; Post-Production Director
                 </div>
               </div>
             </div>
