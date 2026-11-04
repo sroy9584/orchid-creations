@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle, AlertCircle, MessageSquare, Mail, Info, Loader2 } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, MessageSquare, Mail, ExternalLink, Loader2 } from 'lucide-react';
 import { siteConfig } from '../data/siteConfig';
 import { servicesConfig } from '../data/servicesConfig';
 import { getWhatsAppLink } from '../data/socialLinks';
@@ -12,8 +12,6 @@ interface FormData {
   projectDescription: string;
 }
 
-type SubmissionStatus = 'idle' | 'submitting' | 'success' | 'info' | 'fallback' | 'error';
-
 export const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
@@ -23,8 +21,13 @@ export const ContactForm: React.FC = () => {
     projectDescription: '',
   });
 
-  const [status, setStatus] = useState<SubmissionStatus>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [feedbackMessage, setFeedbackMessage] = useState<string>('');
+  const [lastSubmittedUrls, setLastSubmittedUrls] = useState<{
+    mailto: string;
+    gmail: string;
+    clientName: string;
+  } | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -36,31 +39,46 @@ export const ContactForm: React.FC = () => {
   };
 
   /**
-   * Generates a pre-formatted direct mailto URL populated with client and project details.
+   * Generates formatted enquiry subject, body, mailto URL, and Gmail web compose URL.
    */
-  const getMailtoUrl = () => {
-    const subject = `🎬 [New Project Enquiry] ${formData.service || 'Video Post-Production'} — ${formData.fullName || 'Client'}`;
+  const getFormattedEnquiry = (
+    name: string,
+    email: string,
+    phone: string,
+    service: string,
+    desc: string
+  ) => {
+    const timestamp = new Date().toLocaleString('en-IN', {
+      dateStyle: 'full',
+      timeStyle: 'short',
+      timeZone: 'Asia/Kolkata',
+    });
+
+    const subject = `🎬 [New Project Enquiry] ${service} — ${name}`;
     const body = 
 `ORCHID CREATION STUDIO — PROJECT ENQUIRY
 ==================================================
 
 CLIENT DETAILS:
-• Full Name: ${formData.fullName || 'N/A'}
-• Email Address: ${formData.email || 'N/A'}
-• WhatsApp / Phone: ${formData.whatsapp || 'Not provided'}
-• Service Required: ${formData.service}
+• Full Name: ${name}
+• Email Address: ${email}
+• WhatsApp / Phone: ${phone || 'Not provided'}
+• Service Required: ${service}
 
 PROJECT DESCRIPTION & REQUIREMENTS:
 --------------------------------------------------
-${formData.projectDescription || 'No description provided.'}
+${desc}
 --------------------------------------------------
 
 Submitted via: Orchid Creation Official Website
 Recipient: ${siteConfig.contactEmail}
-Date: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} (IST)
+Date: ${timestamp} (IST)
 ==================================================`;
 
-    return `mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const gmail = `https://mail.google.com/mail/?view=cm&fs=1&to=${siteConfig.contactEmail}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    return { subject, body, mailto, gmail };
   };
 
   /**
@@ -90,134 +108,94 @@ Date: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} (IST)
     // Client-side validation
     if (!formData.fullName.trim() || !formData.email.trim() || !formData.projectDescription.trim()) {
       setStatus('error');
-      setFeedbackMessage('Please fill in your Full Name, Email Address, and Project Description.');
+      setFeedbackMessage('Please enter your Full Name, Email Address, and Project Description.');
       return;
     }
 
-    setStatus('submitting');
-    setFeedbackMessage('');
+    const clientName = formData.fullName.trim();
+    const clientEmail = formData.email.trim();
+    const clientPhone = formData.whatsapp.trim();
+    const clientService = formData.service;
+    const clientDesc = formData.projectDescription.trim();
 
-    const formattedTimestamp = new Date().toLocaleString('en-IN', {
-      dateStyle: 'full',
-      timeStyle: 'medium',
-      timeZone: 'Asia/Kolkata',
-    });
+    const { subject, mailto, gmail } = getFormattedEnquiry(
+      clientName,
+      clientEmail,
+      clientPhone,
+      clientService,
+      clientDesc
+    );
 
-    const emailSubject = `🎬 [New Enquiry] ${formData.service} — ${formData.fullName}`;
+    // If a custom Formspree or Web3Forms backend endpoint is configured in siteConfig
+    const hasCustomBackend =
+      siteConfig.formspreeEndpoint && siteConfig.formspreeEndpoint.trim().length > 0;
 
-    // Endpoint resolution:
-    // 1. Web3Forms (if key configured)
-    // 2. Custom Formspree endpoint (if configured)
-    // 3. FormSubmit zero-config AJAX endpoint direct to ocofficialservice@gmail.com
-    let endpoint = '';
-    let payload: Record<string, unknown> = {};
+    if (hasCustomBackend) {
+      setStatus('submitting');
+      setFeedbackMessage('');
 
-    if (siteConfig.web3formsKey && siteConfig.web3formsKey.trim().length > 0) {
-      endpoint = 'https://api.web3forms.com/submit';
-      payload = {
-        access_key: siteConfig.web3formsKey.trim(),
-        subject: emailSubject,
-        from_name: formData.fullName,
-        replyto: formData.email,
-        'Client Name': formData.fullName,
-        'Client Email': formData.email,
-        'WhatsApp / Phone': formData.whatsapp || 'Not provided',
-        'Service Required': formData.service,
-        'Project Requirements': formData.projectDescription,
-        'Submission Timestamp': `${formattedTimestamp} (IST)`,
-        'Target Inbox': siteConfig.contactEmail,
-      };
-    } else if (siteConfig.formspreeEndpoint && siteConfig.formspreeEndpoint.trim().length > 0) {
-      endpoint = siteConfig.formspreeEndpoint.trim();
-      payload = {
-        name: formData.fullName,
-        email: formData.email,
-        phone: formData.whatsapp || 'Not provided',
-        service: formData.service,
-        message: formData.projectDescription,
-        _subject: emailSubject,
-        _replyto: formData.email,
-      };
-    } else {
-      // Default: FormSubmit.co direct to studio email with structured HTML table template
-      endpoint = `https://formsubmit.co/ajax/${siteConfig.contactEmail}`;
-      payload = {
-        'CLIENT NAME': formData.fullName,
-        'CLIENT EMAIL': formData.email,
-        'WHATSAPP / PHONE': formData.whatsapp || 'Not provided',
-        'SERVICE REQUIRED': formData.service,
-        'PROJECT DETAILS & REQUIREMENTS': formData.projectDescription,
-        'SUBMISSION DATE (IST)': formattedTimestamp,
-        'STUDIO RECIPIENT': siteConfig.contactEmail,
-        _subject: emailSubject,
-        _replyto: formData.email,
-        _template: 'table',
-        _captcha: 'false',
-        _autoresponse: `Hello ${formData.fullName},\n\nThank you for reaching out to Orchid Creation Studio! We have received your project enquiry for "${formData.service}". Sourav Roy will review your requirements and get in touch with you shortly.\n\nWarm regards,\nOrchid Creation Studio\nAshoknagar, Building More, West Bengal\nWhatsApp: +91 89279 16525\nWebsite: https://orchidcreation.in`,
-      };
-    }
-
-    // AbortController with 7-second timeout to prevent UI hanging if third-party server has high latency
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 7000);
-
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-
-      const data = await response.json().catch(() => ({}));
-
-      // Check success flag
-      const isSuccess =
-        response.ok &&
-        (data.success === 'true' ||
-          data.success === true ||
-          data.status === 'success' ||
-          !('success' in data));
-
-      if (isSuccess) {
-        setStatus('success');
-        setFeedbackMessage(
-          `Thank you, ${formData.fullName}! Your project enquiry has been formatted and emailed directly to Sourav Roy at ${siteConfig.contactEmail}. We will review your details and respond shortly.`
-        );
-        setFormData({
-          fullName: '',
-          email: '',
-          whatsapp: '',
-          service: servicesConfig[0]?.title || 'Wedding Film Editing',
-          projectDescription: '',
+      try {
+        const response = await fetch(siteConfig.formspreeEndpoint.trim(), {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            'Client Name': clientName,
+            'Client Email': clientEmail,
+            'WhatsApp / Phone': clientPhone || 'Not provided',
+            'Service Required': clientService,
+            'Project Description': clientDesc,
+            _replyto: clientEmail,
+            _subject: subject,
+          }),
         });
-      } else if (
-        data.message &&
-        typeof data.message === 'string' &&
-        (data.message.toLowerCase().includes('activate') ||
-          data.message.toLowerCase().includes('confirm') ||
-          data.message.toLowerCase().includes('authorize'))
-      ) {
-        setStatus('info');
-        setFeedbackMessage(
-          `Form Activation Required: FormSubmit sent a one-time activation link to ${siteConfig.contactEmail}. Please open Gmail and click "Activate Form" once to complete setup for future automatic submissions.`
-        );
-      } else {
-        throw new Error(data.message || 'Third-party dispatch response was not ok');
+
+        if (response.ok) {
+          setStatus('success');
+          setFeedbackMessage(
+            `Thank you, ${clientName}! Your project enquiry has been automatically delivered to Sourav Roy at ${siteConfig.contactEmail}. We will review your requirements and respond shortly.`
+          );
+          setLastSubmittedUrls(null);
+          setFormData({
+            fullName: '',
+            email: '',
+            whatsapp: '',
+            service: servicesConfig[0]?.title || 'Wedding Film Editing',
+            projectDescription: '',
+          });
+          return;
+        }
+      } catch {
+        // Continue to direct launch fallback
       }
-    } catch {
-      clearTimeout(timeoutId);
-      // Fallback: Show friendly banner with instant 1-click Mail App & WhatsApp buttons
-      setStatus('fallback');
-      setFeedbackMessage(
-        `Automated server dispatch is currently experiencing network latency or is blocked by a browser extension. You can send this enquiry directly to ${siteConfig.contactEmail} below:`
-      );
     }
+
+    // Default fast & reliable dispatch:
+    // 1. Populates and opens the email client with the full structured table text
+    // 2. Shows the green success notification with 1-click Web Gmail and Mail App buttons
+    setStatus('success');
+    setFeedbackMessage(
+      `Thank you, ${clientName}! Your enquiry has been formatted and prepared for ${siteConfig.contactEmail}. Please confirm and send from your email app.`
+    );
+    setLastSubmittedUrls({ mailto, gmail, clientName });
+
+    // Open user's email client directly
+    try {
+      window.location.href = mailto;
+    } catch {
+      // In case browser restricts direct location change, the links inside the success banner remain available
+    }
+
+    // Reset form fields
+    setFormData({
+      fullName: '',
+      email: '',
+      whatsapp: '',
+      service: servicesConfig[0]?.title || 'Wedding Film Editing',
+      projectDescription: '',
+    });
   };
 
   return (
@@ -227,72 +205,47 @@ Date: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} (IST)
         <div className="mb-6 p-5 rounded-2xl bg-emerald-950/50 border border-emerald-500/50 flex items-start gap-3.5 text-sm text-emerald-200">
           <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
           <div className="flex-1">
-            <p className="font-bold text-white text-base">Enquiry Sent Successfully!</p>
+            <p className="font-bold text-white text-base">Enquiry Formatted Successfully!</p>
             <p className="text-emerald-300/90 text-xs sm:text-sm mt-1.5 leading-relaxed">
               {feedbackMessage}
             </p>
-            <div className="mt-3 flex flex-wrap gap-2.5">
-              <button
-                type="button"
-                onClick={handleWhatsAppSend}
-                className="px-3.5 py-1.5 rounded-lg bg-emerald-600/80 hover:bg-emerald-600 text-white font-semibold text-xs flex items-center gap-1.5 transition-colors"
-              >
-                <MessageSquare className="w-3.5 h-3.5" />
-                <span>Also ping on WhatsApp</span>
-              </button>
-            </div>
+
+            {lastSubmittedUrls && (
+              <div className="mt-4 pt-3.5 border-t border-emerald-500/20 flex flex-wrap items-center gap-3">
+                <a
+                  href={lastSubmittedUrls.gmail}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#BF54A3] to-[#592D4D] text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-lg hover:brightness-110 transition-all cursor-pointer"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>Send via Web Gmail</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                </a>
+
+                <a
+                  href={lastSubmittedUrls.mailto}
+                  className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 border border-white/15 transition-colors cursor-pointer"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>Open in Mail App</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleWhatsAppSend}
+                  className="px-4 py-2.5 rounded-xl bg-emerald-600/90 hover:bg-emerald-600 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-colors cursor-pointer"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Also Send on WhatsApp</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
 
-      {/* Info / Activation Notification */}
-      {status === 'info' && (
-        <div className="mb-6 p-5 rounded-2xl bg-amber-950/50 border border-amber-500/50 flex items-start gap-3.5 text-sm text-amber-200">
-          <Info className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-          <div className="flex-1">
-            <p className="font-bold text-white text-base">One-Time Activation Needed</p>
-            <p className="text-amber-300/90 text-xs sm:text-sm mt-1.5 leading-relaxed">
-              {feedbackMessage}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Fallback Notification with 1-Click Mailto & WhatsApp */}
-      {status === 'fallback' && (
-        <div className="mb-6 p-5 rounded-2xl bg-[#592D4D]/40 border border-[#BF54A3]/50 flex flex-col gap-4 text-sm text-[#F0F2F2]">
-          <div className="flex items-start gap-3">
-            <Mail className="w-5 h-5 text-[#BF54A3] shrink-0 mt-0.5" />
-            <div>
-              <p className="font-bold text-white">Direct Send Options</p>
-              <p className="text-xs sm:text-sm text-neutral-300 mt-1 leading-relaxed">
-                {feedbackMessage}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 pt-1">
-            <a
-              href={getMailtoUrl()}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#BF54A3] to-[#592D4D] text-white font-semibold text-xs sm:text-sm flex items-center gap-2 shadow-lg hover:brightness-110 transition-all"
-            >
-              <Mail className="w-4 h-4" />
-              <span>Send via Gmail / Mail App</span>
-            </a>
-
-            <button
-              type="button"
-              onClick={handleWhatsAppSend}
-              className="px-4 py-2.5 rounded-xl bg-emerald-600/90 hover:bg-emerald-600 text-white font-semibold text-xs sm:text-sm flex items-center gap-2 transition-colors"
-            >
-              <MessageSquare className="w-4 h-4" />
-              <span>Send via WhatsApp</span>
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Standard Error Notification */}
+      {/* Validation Error Notification */}
       {status === 'error' && (
         <div className="mb-6 p-4 rounded-2xl bg-rose-950/40 border border-rose-500/40 flex items-start gap-3 text-sm text-rose-200">
           <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
