@@ -17,7 +17,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-5 relative"
+          className="lg:col-span-5 relative lg:-mt-4"
         >
           {/* Ambient backlight */}
           <div className="ambient-glow bg-[#BF54A3]/20 w-80 h-80 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
@@ -27,17 +27,17 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
               <img
                 src={siteConfig.founderPhotoPath}
                 alt={`${siteConfig.founderName} - ${siteConfig.founderRole}`}
-                className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                className="w-full h-full object-cover scale-110 -translate-y-5 sm:-translate-y-7 transition-transform duration-700 hover:scale-115"
                 onError={(e) => {
                   e.currentTarget.src = './assets/images/founder-placeholder.svg';
                 }}
               />
 
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#08090D] via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#08090D] via-transparent to-transparent opacity-75" />
 
               {/* Founder Overlay Info */}
-              <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/10">
+              <div className="absolute bottom-3.5 left-3.5 right-3.5 p-3.5 rounded-xl bg-black/65 backdrop-blur-md border border-white/10">
                 <div className="text-base font-bold text-white flex items-center justify-between">
                   <span>{siteConfig.founderName}</span>
                   <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-[#BF54A3]/20 text-[#BF54A3] border border-[#BF54A3]/30">
