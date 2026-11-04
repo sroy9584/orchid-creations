@@ -31,12 +31,16 @@ interface GoogleReviewsProps {
   title?: string;
   subtitle?: string;
   showAll?: boolean;
+  compact?: boolean;
+  maxReviews?: number;
 }
 
 export const GoogleReviews: React.FC<GoogleReviewsProps> = ({
   title = 'CLIENT REVIEWS & GOOGLE RATINGS',
   subtitle = 'Authentic feedback and verified 5-star ratings from couples, music artists, and filmmakers who partnered with Orchid Creation Studio.',
   showAll = false,
+  compact = false,
+  maxReviews,
 }) => {
   const [reviews, setReviews] = useState<ClientReview[]>(googleReviewsData);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -120,64 +124,83 @@ export const GoogleReviews: React.FC<GoogleReviewsProps> = ({
     window.open(googleConfig.reviewUrl, '_blank', 'noopener,noreferrer');
   };
 
-  const displayedReviews = showAll ? reviews : reviews.slice(0, 6);
+  const limit = maxReviews || (compact ? 4 : (showAll ? reviews.length : 6));
+  const displayedReviews = reviews.slice(0, limit);
 
   return (
     <div className="relative w-full">
       {/* Google Business Header & Stats Card */}
-      <div className="glass-card rounded-3xl p-6 sm:p-8 md:p-10 border border-white/10 mb-8 sm:mb-12 relative overflow-hidden">
+      <div
+        className={`glass-card rounded-3xl border border-white/10 relative overflow-hidden ${
+          compact ? 'p-5 sm:p-7 mb-6' : 'p-6 sm:p-8 md:p-10 mb-8 sm:mb-12'
+        }`}
+      >
         <div className="ambient-glow bg-[#107361]/15 w-[350px] h-[350px] -top-20 -right-20" />
         <div className="ambient-glow bg-[#BF54A3]/15 w-[350px] h-[350px] -bottom-20 -left-20" />
 
-        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8">
+        <div
+          className={`relative z-10 flex flex-col ${
+            compact ? 'gap-4' : 'lg:flex-row lg:items-center justify-between gap-6 sm:gap-8'
+          }`}
+        >
           {/* Left: Google Business Badge & Rating Details */}
-          <div className="space-y-4 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-white text-xs font-semibold tracking-wider">
-              <GoogleIcon className="w-4 h-4" />
-              <span>GOOGLE BUSINESS PROFILE • VERIFIED REVIEWS</span>
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white text-[11px] sm:text-xs font-semibold tracking-wider">
+              <GoogleIcon className="w-3.5 h-3.5" />
+              <span>GOOGLE BUSINESS PROFILE • 5.0 VERIFIED</span>
             </div>
 
             <div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h3
+                className={`font-extrabold text-white tracking-tight ${
+                  compact ? 'text-xl sm:text-2xl' : 'text-2xl sm:text-3xl'
+                }`}
+              >
                 {title}
               </h3>
-              <p className="mt-2 text-sm sm:text-base text-neutral-300 leading-relaxed">
+              <p className="mt-1 text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-xl">
                 {subtitle}
               </p>
             </div>
 
             {/* Rating Stars & Aggregate Score */}
-            <div className="flex flex-wrap items-center gap-4 pt-1">
+            <div className="flex flex-wrap items-center gap-3 pt-0.5">
               <div className="flex items-center gap-2">
-                <span className="text-3xl sm:text-4xl font-extrabold text-white leading-none">
+                <span className="text-2xl sm:text-3xl font-extrabold text-white leading-none">
                   {googleConfig.rating.toFixed(1)}
                 </span>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400" />
+                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
                   ))}
                 </div>
               </div>
 
-              <div className="h-6 w-px bg-white/15 hidden sm:block" />
+              <div className="h-5 w-px bg-white/15 hidden sm:block" />
 
-              <div className="text-xs sm:text-sm text-neutral-400">
+              <div className="text-xs text-neutral-400">
                 <span className="font-bold text-white">{googleConfig.reviewCount}+ Google Reviews</span>{' '}
-                • 100% 5-Star Customer Satisfaction
+                • 100% 5-Star Customer Rating
               </div>
             </div>
           </div>
 
           {/* Right: Dual CTA Buttons */}
-          <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+          <div
+            className={`flex flex-col sm:flex-row ${
+              compact ? 'gap-2.5 pt-1' : 'lg:flex-col gap-3 shrink-0'
+            }`}
+          >
             {/* Primary: Direct Write on Google */}
             <a
               href={googleConfig.reviewUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-btn-primary !py-3.5 !px-6 text-xs sm:text-sm font-semibold shadow-glow-accent justify-center flex items-center gap-2.5 group"
+              className={`glass-btn-primary text-xs font-semibold shadow-glow-accent justify-center flex items-center gap-2 group ${
+                compact ? '!py-3 !px-4 flex-1' : '!py-3.5 !px-6'
+              }`}
             >
-              <GoogleIcon className="w-4 h-4" />
+              <GoogleIcon className="w-3.5 h-3.5" />
               <span>WRITE A GOOGLE REVIEW</span>
               <ExternalLink className="w-3.5 h-3.5 ml-0.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
@@ -189,41 +212,49 @@ export const GoogleReviews: React.FC<GoogleReviewsProps> = ({
                 setSubmitted(false);
                 setIsModalOpen(true);
               }}
-              className="glass-btn-secondary !py-3.5 !px-6 text-xs sm:text-sm font-semibold justify-center flex items-center gap-2"
+              className={`glass-btn-secondary text-xs font-semibold justify-center flex items-center gap-2 ${
+                compact ? '!py-3 !px-4 flex-1' : '!py-3.5 !px-6'
+              }`}
             >
-              <MessageSquare className="w-4 h-4 text-[#BF54A3]" />
-              <span>SUBMIT CLIENT FEEDBACK</span>
+              <MessageSquare className="w-3.5 h-3.5 text-[#BF54A3]" />
+              <span>LEAVE FEEDBACK</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* Reviews Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        className={`grid gap-4 sm:gap-5 ${
+          compact ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+        }`}
+      >
         {displayedReviews.map((rev, index) => (
           <motion.div
             key={rev.id || index}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            whileHover={{ y: -3 }}
-            className="glass-card rounded-2xl p-6 border border-white/10 hover:border-[#BF54A3]/30 flex flex-col justify-between transition-all group"
+            whileHover={{ y: -2 }}
+            className={`glass-card rounded-2xl border border-white/10 hover:border-[#BF54A3]/30 flex flex-col justify-between transition-all group ${
+              compact ? 'p-4 sm:p-5' : 'p-6'
+            }`}
           >
             <div>
               {/* Review Card Top: Author, Avatar, Google Verified */}
-              <div className="flex items-center justify-between gap-3 mb-4">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#BF54A3] to-[#107361] p-0.5 flex items-center justify-center shrink-0">
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#BF54A3] to-[#107361] p-0.5 flex items-center justify-center shrink-0">
                     <div className="w-full h-full rounded-full bg-[#141C1D] flex items-center justify-center text-xs font-bold text-white">
                       {rev.authorInitials}
                     </div>
                   </div>
                   <div className="min-w-0">
-                    <div className="text-sm font-bold text-white group-hover:text-[#BF54A3] transition-colors truncate">
+                    <div className="text-xs sm:text-sm font-bold text-white group-hover:text-[#BF54A3] transition-colors truncate">
                       {rev.authorName}
                     </div>
                     {rev.authorLocation && (
-                      <div className="text-[11px] text-neutral-400 truncate">
+                      <div className="text-[10px] text-neutral-400 truncate">
                         {rev.authorLocation}
                       </div>
                     )}
@@ -241,35 +272,59 @@ export const GoogleReviews: React.FC<GoogleReviewsProps> = ({
               </div>
 
               {/* Stars & Project Tag */}
-              <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center justify-between gap-2 mb-2.5">
                 <div className="flex items-center gap-0.5">
                   {[...Array(rev.rating)].map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                   ))}
                 </div>
 
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-[#107361]/15 text-[#107361] border border-[#107361]/25">
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-md bg-[#107361]/15 text-[#107361] border border-[#107361]/25 truncate max-w-[150px]">
                   {rev.projectType}
                 </span>
               </div>
 
               {/* Review Comment */}
-              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed italic line-clamp-5">
+              <p
+                className={`text-xs text-neutral-300 leading-relaxed italic ${
+                  compact ? 'line-clamp-4' : 'line-clamp-5'
+                }`}
+              >
                 "{rev.comment}"
               </p>
             </div>
 
             {/* Review Date & Google Badge */}
-            <div className="mt-5 pt-3.5 border-t border-white/5 flex items-center justify-between text-[11px] text-neutral-500">
+            <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-neutral-500">
               <span>{rev.relativeTime}</span>
-              <span className="inline-flex items-center gap-1 text-[#4285F4] hover:underline cursor-pointer">
+              <a
+                href={googleConfig.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[#4285F4] hover:underline cursor-pointer"
+              >
                 <GoogleIcon className="w-3 h-3" />
                 <span>Google Review</span>
-              </span>
+              </a>
             </div>
           </motion.div>
         ))}
       </div>
+
+      {/* Footer Link to Google Maps */}
+      {compact && (
+        <div className="mt-4 text-center">
+          <a
+            href={googleConfig.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#BF54A3] hover:text-[#BF54A3]/80 transition-colors"
+          >
+            <span>View all 48+ Reviews on Google Business Profile</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
+      )}
 
       {/* Interactive Review Modal */}
       <AnimatePresence>

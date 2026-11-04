@@ -20,14 +20,14 @@ export const Contact: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#BF54A3]/10 border border-[#BF54A3]/25 text-[#BF54A3] text-xs font-semibold tracking-wider uppercase mb-4"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            START A COLLABORATION
+            CONNECT &amp; CLIENT TESTIMONIALS
           </motion.div>
 
           <motion.h1
@@ -48,11 +48,12 @@ export const Contact: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="mt-4 text-base sm:text-lg text-neutral-300 leading-relaxed"
           >
-            Have raw footage ready for editing, an upcoming wedding film, or a brand visual campaign? Send us a message or chat with us directly.
+            Connect with Orchid Creation Studio directly, read verified Google reviews from our clients, or submit your project details below.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Top Grid: Studio Information (Left 5 cols) & Google Reviews (Right 7 cols) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Left Column: Direct Contact & Social Cards (5 cols) */}
           <div className="lg:col-span-5 space-y-8">
             {/* Quick Contact Card */}
@@ -137,15 +138,43 @@ export const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Contact & Enquiry Form (7 cols) */}
+          {/* Right Column: Google Reviews & Ratings (7 cols) */}
           <div className="lg:col-span-7">
-            <ContactForm />
+            <GoogleReviews
+              compact={true}
+              maxReviews={4}
+              title="GOOGLE CLIENT REVIEWS"
+              subtitle="Verified 5-star ratings from couples, music artists, and filmmakers who partnered with Orchid Creation Studio."
+            />
           </div>
         </div>
 
-        {/* Google Reviews & Client Feedback Section */}
+        {/* Bottom Section: Dedicated Project Enquiry & Contact Form */}
         <div className="mt-20 pt-16 border-t border-white/10">
-          <GoogleReviews />
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#107361]/10 border border-[#107361]/25 text-[#107361] text-xs font-semibold tracking-wider uppercase mb-3"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span>START A COLLABORATION</span>
+            </motion.div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#F0F2F2] tracking-tight">
+              PROJECT{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F0F2F2] via-[#BF54A3] to-[#107361]">
+                ENQUIRY
+              </span>
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-neutral-300">
+              Have raw footage ready for editing, an upcoming wedding film, or a brand visual campaign? Send us your requirements below.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <ContactForm />
+          </div>
         </div>
       </div>
     </div>
