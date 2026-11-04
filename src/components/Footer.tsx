@@ -44,20 +44,12 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
           {/* Brand Info (2 cols) */}
           <div className="lg:col-span-2 space-y-5">
-            <Link to="/" className="inline-flex items-center gap-3 focus:outline-none group">
+            <Link to="/" className="inline-block focus:outline-none group">
               <img
-                src={siteConfig.logoPath}
-                alt={siteConfig.brandName}
-                className="h-12 w-12 object-contain transition-transform duration-300 group-hover:scale-105"
+                src="./assets/logo/orchid-wordmark.png"
+                alt="Orchid Creation - Giving Wings to Your Stories"
+                className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="flex flex-col">
-                <span className="text-xl font-extrabold tracking-wider text-white group-hover:text-[#BF54A3] transition-colors leading-tight">
-                  ORCHID <span className="font-light text-[#BF54A3]">CREATION</span>
-                </span>
-                <span className="text-[10px] uppercase tracking-wider text-[#107361] font-mono font-semibold">
-                  GIVING WINGS TO YOUR STORIES • EST. {siteConfig.establishedYear}
-                </span>
-              </div>
             </Link>
 
             <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">

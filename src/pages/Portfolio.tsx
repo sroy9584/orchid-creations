@@ -4,7 +4,6 @@ import { Film, Sparkles, Filter, Search, X } from 'lucide-react';
 import { PortfolioFilters } from '../components/PortfolioFilters';
 import { PortfolioGrid } from '../components/PortfolioGrid';
 import { VideoModal } from '../components/VideoModal';
-import { SyncBadge } from '../components/SyncBadge';
 import { usePortfolio } from '../hooks/usePortfolio';
 
 export const Portfolio: React.FC = () => {
@@ -23,7 +22,6 @@ export const Portfolio: React.FC = () => {
     selectedVideo,
     openVideoModal,
     closeVideoModal,
-    metadata,
     getCategoryTitle,
   } = usePortfolio({ itemsPerPage: 9 });
 
@@ -66,15 +64,7 @@ export const Portfolio: React.FC = () => {
             A collection of visual stories crafted with creativity, precision, and passion.
           </motion.p>
 
-          {/* Sync Status Badge */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="mt-5"
-          >
-            <SyncBadge metadata={metadata} />
-          </motion.div>
+
 
           {/* Real-time Video Search Bar (by Video Name or Video ID) */}
           <motion.div

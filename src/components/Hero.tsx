@@ -124,7 +124,7 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           </div>
           <div className="text-center sm:text-left min-w-0">
             <div className="text-[11px] sm:text-sm md:text-base font-bold text-white leading-tight">
-              690+ Films
+              620+ Films
             </div>
             <div className="text-[8px] sm:text-[11px] text-neutral-400 leading-tight truncate sm:overflow-visible">
               YouTube Official Vault
@@ -132,17 +132,17 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           </div>
         </div>
 
-        {/* Stat 3: Turnkey Suite */}
+        {/* Stat 3: 4K Ultra HD */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 px-1 sm:px-3 py-0.5 sm:py-0">
             <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-lg bg-[#592D4D]/30 border border-[#592D4D]/40 flex items-center justify-center text-[#D977BF] shrink-0">
-              <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
             </div>
             <div className="text-center sm:text-left min-w-0">
               <div className="text-[11px] sm:text-sm md:text-base font-bold text-white leading-tight">
-                Turnkey Suite
+                4K Ultra HD
               </div>
               <div className="text-[8px] sm:text-[11px] text-neutral-400 leading-tight truncate sm:overflow-visible">
-                Pacing • Color • Sound
+                Cinema Grade Master
               </div>
             </div>
           </div>
