@@ -33,8 +33,11 @@ export const siteConfig: SiteConfig = {
     placeId: '',
   },
 
-  // External Form Backend (Formspree or Web3Forms)
+  // External Form Backend (FormSubmit / Web3Forms / Formspree)
+  // By default, FormSubmit automatically dispatches to contactEmail in table format.
+  // Optional: Paste your free Web3Forms access key here if preferred (https://web3forms.com)
   formspreeEndpoint: '',
+  web3formsKey: '',
 
   // Official Asset Paths (located in public/ folder)
   logoPath: './assets/logo/orchid-logo.png',

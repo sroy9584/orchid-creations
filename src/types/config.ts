@@ -33,6 +33,7 @@ export interface SiteConfig {
   whatsappNumber: string; // international format without spaces (e.g. 919876543210)
   displayPhone: string;
   formspreeEndpoint: string; // Formspree endpoint or empty if not yet configured
+  web3formsKey?: string; // Optional Web3Forms access key for bulletproof delivery
   logoPath: string; // Path to official logo
   founderPhotoPath: string; // Path to founder photo
   aboutText: {
