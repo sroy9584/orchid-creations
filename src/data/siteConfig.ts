@@ -38,7 +38,7 @@ export const siteConfig: SiteConfig = {
 
   // Official Asset Paths (located in public/ folder)
   logoPath: './assets/logo/orchid-logo.png',
-  founderPhotoPath: './assets/images/founder-placeholder.svg',
+  founderPhotoPath: './assets/images/sourav-roy.jpg',
 
   aboutText: {
     hero: 'Orchid Creation is a creative video post-production studio established in 2021. Founded by Sourav Roy, the studio focuses on giving wings to your stories by transforming raw footage into cinematic visual experiences.',

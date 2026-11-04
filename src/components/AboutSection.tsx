@@ -27,7 +27,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ isFullPage = false }
               <img
                 src={siteConfig.founderPhotoPath}
                 alt={`${siteConfig.founderName} - ${siteConfig.founderRole}`}
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
                 onError={(e) => {
                   e.currentTarget.src = './assets/images/founder-placeholder.svg';
                 }}
