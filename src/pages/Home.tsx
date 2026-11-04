@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Film, Heart } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { Hero } from '../components/Hero';
 import { FeaturedWorks } from '../components/FeaturedWorks';
 import { ServicesGrid } from '../components/ServicesGrid';
 import { AboutSection } from '../components/AboutSection';
+import { GoogleReviews } from '../components/GoogleReviews';
 import { CTASection } from '../components/CTASection';
 import { VideoModal } from '../components/VideoModal';
 import { usePortfolio } from '../hooks/usePortfolio';
@@ -85,7 +85,14 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. CTA Section */}
+      {/* 5. Client Reviews & Google Business Ratings */}
+      <section className="relative py-12 sm:py-16 border-t border-white/5 overflow-hidden">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <GoogleReviews />
+        </div>
+      </section>
+
+      {/* 6. CTA Section */}
       <CTASection />
 
       {/* Video Playback Modal */}
@@ -97,4 +104,3 @@ export const Home: React.FC = () => {
     </div>
   );
 };
-

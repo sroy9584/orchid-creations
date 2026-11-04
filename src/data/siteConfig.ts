@@ -16,12 +16,22 @@ export const siteConfig: SiteConfig = {
   founderRole: 'Founder & Lead Video Editor',
   establishedYear: 2021,
   yearsOfExperience: '5+ Years',
-  location: 'Ashoknagar, Building More, Ashoknagar Kalyangarh, West Bengal 743222, India',
+  location: 'Ashoknagar, Building More, North 24 Parganas, West Bengal 743222, India',
 
   // Official contact details
   whatsappNumber: '918927916525',
   displayPhone: '+91 8927916525',
   contactEmail: 'ocofficialservice@gmail.com',
+
+  // Google Business Profile details
+  googleBusiness: {
+    name: 'Orchid Creation Studio',
+    rating: 5.0,
+    reviewCount: 48,
+    mapsUrl: 'https://maps.google.com/?q=Orchid+Creation+Studio+Ashoknagar+Building+More+North+24+Parganas+West+Bengal+743222',
+    reviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJOrchidCreationStudioAshoknagar',
+    placeId: '',
+  },
 
   // External Form Backend (Formspree or Web3Forms)
   formspreeEndpoint: '',

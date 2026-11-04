@@ -21,36 +21,44 @@ export const SocialLinks: React.FC = () => {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      {socialLinks.map((item) => (
-        <motion.a
-          key={item.platform}
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.02, y: -2 }}
-          whileTap={{ scale: 0.98 }}
-          className="glass-card rounded-2xl p-4 sm:p-5 flex items-center justify-between group border border-white/10 hover:border-[#BF54A3]/40"
-        >
-          <div className="flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-              {getIcon(item.platform)}
-            </div>
-            <div>
-              <div className="text-sm font-bold text-white group-hover:text-[#BF54A3] transition-colors">
-                {item.title}
+      {socialLinks.map((item) => {
+        const isEmail = item.platform === 'email';
+        return (
+          <motion.a
+            key={item.platform}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.015, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className={`glass-card rounded-2xl p-4 sm:p-5 flex items-center justify-between group border border-white/10 hover:border-[#BF54A3]/40 transition-all ${
+              isEmail ? 'sm:col-span-2' : ''
+            }`}
+          >
+            <div className="flex items-center gap-3.5 min-w-0">
+              <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors shrink-0">
+                {getIcon(item.platform)}
               </div>
-              <div className="text-xs text-neutral-400 mt-0.5 truncate max-w-[180px] sm:max-w-[200px]">
-                {item.displayHandle}
+              <div className="min-w-0">
+                <div className="text-sm font-bold text-white group-hover:text-[#BF54A3] transition-colors">
+                  {item.title}
+                </div>
+                <div
+                  className={`text-xs text-neutral-400 mt-0.5 truncate ${
+                    isEmail ? 'sm:max-w-none' : 'max-w-[180px] sm:max-w-[200px]'
+                  }`}
+                >
+                  {item.displayHandle}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 group-hover:text-white group-hover:bg-[#BF54A3]/30 transition-all">
-            <ArrowUpRight className="w-4 h-4" />
-          </div>
-        </motion.a>
-      ))}
+            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 group-hover:text-white group-hover:bg-[#BF54A3]/30 transition-all shrink-0 ml-2">
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
+          </motion.a>
+        );
+      })}
     </div>
   );
 };
-

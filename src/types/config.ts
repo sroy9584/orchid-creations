@@ -1,3 +1,25 @@
+export interface GoogleBusinessConfig {
+  name: string;
+  rating: number;
+  reviewCount: number;
+  mapsUrl: string;
+  reviewUrl: string;
+  placeId?: string;
+}
+
+export interface ClientReview {
+  id: string;
+  authorName: string;
+  authorInitials: string;
+  authorLocation?: string;
+  rating: number;
+  date: string;
+  relativeTime: string;
+  projectType: string;
+  comment: string;
+  verifiedGoogle: boolean;
+}
+
 export interface SiteConfig {
   brandName: string;
   tagline: string;
@@ -18,6 +40,7 @@ export interface SiteConfig {
     story: string[];
     mission: string;
   };
+  googleBusiness?: GoogleBusinessConfig;
   skills: {
     software: string[];
     disciplines: string[];
@@ -31,4 +54,3 @@ export interface SocialLink {
   displayHandle: string;
   iconName: string;
 }
-

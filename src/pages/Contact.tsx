@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageSquare, Mail, MapPin, Phone, Sparkles, Clock, Calendar } from 'lucide-react';
+import { MessageSquare, Mail, MapPin, Sparkles } from 'lucide-react';
 import { ContactForm } from '../components/ContactForm';
 import { SocialLinks } from '../components/SocialLinks';
+import { GoogleReviews } from '../components/GoogleReviews';
 import { siteConfig } from '../data/siteConfig';
 import { getWhatsAppLink } from '../data/socialLinks';
 
@@ -57,7 +58,7 @@ export const Contact: React.FC = () => {
             {/* Quick Contact Card */}
             <div className="glass-card rounded-3xl p-6 sm:p-8 border border-white/10 space-y-6">
               <h3 className="text-xl font-bold text-white tracking-tight">
-                Studio Headquarters
+                Orchid Creation Studio
               </h3>
 
               <div className="space-y-4">
@@ -141,8 +142,12 @@ export const Contact: React.FC = () => {
             <ContactForm />
           </div>
         </div>
+
+        {/* Google Reviews & Client Feedback Section */}
+        <div className="mt-20 pt-16 border-t border-white/10">
+          <GoogleReviews />
+        </div>
       </div>
     </div>
   );
 };
-
