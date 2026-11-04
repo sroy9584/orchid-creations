@@ -63,7 +63,6 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ previewOnly = false 
     { id: 'wedding', label: 'Wedding & Rituals' },
     { id: 'cinematic', label: 'Films & Music' },
     { id: 'commercial', label: 'Commercial & Reels' },
-    { id: 'design-audio', label: 'Color, Sound & VFX' },
   ];
 
   const filteredServices = activeTab === 'all'

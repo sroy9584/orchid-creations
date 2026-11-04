@@ -142,30 +142,6 @@ export const servicesConfig: ServiceItem[] = [
     featuredInHome: true,
   },
   {
-    id: 'photo-editing',
-    title: 'Photo Editing & Retouching',
-    shortDescription:
-      'Professional color toning, skin texture preservation, high-end beauty retouching, and portrait enhancement.',
-    fullDescription:
-      'High-end Photoshop processing for wedding albums, model portfolios, and promotional assets, maintaining natural tones and artistic polish.',
-    iconName: 'Image',
-    category: 'design-audio',
-    deliverables: ['High-Res JPEG/TIFF Exports', 'Frequency Separation Retouch', 'Color Cast Correction'],
-    featuredInHome: false,
-  },
-  {
-    id: 'graphic-design',
-    title: 'Graphic Design',
-    shortDescription:
-      'Compelling YouTube thumbnails, movie posters, title cards, digital covers, and promotional social collateral.',
-    fullDescription:
-      'Eye-catching graphic assets designed with bold typography, high CTR thumb strategy, and cohesive visual branding.',
-    iconName: 'Palette',
-    category: 'design-audio',
-    deliverables: ['YouTube High-CTR Thumbnails', 'Digital Posters', 'Social Announcement Tiles'],
-    featuredInHome: false,
-  },
-  {
     id: 'color-correction-grading',
     title: 'Color Correction & Color Grading',
     shortDescription:
@@ -188,42 +164,6 @@ export const servicesConfig: ServiceItem[] = [
     category: 'cinematic',
     deliverables: ['Object/Crowd Clean-up', 'Sky Replacement', 'Motion Tracking & Screen Insert'],
     featuredInHome: false,
-  },
-  {
-    id: 'motion-graphics-2d-3d',
-    title: '2D / 3D Motion Graphics',
-    shortDescription:
-      'Custom animated titles, logo stings, lower thirds, cinematic bumpers, and explanatory kinetic motion design.',
-    fullDescription:
-      'Fluid vector and 3D graphics that introduce films and brands with premium elegance, smooth physics, and modern aesthetic styling.',
-    iconName: 'Boxes',
-    category: 'design-audio',
-    deliverables: ['Animated Studio Sting/Logo', 'Cinematic Lower Thirds', 'Kinetic Typography'],
-    featuredInHome: false,
-  },
-  {
-    id: 'sound-design',
-    title: 'Sound Design & Foley',
-    shortDescription:
-      'Layered cinematic audio, environmental ambiance, whooshes, impacts, and acoustic textures that bring visuals to life.',
-    fullDescription:
-      'Video is only half the experience. We construct three-dimensional sound environments with custom foley, risers, sub-bass drops, and realistic spatial depth.',
-    iconName: 'Volume2',
-    category: 'design-audio',
-    deliverables: ['Custom SFX Layering', 'Atmospheric Foley Bed', 'Dynamic Impact Accents'],
-    featuredInHome: false,
-  },
-  {
-    id: 'audio-mixing-mastering',
-    title: 'Audio Editing, Mixing & Mastering',
-    shortDescription:
-      'Dialogue denoising, spectral vocal cleanup, music-dialogue ducking, and Broadcast/Web loudness standardization (LUFS).',
-    fullDescription:
-      'Crystal-clear speech even from noisy live ceremony environments. Background noise reduction, EQ frequency carving, compression, and loudness mastering.',
-    iconName: 'Sliders',
-    category: 'design-audio',
-    deliverables: ['AI & Spectral Denoising', 'Multi-Track Level Balancing', 'Web/Broadcast Loudness Conformity'],
-    featuredInHome: false,
-  },
+  }
 ];
 

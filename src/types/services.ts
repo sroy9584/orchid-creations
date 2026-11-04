@@ -4,7 +4,7 @@ export interface ServiceItem {
   shortDescription: string;
   fullDescription?: string;
   iconName: string; // Lucide icon identifier
-  category: 'wedding' | 'cinematic' | 'commercial' | 'design-audio';
+  category: 'wedding' | 'cinematic' | 'commercial';
   deliverables?: string[];
   featuredInHome?: boolean;
 }

@@ -42,11 +42,11 @@ export const Services: React.FC = () => {
             transition={{ delay: 0.2 }}
             className="mt-4 text-base sm:text-lg text-neutral-300 leading-relaxed"
           >
-            Specialized video editing, multi-camera assembly, DaVinci Resolve color grading, 2D/3D motion graphics, and audio mastering tailored to elevate your footage.
+            Specialized video editing, multi-camera assembly, cinematic wedding highlights, and DaVinci Resolve color grading tailored to elevate your footage.
           </motion.p>
         </div>
 
-        {/* Complete 18 Services Grid */}
+        {/* Complete Services Grid */}
         <ServicesGrid previewOnly={false} />
 
         {/* Pricing link banner */}
