@@ -85,4 +85,12 @@ export const playlistCategories: PlaylistCategory[] = [
     featured: false,
     displayOrder: 9,
   },
+  {
+    id: 'music-videos',
+    title: 'Music Videos',
+    playlistId: 'MANUAL_MUSIC_VIDEOS',
+    description: 'Cinematic music video productions, creative concept choreography, color grading, and acoustic vocal sync.',
+    featured: false,
+    displayOrder: 10,
+  },
 ];

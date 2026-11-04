@@ -53,8 +53,8 @@ export function usePortfolio(options: UsePortfolioOptions = {}) {
       });
     }
 
-    // If viewing 'Short Films & Series' category, sort strictly by YouTube view count (highest views first)
-    if (selectedCategory === 'short-films-series') {
+    // If viewing 'Short Films & Series' or 'Music Videos' category, sort strictly by YouTube view count (highest views first)
+    if (selectedCategory === 'short-films-series' || selectedCategory === 'music-videos') {
       return [...result].sort((a, b) => {
         const viewsA = a.viewCount || 0;
         const viewsB = b.viewCount || 0;

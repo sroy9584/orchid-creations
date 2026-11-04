@@ -25,20 +25,24 @@
     width: 8px;
     height: 8px;
   }
+
   ::-webkit-scrollbar-track {
     background: #0D1516;
   }
+
   ::-webkit-scrollbar-thumb {
     background: rgba(240, 242, 242, 0.15);
     border-radius: 9999px;
     border: 2px solid #0D1516;
   }
+
   ::-webkit-scrollbar-thumb:hover {
     background: #BF54A3;
   }
 }
 
 @layer components {
+
   /* Apple-inspired Liquid Glass Card */
   .glass-card {
     background: rgba(25, 37, 38, 0.65);

@@ -117,14 +117,14 @@ export const Hero: React.FC<HeroProps> = ({ videos = [] }) => {
           </div>
         </div>
 
-        {/* Stat 2: 570+ Films */}
+        {/* Stat 2: 690+ Films */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 px-1 sm:px-3 py-0.5 sm:py-0">
           <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-lg bg-[#107361]/20 border border-[#107361]/30 flex items-center justify-center text-[#107361] shrink-0">
             <Film className="w-3 h-3 sm:w-4 sm:h-4" />
           </div>
           <div className="text-center sm:text-left min-w-0">
             <div className="text-[11px] sm:text-sm md:text-base font-bold text-white leading-tight">
-              570+ Films
+              690+ Films
             </div>
             <div className="text-[8px] sm:text-[11px] text-neutral-400 leading-tight truncate sm:overflow-visible">
               YouTube Official Vault
