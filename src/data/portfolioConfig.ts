@@ -77,4 +77,12 @@ export const playlistCategories: PlaylistCategory[] = [
     featured: false,
     displayOrder: 8,
   },
+  {
+    id: 'short-films-series',
+    title: 'Short Films & Series',
+    playlistId: 'MANUAL_SHORT_FILMS',
+    description: 'Narrative short films, drama sketches, fight spoofs, and episodic web series post-production.',
+    featured: false,
+    displayOrder: 9,
+  },
 ];

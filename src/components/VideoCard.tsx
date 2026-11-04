@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Sparkles, Clock } from 'lucide-react';
+import { Play, Sparkles, Clock, Eye } from 'lucide-react';
 import { PortfolioVideo } from '../types/portfolio';
+
+function formatViewCount(views: number): string {
+  if (views >= 1000000) return `${(views / 1000000).toFixed(1).replace(/\.0$/, '')}M views`;
+  if (views >= 1000) return `${(views / 1000).toFixed(1).replace(/\.0$/, '')}K views`;
+  return `${views.toLocaleString()} views`;
+}
 
 interface VideoCardProps {
   video: PortfolioVideo;
@@ -211,9 +217,15 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
           ) : null}
         </div>
 
-        {/* Duration Pill on Thumbnail Corner */}
+        {/* Duration / Views Pill on Thumbnail Corner */}
         {video.duration && !isPreviewing && (
-          <div className="absolute bottom-2.5 right-2.5 z-20 pointer-events-none">
+          <div className="absolute bottom-2.5 right-2.5 z-20 pointer-events-none flex items-center gap-1.5">
+            {video.viewCount !== undefined && (
+              <span className="flex items-center gap-1 text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-black/80 backdrop-blur-md text-[#D977BF] border border-white/10 shadow-sm">
+                <Eye className="w-2.5 h-2.5 text-[#BF54A3]" />
+                <span>{formatViewCount(video.viewCount)}</span>
+              </span>
+            )}
             <span className="flex items-center gap-1 text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-black/80 backdrop-blur-md text-white/95 border border-white/10 shadow-sm">
               <Clock className="w-2.5 h-2.5 text-[#107361]" />
               <span>{video.duration}</span>
@@ -266,16 +278,24 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, categoryTitle, onPl
           </p>
         </div>
 
-        {/* Card Footer: Watch Film action and Video Duration Badge replacing old '4K Portfolio' */}
+        {/* Card Footer: Watch Film action, Views Badge and Video Duration Badge */}
         <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400">
           <span className="flex items-center gap-1.5 text-[#BF54A3] group-hover:text-[#D977BF] font-medium">
             Watch Film
             <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
           </span>
-          <span className="text-[11px] font-mono text-[#107361] font-semibold flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#107361]/10 border border-[#107361]/25">
-            <Clock className="w-3 h-3 text-[#107361]" />
-            <span>{video.duration || '4K Film'}</span>
-          </span>
+          <div className="flex items-center gap-1.5">
+            {video.viewCount !== undefined && (
+              <span className="text-[11px] font-mono text-neutral-300 font-medium flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/5 border border-white/10 shadow-sm">
+                <Eye className="w-3 h-3 text-[#BF54A3]" />
+                <span>{formatViewCount(video.viewCount)}</span>
+              </span>
+            )}
+            <span className="text-[11px] font-mono text-[#107361] font-semibold flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#107361]/10 border border-[#107361]/25">
+              <Clock className="w-3 h-3 text-[#107361]" />
+              <span>{video.duration || '4K Film'}</span>
+            </span>
+          </div>
         </div>
       </div>
     </motion.div>

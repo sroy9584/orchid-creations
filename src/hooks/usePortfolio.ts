@@ -53,7 +53,21 @@ export function usePortfolio(options: UsePortfolioOptions = {}) {
       });
     }
 
-    // Enforce date-wise sorting: newest first, oldest last
+    // If viewing 'Short Films & Series' category, sort strictly by YouTube view count (highest views first)
+    if (selectedCategory === 'short-films-series') {
+      return [...result].sort((a, b) => {
+        const viewsA = a.viewCount || 0;
+        const viewsB = b.viewCount || 0;
+        if (viewsB !== viewsA) {
+          return viewsB - viewsA;
+        }
+        const timeA = new Date(a.publishedAt || 0).getTime();
+        const timeB = new Date(b.publishedAt || 0).getTime();
+        return timeB - timeA;
+      });
+    }
+
+    // Enforce date-wise sorting for all other categories: newest first, oldest last
     return [...result].sort((a, b) => {
       const timeA = new Date(a.publishedAt || 0).getTime();
       const timeB = new Date(b.publishedAt || 0).getTime();

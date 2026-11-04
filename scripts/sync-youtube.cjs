@@ -258,7 +258,7 @@ async function main() {
   console.log(`Found ${categories.length} configured categories in portfolioConfig.ts`);
 
   const validCategories = categories.filter(
-    (c) => c.playlistId && !c.playlistId.includes('REPLACE_ID')
+    (c) => c.playlistId && !c.playlistId.includes('REPLACE_ID') && !c.playlistId.startsWith('MANUAL')
   );
 
   if (validCategories.length === 0) {
@@ -305,6 +305,9 @@ async function main() {
 
         if (existing && existing.manualOverride) {
           item.manualOverride = true;
+        }
+        if (existing && existing.viewCount !== undefined) {
+          item.viewCount = existing.viewCount;
         }
 
         fetchedVideos.push(item);

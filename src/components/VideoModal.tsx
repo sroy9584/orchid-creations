@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Film } from 'lucide-react';
+import { X, Film, Eye, Clock } from 'lucide-react';
 import { PortfolioVideo } from '../types/portfolio';
 
 interface VideoModalProps {
@@ -98,8 +98,18 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose, category
                 {video.description || 'Cinematic video post-production project by Orchid Creation.'}
               </p>
               <div className="flex items-center gap-2 self-end shrink-0 text-neutral-400 font-mono text-[10px] sm:text-[11px]">
+                {video.viewCount !== undefined && (
+                  <span className="text-[#BF54A3] font-semibold flex items-center gap-1">
+                    <Eye className="w-3 h-3 text-[#BF54A3]" />
+                    <span>{video.viewCount.toLocaleString()} views</span>
+                  </span>
+                )}
+                {video.viewCount !== undefined && <span className="text-white/20">•</span>}
                 {video.duration && (
-                  <span className="text-[#107361] font-semibold">{video.duration}</span>
+                  <span className="text-[#107361] font-semibold flex items-center gap-1">
+                    <Clock className="w-3 h-3 text-[#107361]" />
+                    <span>{video.duration}</span>
+                  </span>
                 )}
                 {video.duration && <span className="text-white/20">•</span>}
                 <span>ID: {video.id}</span>
