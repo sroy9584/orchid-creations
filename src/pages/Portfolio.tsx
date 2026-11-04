@@ -42,7 +42,7 @@ export const Portfolio: React.FC = () => {
             className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#BF54A3]/15 border border-[#BF54A3]/30 text-[#D977BF] text-xs font-semibold tracking-wider uppercase mb-4"
           >
             <Film className="w-3.5 h-3.5 text-[#107361]" />
-            690+ FILMS • YOUTUBE PORTFOLIO VAULT
+            620+ FILMS • YOUTUBE PORTFOLIO VAULT
           </motion.div>
 
           <motion.h1
